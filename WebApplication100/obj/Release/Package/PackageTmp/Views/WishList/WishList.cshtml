@@ -1,0 +1,12 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+<a href="/Wishlist" class="shpl" title="لیست محصولات مورد علاقه شما">
+    <div class="icon">
+        <i class="icon-heart-o"></i>
+        
+            <span class="wishlist-count badge">@Model.Count()</span>
+        
+    </div>
+    <p>علاقه مندی ها</p>
+</a>
+

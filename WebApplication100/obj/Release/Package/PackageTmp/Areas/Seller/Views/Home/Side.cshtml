@@ -1,0 +1,45 @@
+﻿
+    <ul class="nav" id="side-menu">
+
+        <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </li>
+
+        <li>
+            <span>
+                @ViewBag.Name
+            </span>
+        </li>
+
+        <li>
+            <a href="/Seller"><i class="fa fa-dashboard fa-fw"></i> داشبورد</a>
+        </li>
+        <li>
+            <a href="/"><i class="fa fa-globe fa-fw"></i> مشاهده سایت</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> محصولات<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="/Seller/Products">لیست محصولات</a>
+                </li>
+                <li>
+                    <a href="/Seller/Product_Groups">گروه محصولات</a>
+                </li>
+                <li>
+                    <a href="/Seller/Features">ویژگی محصولات</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+
+
+    </ul>

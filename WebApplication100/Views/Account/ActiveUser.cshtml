@@ -1,0 +1,15 @@
+﻿@model DataLayer.UserInfo
+@{
+    ViewBag.Title = "فعالسازی ایمیل";
+}
+
+        <div class="row justify-content-center mt-5 mb-5">
+                <div class=" text-center p-5 border border-success shadow bg-light">
+                    <h4 class=" text-center">@Model.FullName.Split(' ')[0] عزیز</h4>
+                    <p class=" text-center">
+                        ایمیل شما قبلا فعال شده است.
+                        <br />
+                        <a class="border btn-outline-info shpl m-auto" style="padding: 5px 10px" href="/Login">بازگشت به حساب کاربری</a>
+                    </p>
+                </div>
+        </div>

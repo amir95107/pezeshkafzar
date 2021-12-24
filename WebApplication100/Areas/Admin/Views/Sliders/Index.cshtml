@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DataLayer.Slider>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">افزودن محصول جدید</h2>
+
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl"text-align: right">
+        <a class="m-0 btn btn-primary " href="@Url.Action("Create")">افزودن اسلایدر جدید</a>
+        
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning btn-xs"
+                       data-toggle="tooltip" data-placement="top" title="ویرایش"
+                       href="@Url.Action("Edit" ,new {id = item.SlideID })">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                    </a>
+                    <a class="btn btn-outline-danger btn-xs"
+                       data-toggle="tooltip" data-placement="top" title="حذف"
+                       href="@Url.Action("Delete" ,new {id = item.SlideID })">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

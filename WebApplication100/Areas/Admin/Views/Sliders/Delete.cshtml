@@ -1,0 +1,30 @@
+﻿@model DataLayer.Slider
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">حذف اسلایدر شماره @Model.SlideID</h2>
+    <div>
+        <p>آیا از حذف اسلایدر شماره @Model.SlideID اطمینان دارید؟</p>
+        
+        <div class="">
+            <img src="~/Images/Slider/@Model.ImageName" title="@Model.Title" alt="@Model.Title" width="300"/>
+            <span class="pull-left">نام: @Model.Title</span>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="حذف" class="btn btn-danger" /> |
+                @Html.ActionLink("بازگشت", "Index")
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+﻿
+
+@{
+    ViewBag.Title = "لیست آدرس ها - پزشک افزار";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+
+}
+
+
+<div style="background: #ccc">
+    <div class="container mt-3 mb-3">
+        <div class=" form-box">
+            <h1 class="text-center mt-0 h1-title"><span class="title">لیست آدرس ها</span></h1>
+
+            <p class="mb-2">
+                <a class="btn btn-primary shpl" href="/address/create" id="newAddress">ایجاد آدرس جدید</a>
+            </p>
+            <div id="AddressList">
+                @Html.Action("AddressesList")
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    th, td {
+        text-align: center !important
+    }
+
+    th {
+        background-color: #ccc;
+        color: #fff !important
+    }
+
+    .default-address {
+        background-color: aquamarine
+    }
+</style>
+@section Scripts{
+    <script>
+        checkDefaultAddress = () => {
+            if ($('.address-row').length > 0 && $('.address-row.default-address').length < 1) {
+                $('#signin-modal').modal('show').find('.modal-body').html('لطفا یک آدرس را به عنوان پیشفرض انتخاب کنید')
+            }
+        }
+        $(document).ready(() => {
+            checkDefaultAddress()
+            if (window.location.search != '') {
+                var btnHref = $('#newAddress').attr('href')
+                $('#newAddress').attr('href', btnHref + window.location.search)
+            }
+        })
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+
+}
+
+<div class="container">
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl" style="margin-top: 100px;text-align: right">
+        <select class="" onchange="reportSelling(this.value)" id="sellerOpt">
+            <option value="">
+                همه سفارشها
+            </option>
+            @{
+                List<DataLayer.Sellers> sellers = ViewBag.Sellers;
+                foreach (var seller in sellers)
+                {
+                    <option value="@seller.SellerID">
+                        @seller.SellerFullName
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    <div class="table-wrapper" id="orderTable">
+        @Html.Action("OrderTable")
+    </div>
+</div>
+
+@section Scripts {
+    <link href="~/Areas/Admin/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/DataTables/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable()
+        })
+    </script>
+}

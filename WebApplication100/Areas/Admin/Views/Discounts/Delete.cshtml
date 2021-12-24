@@ -1,0 +1,68 @@
+﻿@model DataLayer.Discounts
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">ایجاد کد تخفیف جدید</h2>
+
+    <h3>آیا ازحذف این کد تخفیف اطمینان دارید؟</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiscountCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpireDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpireDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountPercent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiscountPercent)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MaxDiscountValue)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaxDiscountValue)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Users.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Users.UserName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        <a class="btn btn-outline-warning" href="/admin/discounts">بازگشت</a>
+    </div>
+        }
+    </div>
+    </div>

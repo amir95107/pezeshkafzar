@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ShopCartItem>
+
+@{ 
+    List<DataLayer.Products> products = ViewBag.Products;
+}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        var product = products.Single(p=>p.ProductID== item.ProductID);
+        <div class="product-item border p-2 m-2 text-center" id="product-item-@item.ProductID">
+            @*<span style="color:red" onclick="deleteFromList(@item.ProductID,event)">X</span>*@
+            <img src="~/Images/ProductImages/Thumb/@product.ImageName" width="150">
+            <p class="text-center">@product.Title</p>
+            <div>
+                تعداد:<input type="number" value="@item.Count" oninput="commandOrder(@item.ProductID,this.value)" />
+            </div>
+        </div>
+    }
+}

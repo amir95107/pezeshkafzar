@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ShopCartItemViewModel>
+
+    <a href="@(Model.Any()?"/ShopCart":"#")" class="shpl dropdown-toggle @(Model.Any()?"cart-not-empty":"cart-empty")" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false" data-display="static">
+        <div class="icon">
+            <i class="icon-shopping-cart"></i>
+            @if (Model.Any())
+            {<span class="cart-count">@Model.Sum(p=>p.Count)</span>}
+        </div>
+        <p class="in-desktop">سبد خرید</p>
+    </a>
+@if (Model.Any())
+{
+    <div class="dropdown-menu dropdown-menu-right in-desktop">
+        <div class="dropdown-cart-products">
+            @foreach (var item in Model)
+            {
+                <div class="product">
+                    <div class="product-cart-details">
+                        <h4 class="product-title">
+                            <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="shpl">@item.Title</a>
+                        </h4>
+
+                        <span class="cart-product-info">
+                            <span class="cart-product-qty">@item.Count x </span>
+                            @item.PriceAfterDiscount.ToString("#,0") تومان
+                        </span>
+                    </div><!-- End .product-cart-details -->
+
+                    <figure class="product-image-container">
+                        <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="product-image shpl">
+                            <img data-src="/Images/ProductImages/Thumb/@item.ImageName" class="lazy" alt="@item.Title" title="@item.Title">
+                        </a>
+                    </figure>
+                    <a onclick="commandOrder(@item.ProductID,0)" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></a>
+                </div>
+            }
+            <!-- End .product -->
+
+        </div><!-- End .cart-product -->
+
+        <div class="dropdown-cart-total">
+            <span>مجموع</span>
+
+            <span class="cart-total-price">@Model.Sum(p => p.PriceAfterDiscount *p.Count).ToString("#,0") تومان</span>
+        </div><!-- End .dropdown-cart-total -->
+
+        <div class="dropdown-cart-action">
+            <a href="/ShopCart" class="btn btn-primary shpl">مشاهده سبد خرید</a>
+            @*<a href="checkout.html" class="btn btn-outline-primary-2">
+                <span>پرداخت</span><i class="icon-long-arrow-left"></i>
+            </a>*@
+        </div><!-- End .dropdown-cart-total -->
+    </div>
+}

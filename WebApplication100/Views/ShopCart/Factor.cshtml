@@ -1,0 +1,241 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ShowOrderViewModel>
+@{
+    ViewBag.Title = "تایید نهایی خرید - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید علاوه بر بررسی نهایی خرید خود، شیوه پرداخت را هم انتخاب کنید.";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+@{
+    DataLayer.DeliveryWays delivery = ViewBag.shipping;
+    var _discount = Session["Discount"] as DataLayer.Discounts;
+
+    int orderId = ViewBag.OrderId;
+}
+
+
+
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('./Content/images/page-header-bg.jpg')">
+        <div class="container" id="OrderingLevel">
+            @Html.Action("OrderingLevel")
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="shpl">خانه</a></li>
+                <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">سبد خرید</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="cart">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        @*<div class="checkout-discount">
+                                <form onsubmit="submitDiscountCode(event)" >
+                                    <input type="text" class="form-control" required="" id="discountCuponCode">
+                                    <label for="discountCuponCode" class="text-truncate" style="opacity: 1;">کد تخفیف دارید؟ <span>برای وارد کردن کد تخفیف خود اینجا کلیک کنید</span></label>
+                                    <button class="btn-check-discount" type="submit"><i class="icon-check"></i></button>
+                                </form>
+
+                            </div>*@
+                        <table class="table table-cart table-mobile">
+                            <thead>
+                                <tr>
+                                    <th>محصول</th>
+                                    <th>قیمت</th>
+                                    <th>قیمت پس از تخفیف</th>
+                                    <th>تعداد</th>
+                                    <th>مجموع</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="shpl">
+                                                        <img data-src="/Images/ProductImages/Thumb/@item.ImageName" class="lazy" title="@item.Title" alt="@item.Title">
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="/ShowProduct/@item.ProductID/@item.SefUrl">@item.Title <small class="d-inline-block mr-4 in-desktop-inline-block"> × @item.Count</small></a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td class="price-col"><span class="in-desktop">@item.Price.ToString("#,0")</span><span class="in-mobile"><del>@item.Price.ToString("#,0")</del><small class="mr-2">تومان</small></span></td>
+                                        <td class="price-col"><span class="FontBig-sm">@item.PriceAfterDiscount.ToString("#,0")</span><small class="mr-2">تومان</small></td>
+                                        <td class="quantity-col">
+                                            <span class="in-mobile">
+                                                <span>تعداد: </span>
+                                                <span>@item.Count</span>
+                                            </span>
+                                            <!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td class="total-col">@((item.PriceAfterDiscount * item.Count).ToString("#,0"))</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table><!-- End .table table-wishlist -->
+                        <!-- End .cart-bottom -->
+                        <div class="mt-2 text-right">
+                            <a class="btn btn-info shpl" href="/ShopCart?editShopCart=true">بازگشت و ویرایش سفارش</a>
+                        </div>
+                    </div><!-- End .col-lg-9 -->
+                    <aside class="col-lg-3">
+                        <div class="summary summary-cart">
+                            <h3 class="summary-title">جمع سبد خرید</h3><!-- End .summary-title -->
+                            @{
+                                var priceWithOutDiscount = Model.Sum(p => p.Sum);
+                                int extraDiscount = (_discount == null) ? 0 : Math.Min(Model.Sum(p => p.PriceAfterDiscount) * _discount.DiscountPercent / 100, _discount.MaxDiscountValue);
+                                var __discount = Model.Sum(p => p.Discount) + extraDiscount;
+
+                                var priceWithDiscount = priceWithOutDiscount - __discount;                            }
+                            <table class="table table-summary">
+                                <tbody>
+                                    <tr class="summary-subtotal">
+                                        <td>جمع کل سبد خرید : </td>
+                                        <td class="text-left">@priceWithOutDiscount.ToString("#,0") تومان</td>
+                                    </tr>
+                                    <tr class="summary-subtotal">
+                                        <td>جمع کل تخفیف : </td>
+
+                                        <td class="text-left">@(__discount.ToString("#,0")) تومان</td>
+
+
+
+                                    </tr><!-- End .summary-subtotal -->
+
+                                    <tr class="summary-shipping">
+                                        <td>شیوه ارسال : </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+
+                                    <tr class="summary-subtotal">
+                                        <td>
+
+                                            <div class="custom-control custom-radio">
+                                                <label class="m-0">
+                                                    @delivery.Title :
+                                                </label>
+                                            </div>
+
+                                            <!-- End .custom-control -->
+                                        </td>
+                                        <td class="text-left">
+                                            @if (delivery.Price == 0)
+                                            {
+                                                <span>هزینه متغیر</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@delivery.Price</span> <small>تومان</small>
+                                            }
+                                        </td>
+                                    </tr><!-- End .summary-shipping-row -->
+
+                                    <tr class="summary-shipping">
+                                        <td>آدرس : </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+
+                                    <tr class="p-0 address-area">
+                                        <td colspan="2">
+                                            <div class="custom-radio">
+                                                <div class="card border">
+                                                    <div class="card-body">
+                                                        @ViewBag.DefaultAddress
+                                                    </div>
+                                                </div>
+                                                <div class="w-100 mb-3">
+                                                    @*<a class="btn btn-warning p-1 mt-1" onclick="$('#address').attr('disabled', true)">تایید همین آدرس</a>*@
+                                                    <a class="btn btn-warning p-1 mt-1 shpl" href="/address/create?returnUrl=/ShopCart/Factor">تعریف آدرس جدید</a>
+                                                </div>
+                                            </div><!-- End .custom-control -->
+                                        </td>
+                                    </tr><!-- End .summary-shipping-row -->
+                                    <!-- End .summary-shipping-row -->
+
+                                    <tr class="summary-total">
+                                        <td>مبلغ قابل پرداخت :</td>
+                                        <td class="text-left"><span id="payable">@(priceWithDiscount.ToString("#,0"))</span> <small>تومان</small></td>
+                                    </tr><!-- End .summary-total -->
+                                </tbody>
+                            </table>
+
+                            <div class="accordion-summary" id="accordion-payment">
+                                <div class="card">
+
+
+                                    <div class="row">
+                                        <label>نحوه پرداخت : </label>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-header" id="heading-3">
+                                            <h2 class="card-title">
+                                                <a class="btn-payway" onclick="payWay(1,@orderId)" data-pay-way="1" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                                                    درگاه زرین پال
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse-3" class="collapse show" aria-labelledby="heading-3" data-parent="#accordion-payment">
+                                            <div class="card-body">
+                                                انتقال به صفحه درگاه امن زرین پال
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .collapse -->
+                                    </div><!-- End .card -->
+                                    <!-- End .card -->
+
+                                    <div class="card">
+                                        <div class="card-header" id="heading-5">
+                                            <h2 class="card-title">
+                                                <a class="collapsed btn-payway" onclick="payWay(2,@orderId)" data-pay-way="2" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
+                                                    کارت به کارت ( امکان پرداخت در محل )
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse-5" class="collapse" aria-labelledby="heading-5" data-parent="#accordion-payment">
+                                            <div class="card-body">
+                                                انتقال به صفحه ای که در آن اطلاعات بانکی ما وجود دارد.
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .collapse -->
+                                    </div><!-- End .card -->
+                                </div>
+                                <!-- End .table table-summary -->
+
+                                <a id="btnPay" href="/Pay/Pay?orderId=@orderId" class="mt-3 btn btn-outline-primary-2 btn-order btn-block shpl">
+                                    انتقال به درگاه بانکی
+                                </a>
+                            </div><!-- End .summary -->
+                        </div>
+
+                    </aside><!-- End .col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .cart -->
+    </div><!-- End .page-content -->
+</main>
+
+@section Scripts{
+    <style>
+        .in-desktop-inline-block {
+            display: inline-block
+        }
+        @@media(max-width:768px) {
+            .in-desktop-inline-block{
+                display: none
+            }
+        }
+    </style>
+    
+}

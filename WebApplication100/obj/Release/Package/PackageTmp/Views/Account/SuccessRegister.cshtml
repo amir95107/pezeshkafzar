@@ -1,0 +1,21 @@
+﻿@model DataLayer.Users
+@{
+    ViewBag.Title = "ثبت نام";
+}
+
+
+
+<div class="tab-content">
+    <div class="tab-pane fade active show p-0" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+        <div class="login-page bg-image pt-5 pb-5"
+             style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            <div class="container">
+                <div class="form-box alert alert-success text-right p-5">
+                    <h3>@Model.UserName عزیز ، با تشکر از ثبت نام شما در سایت ما .</h3>
+                    <p>ایمیلی حاوی لینک فعالسازی به ایمیل " @Model.Email " ارسال شد ، لطفا وارد ایمیل فوق شوید و روی لینک کلیک کنید .</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

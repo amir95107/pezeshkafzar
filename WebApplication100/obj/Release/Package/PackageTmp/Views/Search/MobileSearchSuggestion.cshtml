@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+@if (Model.Any())
+{
+    <label class="float-none">نتایج پیشنهادی جستجو: <span id="searched-word"></span></label>
+    <div class="bg-white border p-2">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 mb-1">
+                    <div class="card border">
+                        <div class="card-body">
+                            <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="shpl" onclick="setLastSearchedCookies(event,@item.ProductID)">
+
+                                <div class="row">
+                                    <div class="col-5 border-left">
+                                        <img src="~/Images/ProductImages/Thumb/@item.ImageName" title="@item.Title" alt="@item.Title" class="m-auto" style="max-height: 85px" />
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="searched-product-title text-center">
+                                            <div class="h-50-p">
+                                                <span class="m-auto">@item.Title</span>
+                                            </div>
+                                            <hr class="m-1"/>
+                                            <div class="h-50-p">
+                                                <small class="ml-1 in-cat m-auto">در دسته بندی</small>
+                                                <small class="searched-product-category m-auto">@item.Product_Selected_Groups.Select(p => p.Product_Groups).First().GroupTitle</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert text-warning text-center" id="emptyResult" dir="rtl">
+        هیچ نتیجه ای یافت نشد!
+    </div>
+}

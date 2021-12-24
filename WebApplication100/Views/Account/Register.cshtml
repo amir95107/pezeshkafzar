@@ -1,0 +1,111 @@
+﻿@model DataLayer.ViewModels.RegisterViewModel
+
+
+@{
+    ViewBag.Title = "ثبت نام - پزشک افزار";
+    ViewBag.Description = "صفحه مربوط به ورود به بخش کاربری و یا پنل ادمین - پزشک افزار";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="login-page bg-image pt-1 pb-1">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link shpl" href="/Login" aria-selected="true">ورود</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-selected="false">ثبت نام</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @if (TempData["RegisterError"] != null)
+                                {
+                                    <div class="alert alert-warning text-center" dir="rtl">
+                                        @TempData["RegisterError"]
+                                    </div>
+                                    <hr />
+                                }
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control",placeholder="09*********",dir="ltr", required="true" } })
+                                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RePassword, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-sm-12 text-center">
+                                    <label class="control-label">عبارت امنیتی</label>
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6LfwqHQaAAAAAC_HutdWgAFwHWU_wBlJ1JTtoVX1"
+                                         data-callback='onSubmit'
+                                         data-action='submit'>
+                                        تایید عبارت امنیتی
+                                    </div>
+                                    <span class="text-danger">@ViewBag.Message</span>
+                                </div>
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-outline-primary-2 spl">
+                                        <span>ثبت نام</span>
+                                        <i class="icon-long-arrow-left"></i>
+                                    </button>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input"
+                                               id="register-policy-2" required>
+                                        <label class="custom-control-label" for="register-policy-2">
+                                            من با <a href="#">قوانین و مقررات</a> موافقم *
+                                        </label>
+                                    </div><!-- End .custom-checkbox -->
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-warning shpl" href="/">بازگشت صفحه اصلی</a>
+                                </div>
+
+
+                            </div>
+                        }
+                    </div>
+
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div>
+
+@section Scripts{
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa"></script>
+}
+@section Styles{
+    <style>
+        .g-recaptcha > div {
+            margin: auto
+        }
+    </style>
+}

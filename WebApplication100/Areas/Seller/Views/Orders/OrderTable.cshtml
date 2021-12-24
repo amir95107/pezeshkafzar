@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DataLayer.Orders>
+
+<table class="dataTable table table-bordered table-responsive products_table bg-white d-table" dir="rtl">
+    <thead>
+        <tr>
+            <th>ردیف</th>
+            <th>
+                تاریخ
+            </th>
+            <th>شماره پیگیری</th>
+            <th>
+                مبلغ قابل پرداخت
+            </th>
+            <th>
+                نام مشتری
+            </th>
+
+            <th>
+                شیوه پرداخت
+            </th>
+            <th>
+                نهایی شده؟
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    @{ int c = 1;}
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@c</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @item.TraceCode
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payable)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.UserName)
+                </td>
+
+                <td>
+                    @((item.PaymentWay == 1)? "اینترنتی" : "کارت به کارت")
+                </td>
+
+
+                <td>
+                    @((item.IsFinaly)?"بله":"خیر")
+                </td>
+                
+                <td>
+                    @if (!item.IsFinaly)
+                    {
+                        <a class="btn btn-success" onclick="finalizeOrder(@item.OrderID)"
+                           data-toggle="tooltip" data-placement="top" title="" data-original-title="نهایی کردن سفارش">
+                            <i class="now-ui-icons ui-1_check text-white"></i>
+                        </a>}
+                        <a class="btn btn-info" onclick="showDetails(@item.OrderID)"
+                           data-toggle="tooltip" data-placement="top" title="" data-original-title="نمایش جزئیات">
+                            <i class="now-ui-icons design_bullet-list-67 text-white"></i>
+                        </a>
+                        @if (!item.IsFinaly)
+                        {
+                            <a class="btn btn-danger" onclick="DeleteOrder(@item.OrderID)"
+                               data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف سفارش">
+                                <i class="now-ui-icons ui-1_simple-remove text-white"></i>
+                            </a>
+                        }
+
+
+
+                    </td>
+            </tr>
+            c++;
+        }
+    </tbody>
+
+</table>

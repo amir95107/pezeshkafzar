@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DataLayer.SpecialProducts>
+@{
+    var spCout = Model.Count();
+}
+
+@foreach (var item in Model)
+{
+    <div class="banner mb-lg-1 mb-xl-1 border p-1" dir="ltr">
+
+        <a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="shpl">
+            <img class="w-auto lazy" data-src="/Images/ProductImages/Thumb/@item.Products.ImageName" alt="بنر">
+        </a>
+
+
+        <div class="banner-content text-right">
+            @*<h4 class="banner-subtitle d-lg-none d-xl-block">
+                    <a href="#">محصولات برتر</a>
+                </h4>*@
+            <h3 class="banner-title" dir="rtl"><a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="shpl"><br>@item.Products.Title</a></h3>
+            <div id="countdown"></div>
+
+            <a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="banner-link shpl">خرید<i class="icon-long-arrow-left"></i></a>
+        </div>
+    </div>
+    
+}
+<div class="mb-lg-1 mb-xl-1 text-center border">
+    <div class="banner badge badge-info p-5 text-center text-dark m-0" id="banner-info-bottom"><a onclick="showHumanBody()" class="btn">جستجو بر اساس اعضای بدن</a></div>
+</div>
+
+
+
+@*<div class="banner mb-lg-1 mb-xl-2">
+        <a href="#">
+            <img src="Content/images/demos/demo-3/banners/banner-2.jpg" alt="بنر">
+        </a>
+
+        <div class="banner-content text-right">
+            <h4 class="banner-subtitle d-lg-none d-xl-block">
+                <a href="#">محصولات جدید</a>
+            </h4>
+
+            <h3 class="banner-title">
+                <a href="#">
+                    دوربین های 360 درجه<span>
+                        70%
+                        تخفیف
+                    </span>
+                </a>
+            </h3>
+            <a href="#" class="banner-link">خرید<i class="icon-long-arrow-left"></i></a>
+        </div>
+    </div>*@
+
+@*<div class="banner mb-0">
+        <a href="#">
+            <img src="Content/images/demos/demo-3/banners/banner-3.jpg" alt="بنر">
+        </a>
+
+        <div class="banner-content text-right">
+            <h4 class="banner-subtitle d-lg-none d-xl-block">
+                <a href="#">محصولات ویژه</a>
+            </h4>
+
+            <h3 class="banner-title"><a href="#">ساعت اپل 4</a></h3>
+
+            <a href="#" class="banner-link">خرید<i class="icon-long-arrow-left"></i></a>
+        </div>
+    </div>*@

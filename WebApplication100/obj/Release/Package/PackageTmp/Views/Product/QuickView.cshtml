@@ -1,0 +1,18 @@
+﻿@model DataLayer.Products
+
+<div>
+    <img id="qv-big-image" class="m-auto" src="/Images/ProductImages/@Model.ImageName" alt="@Model.Title" />
+</div>
+@if (Model.Product_Galleries.Any())
+{
+<div class="d-flex mt-2">
+    @foreach (var image in Model.Product_Galleries)
+    {
+        <div class=" product-gallery-item">
+            <a onclick="showThisImage(this)">
+                <img src="~/Images/ProductImages/Thumb/@image.ImageName" />
+            </a>
+        </div>
+    }
+</div>
+}

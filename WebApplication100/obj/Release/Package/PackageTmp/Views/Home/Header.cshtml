@@ -1,0 +1,150 @@
+﻿
+<header class="header header-intro-clearance header-3">
+    
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">فهرست</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                @*<div class="">*@
+                <a href="/" class="logo shpl">
+                    <img src="~/Content/images/logo/main-logo_180_67.png" alt="Pezeshkafzar Logo" title="Pezeshkafzar Logo">
+                </a>
+                @*</div>*@
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                    <a href="#" class="search-toggle shpl" role="button"><i class="icon-search"></i></a>
+                    <form action="/Search" method="get">
+                        <div class="header-search-wrapper search-wrapper-wide">
+                            <label for="q" class="sr-only">جستجو</label>
+                            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                            <input type="search" class="form-control" name="q" id="searchInput"
+                                   placeholder="جستجوی محصولات ..." required oninput="searchSuggestion(event)">
+                            <div id="searchSuggestion"></div>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+            </div>
+
+            <div class="header-right">
+
+                <div class="account in-desktop-flex">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/login" class="login-account shpl">
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                            <p class="in-desktop">ورود / ثبت نام</p>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/account" class="account shpl">
+                            <div class="icon">
+                                <i class="icon-user"></i>
+                            </div>
+                            <p class="in-desktop">حساب کاربری</p>
+                        </a>
+                    }
+                </div>
+                <div class="wishlist in-mobile" id="wishList-header">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.Action("WishList", "WishList")
+                        }
+                    </div><!-- End .compare-dropdown -->
+
+                <div class="dropdown cart-dropdown in-desktop-flex mr-3" id="showCart">
+                    @Html.Action("ShowCart", "ShopCart")
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <div class="header-left">
+                <div class="dropdown category-dropdown" id="category-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-display="static"
+                       title="فهرست دسته بندی ها">
+                        فهرست دسته بندی ها <i class="icon-angle-down"></i>
+                    </a>
+                    <div class="dropdown-menu" id="mega-menu-container">
+                        <nav class="side-nav">
+                            <ul class="menu-vertical sf-arrows megamenu menu-level-1">
+
+                                @Html.Action("ShowGroups", "Product")
+                            </ul>
+                        </nav>
+                    </div>
+                </div><!-- End .header-left -->
+            </div>
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu">
+                        <li class="active">
+                            <a href="/" class="shpl">خانه</a>
+
+
+                        </li>
+                        <li>
+                            <a href="/AllOffers" class="shpl">تخفیف ها</a>
+
+
+                        </li>
+
+                        <li>
+                            <a href="#" class="">درباره ما </a>
+
+
+                        </li>
+
+                        <li>
+                            <a href="/ContactUs" class="shpl">تماس با ما</a>
+
+
+
+                        </li>
+                        <li>
+                            <a href="/blog/allblogs" class="shpl">بلاگ</a>
+
+
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+
+            <div class="header-right">
+                <div class="header-lightbulb-icon">
+                    <p>
+                        @if (!User.Identity.IsAuthenticated || ViewBag.Role == 1)
+                        {
+                            <a href="/RegisterSeller" class="btn btn-outline-info shpl">فروشنده شوید</a>
+                        }
+                        else if (ViewBag.Role == 2)
+                        {
+                            <a href="/Admin" class="btn btn-outline-info shpl">ورود به پنل ادمین</a>
+                        }
+                        else if (ViewBag.Role == 3)
+                        {
+                            <a href="/Seller" class="btn btn-outline-info shpl">ورود به پنل فروشنده</a>
+                        }
+                    </p>
+                </div>
+                <div class="dropdown cart-dropdown" id="showCart2">
+                    @Html.Action("ShowCart", "ShopCart")
+                </div>
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+
+</header>

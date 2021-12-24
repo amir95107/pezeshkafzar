@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+@{ int c = 1; }
+<table class="table table-bordered table-responsive d-md-table dataTable" dir="rtl">
+    <thead class=" text-primary">
+        <tr>
+            <th>ردیف</th>
+            <th>تعداد</th>
+            <th>محصول</th>
+
+            <th>
+                قیمت نهایی
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(o => o.Orders.IsFinaly))
+        {
+            <tr>
+                <td>@c</td>
+
+                <td>@item.Count</td>
+                <td><a href="/ShowProduct/@item.ProductID/@item.Products.SefUrl">@item.Products.Title</a></td>
+
+                <td>
+                    @item.Price.ToString("#,0") تومان
+                </td>
+            </tr>
+            c++;
+        }
+
+
+    </tbody>
+    <tfoot class="">
+        @{ 
+            int delivery = 0;
+            if (Model.FirstOrDefault().Orders.DeliveryPrice != null)
+            {
+                delivery = (int)Model.FirstOrDefault().Orders.DeliveryPrice;
+            }
+        }
+        <tr><td colspan="2">مجموع:</td><td colspan="5">@(Model.Sum(o=>o.Price*o.Count).ToString("#,0")) <small>تومان</small></td></tr>
+        <tr><td colspan="2">هزینه ارسال:</td><td colspan="5">@delivery.ToString("#,0") <small>تومان</small></td></tr>
+        <tr><td colspan="2">کد تخفیف:</td><td colspan="5">@((Model.Sum(o => o.Price * o.Count)+delivery-Model.Sum(o => o.Orders.Payable)).ToString("#,0"))</td></tr>
+    </tfoot>
+</table>

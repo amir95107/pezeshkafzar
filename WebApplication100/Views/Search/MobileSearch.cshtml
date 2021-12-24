@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = " نتیجه جستجو برای " + ViewBag.Search;
+    ViewBag.Description = "نتایج جستجوی های مربوط به " + ViewBag.Search + " - فروشگاه اینرنتی میداس مارت";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="container p-0">
+    <div class="p-3">
+        <div class="bg-gray w-100">
+            <div class="search-wrapper-wide w-100 p-1">
+                <form class="mobile-search-form" action="/search">
+                    <div class="">
+                        <input name="q" required id="search" autocomplete="off" placeholder="جست و جو ..." type="search" class="bg-white form-control w-100 m-0" oninput="mobileSearchSuggestion(event)" />
+                    </div>
+                    <div id="searchAlert" class="w-100 text-danger text-right mb-1 p-1" style="display: none"></div>
+                    <div class="">
+                        <input type="submit" id="submit" value="بگرد" class="btn btn-info text-white w-100 mt-1 shpl" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr class="m-1" />
+        @Html.Action("LastSearchedProducts","Search")
+        <hr class="m-1" />
+        <div class="search-suggestion-container p-1" style="min-height: 60px">
+            <div id="mobileSearchSuggestion" class="text-right position-relative"></div>
+            <div class="overlayer" id="search-overlayer" style="display: none"></div>
+        </div>
+    </div>
+</div>
+

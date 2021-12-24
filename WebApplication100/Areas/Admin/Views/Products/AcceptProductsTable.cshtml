@@ -1,0 +1,99 @@
+﻿
+@model IEnumerable<DataLayer.Products>
+
+<table class="dataTable table table-bordered table-responsive products_table bg-white d-md-table" dir="rtl">
+    <thead class=" text-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                گروه های این محصول
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.PriceAfterDiscount)
+            </th>
+
+            <th>
+                درصد تخفیف
+            </th>
+
+            <th>
+                موجودی انبار
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr data-seller-id="@item.SellerID" id="product-@item.ProductID" class="product-item">
+                    <td>
+                        <img class="thumbnail" src="/Images/ProductImages/Thumb/@item.ImageName" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @if (item.Product_Selected_Groups.Any())
+                        {
+                            <ol>
+                                @foreach (var group in item.Product_Selected_Groups)
+                                {
+                                    <li>
+                                        @group.Product_Groups.GroupTitle
+                                    </li>
+                                }
+                            </ol>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceAfterDiscount)
+                    </td>
+
+                    <td>
+                        % @(
+                    (item.Price - item.PriceAfterDiscount)*100/item.Price
+                )
+                    </td>
+
+                    <td>
+                        @item.Stock
+                    </td>
+
+                    <td>
+                        @item.CreateDate.ToString("dddd, dd MMMM yyyy")
+                    </td>
+                    <td>
+                        <a class="btn btn-default btn-xs p-2 m-1" href="@Url.Action("Details",new {id=item.ProductID})">مشاهده جزئیات</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="9"><div class="alert alert-warning m-1 text-center">هیچ محصولی یافت نشد!</div></td>
+            </tr>
+        }
+    </tbody>
+
+</table>

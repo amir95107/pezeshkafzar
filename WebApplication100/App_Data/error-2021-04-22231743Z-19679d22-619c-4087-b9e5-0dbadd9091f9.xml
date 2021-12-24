@@ -1,0 +1,206 @@
+﻿<error errorId="19679d22-619c-4087-b9e5-0dbadd9091f9" host="DESKTOP-S9L5IM5" type="System.ArgumentException" message="The parameters dictionary contains a null entry for parameter 'acc' of non-nullable type 'System.Boolean' for method 'System.Web.Mvc.ActionResult SortByVisit(Boolean)' in 'MyEshop.Areas.Admin.Controllers.ProductsController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.&#xD;&#xA;Parameter name: parameters" source="System.Web.Mvc" detail="System.ArgumentException: The parameters dictionary contains a null entry for parameter 'acc' of non-nullable type 'System.Boolean' for method 'System.Web.Mvc.ActionResult SortByVisit(Boolean)' in 'MyEshop.Areas.Admin.Controllers.ProductsController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.&#xD;&#xA;Parameter name: parameters&#xD;&#xA;   at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c.&lt;BeginInvokeSynchronousActionMethod&gt;b__9_0(IAsyncResult asyncResult, ActionInvocation innerInvokeState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass11_0.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass11_2.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__2()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass7_0.&lt;BeginInvokeActionMethodWithFilters&gt;b__1(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_6.&lt;BeginInvokeAction&gt;b__4()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_1.&lt;BeginInvokeAction&gt;b__1(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;&gt;c.&lt;BeginExecuteCore&gt;b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;&gt;c.&lt;BeginExecute&gt;b__151_2(IAsyncResult asyncResult, Controller controller)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c.&lt;BeginProcessRequest&gt;b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="admin" time="2021-04-22T23:17:43.8639097Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:close&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_ENCODING:br, gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.5&#xD;&#xA;HTTP_COOKIE:_gcl_au=1.1.496398552.1614889134; _ga=GA1.1.333446264.1614889137; _hjid=8ed9e58c-9c05-46d5-9f1f-d983cd022dde; SeenProduct-3048=3048; SeenProduct-3051=3051; SeenProduct-3059=3059; SeenProduct-3052=3052; __RequestVerificationToken=L4PDKwpWECbUakdy0d8z4qnPizBmWTmXwHT2Hiox-qf6VOzmUP0vkxETl-EGfiGIfJOFBUDE_mY_2mpM3ulFHX8-32PelhM-nOr1x82P-rE1; MEDIAAD_USER_ID=920604cf-9b8e-4473-8ce2-e371d7bf5edd; ASP.NET_SessionId=5owyq2gq1g11xn5lgoiayfwe; myEshop=3A6602231EE6214404BEBCB216EA97F6B299199F4093ABCFEEB36457DE80DE9A908288346B6C1D57CC0256125674220D16AD5A63C235D798D9A7E074BCAA3D400D9B44D3403028D5D60171DBBC4723C925FECDFDB362FE69E54FBD4300FE963C; SeenProduct-3057=3057&#xD;&#xA;HTTP_HOST:localhost:44381&#xD;&#xA;HTTP_REFERER:https://localhost:44381/admin/products&#xD;&#xA;HTTP_TE:trailers&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: close&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Encoding: br, gzip, deflate&#xD;&#xA;Accept-Language: en-US,en;q=0.5&#xD;&#xA;Cookie: _gcl_au=1.1.496398552.1614889134; _ga=GA1.1.333446264.1614889137; _hjid=8ed9e58c-9c05-46d5-9f1f-d983cd022dde; SeenProduct-3048=3048; SeenProduct-3051=3051; SeenProduct-3059=3059; SeenProduct-3052=3052; __RequestVerificationToken=L4PDKwpWECbUakdy0d8z4qnPizBmWTmXwHT2Hiox-qf6VOzmUP0vkxETl-EGfiGIfJOFBUDE_mY_2mpM3ulFHX8-32PelhM-nOr1x82P-rE1; MEDIAAD_USER_ID=920604cf-9b8e-4473-8ce2-e371d7bf5edd; ASP.NET_SessionId=5owyq2gq1g11xn5lgoiayfwe; myEshop=3A6602231EE6214404BEBCB216EA97F6B299199F4093ABCFEEB36457DE80DE9A908288346B6C1D57CC0256125674220D16AD5A63C235D798D9A7E074BCAA3D400D9B44D3403028D5D60171DBBC4723C925FECDFDB362FE69E54FBD4300FE963C; SeenProduct-3057=3057&#xD;&#xA;Host: localhost:44381&#xD;&#xA;Referer: https://localhost:44381/admin/products&#xD;&#xA;TE: trailers&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0&#xD;&#xA;x-requested-with: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="E:\Users\user\source\repos\WebApplication100\WebApplication100\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="admin" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="admin" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="admin" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="256" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="2048" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="CN=localhost" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="CN=localhost" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="on" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="256" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="2048" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="CN=localhost" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="CN=localhost" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Admin/Products/SortByVisit" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="E:\Users\user\source\repos\WebApplication100\WebApplication100\Admin\Products\SortByVisit" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="acc=%D8%A8%D8%AF%D9%88%D9%86%20%D9%85%D8%B1%D8%AA%D8%A8%20%D8%B3%D8%A7%D8%B2%DB%8C" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="50317" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Admin/Products/SortByVisit" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="44381" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="1" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/10.0" />
+    </item>
+    <item name="URL">
+      <value string="/Admin/Products/SortByVisit" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="close" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="br, gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_gcl_au=1.1.496398552.1614889134; _ga=GA1.1.333446264.1614889137; _hjid=8ed9e58c-9c05-46d5-9f1f-d983cd022dde; SeenProduct-3048=3048; SeenProduct-3051=3051; SeenProduct-3059=3059; SeenProduct-3052=3052; __RequestVerificationToken=L4PDKwpWECbUakdy0d8z4qnPizBmWTmXwHT2Hiox-qf6VOzmUP0vkxETl-EGfiGIfJOFBUDE_mY_2mpM3ulFHX8-32PelhM-nOr1x82P-rE1; MEDIAAD_USER_ID=920604cf-9b8e-4473-8ce2-e371d7bf5edd; ASP.NET_SessionId=5owyq2gq1g11xn5lgoiayfwe; myEshop=3A6602231EE6214404BEBCB216EA97F6B299199F4093ABCFEEB36457DE80DE9A908288346B6C1D57CC0256125674220D16AD5A63C235D798D9A7E074BCAA3D400D9B44D3403028D5D60171DBBC4723C925FECDFDB362FE69E54FBD4300FE963C; SeenProduct-3057=3057" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:44381" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="https://localhost:44381/admin/products" />
+    </item>
+    <item name="HTTP_TE">
+      <value string="trailers" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="acc">
+      <value string="بدون مرتب سازی" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="_gcl_au">
+      <value string="1.1.496398552.1614889134" />
+    </item>
+    <item name="_ga">
+      <value string="GA1.1.333446264.1614889137" />
+    </item>
+    <item name="_hjid">
+      <value string="8ed9e58c-9c05-46d5-9f1f-d983cd022dde" />
+    </item>
+    <item name="SeenProduct-3048">
+      <value string="3048" />
+    </item>
+    <item name="SeenProduct-3051">
+      <value string="3051" />
+    </item>
+    <item name="SeenProduct-3059">
+      <value string="3059" />
+    </item>
+    <item name="SeenProduct-3052">
+      <value string="3052" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="L4PDKwpWECbUakdy0d8z4qnPizBmWTmXwHT2Hiox-qf6VOzmUP0vkxETl-EGfiGIfJOFBUDE_mY_2mpM3ulFHX8-32PelhM-nOr1x82P-rE1" />
+    </item>
+    <item name="MEDIAAD_USER_ID">
+      <value string="920604cf-9b8e-4473-8ce2-e371d7bf5edd" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="5owyq2gq1g11xn5lgoiayfwe" />
+    </item>
+    <item name="myEshop">
+      <value string="3A6602231EE6214404BEBCB216EA97F6B299199F4093ABCFEEB36457DE80DE9A908288346B6C1D57CC0256125674220D16AD5A63C235D798D9A7E074BCAA3D400D9B44D3403028D5D60171DBBC4723C925FECDFDB362FE69E54FBD4300FE963C" />
+    </item>
+    <item name="SeenProduct-3057">
+      <value string="3057" />
+    </item>
+  </cookies>
+</error>

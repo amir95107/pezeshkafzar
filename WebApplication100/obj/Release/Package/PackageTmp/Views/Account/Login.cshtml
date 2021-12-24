@@ -1,0 +1,144 @@
+﻿@model DataLayer.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "ورود";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="login-page bg-image pt-1 pb-1">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-selected="true">ورود</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shpl" href="/Register" id="registerBtn" aria-selected="false">ثبت نام</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <form action="/Login?ReturnUrl=@Request.QueryString["ReturnUrl"]" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
+                                {
+                                    <div class="alert alert-danger text-white text-center">
+                                        <b>شما مجوز ورود به بخش درخواست شده را ندارید .</b>
+                                    </div>
+                                }
+
+                                @if (Request.QueryString["recovery"] != null)
+                                {
+                                    <div class="alert alert-success">
+                                        <p>کلمه عبور شما با موفقیت تغییر کرد .</p>
+                                        <p>میتوانید لاگین کنید</p>
+                                    </div>
+                                }
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                    @*<div class="col-md-10">*@
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    @*</div>*@
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                                    @*<div class="col-md-10">*@
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    @*</div>*@
+                                </div>
+
+                                <div class="form-group col-sm-12 text-center">
+                                    <label class="control-label">عبارت امنیتی</label>
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6LfwqHQaAAAAAC_HutdWgAFwHWU_wBlJ1JTtoVX1"
+                                         data-callback='onSubmit'
+                                         data-action='submit'>
+                                        تایید عبارت امنیتی
+                                    </div>
+                                    <span class="text-danger">@ViewBag.Message</span>
+                                </div>
+
+                                <div class="form-footer">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-primary-2 spl">
+                                            <span>ورود</span>
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox mr-sm-1">
+                                        <input type="checkbox" class="custom-control-input" id="RememberMe">
+                                        @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "custom-control-label" })
+                                    </div><!-- End .custom-checkbox -->
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <a href="/ForgotPassword" class="forgot-link shpl">رمز عبور خود را فراموش کرده اید؟</a>
+                                    <br />
+                                    <a href="/Register" class="forgot-link shpl">حساب کاربری ندارید؟</a>
+                                </div>
+                                <hr />
+                                <div class="text-center">
+                                    <a class="btn btn-outline-warning shpl" href="/">بازگشت صفحه اصلی</a>
+                                </div>
+
+
+
+
+                            </div>
+                        </form>
+
+                        @*<div class="form-choice">
+                                <p class="text-center">یا ورود با </p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-g">
+                                            <i class="icon-google"></i>
+                                            حساب کاربری گوگل
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-f">
+                                            <i class="icon-facebook-f"></i>
+                                            حساب کاربری فیسبوک
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>*@<!-- End .form-choice -->
+                    </div><!-- .End .tab-pane -->
+
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            var searchUrl = location.search;
+            if (searchUrl.toLowerCase().indexOf('returnurl') != -1) {
+                var returnUrl = searchUrl.split('=')[1];
+                var href = $('#registerBtn').attr('href');
+                $('#registerBtn').attr('href', href + '?returnUrl=' + returnUrl);
+            }
+            hideOverlayer();
+        })
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa"></script>
+
+}
+@section Styles{
+    <style>
+        .g-recaptcha > div {
+            margin: auto
+        }
+    </style>
+}

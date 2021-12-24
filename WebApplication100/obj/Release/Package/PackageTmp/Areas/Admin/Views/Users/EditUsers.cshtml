@@ -1,0 +1,77 @@
+﻿@model DataLayer.Users
+
+
+@using (Ajax.BeginForm("EditUsers", "Users", FormMethod.Post, new AjaxOptions()
+{
+    OnSuccess = "getUsers",
+    UpdateTargetId = "usersTable"
+}))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+    <input type="hidden" id="ActiveCode" name="ActiveCode" value="@Model.ActiveCode" />
+    <input type="hidden" id="IsUserInfoCompleted" name="IsUserInfoCompleted" value="@Model.IsUserInfoCompleted" />
+    <div class="form-horizontal">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleID, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.RoleID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegisterDate, htmlAttributes: new { @class = "control-label " })
+            <div class="">
+                @Html.EditorFor(model => model.RegisterDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 ">
+                <input type="submit" value="ذخیره" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+

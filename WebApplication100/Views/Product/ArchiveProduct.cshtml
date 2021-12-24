@@ -1,0 +1,360 @@
+﻿@model IEnumerable<DataLayer.Products>
+@{
+    ViewBag.Title = "آرشیو محصولات - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید تمامی محصولاتی که با تخفیف ارائه میشوند را مشاهده فرمایید.";
+    int pageId = ViewBag.pageId;
+    int take = ViewBag.Take;
+    int total = ViewBag.ProductsCount;
+    int min = ViewBag.minPrice;
+    int max = ViewBag.maxPrice;
+    if (Request.QueryString["minPrice"] != null && Request.QueryString["maxPrice"] != null)
+    {
+        min = int.Parse(Request.QueryString["minPrice"].ToString());
+        max = int.Parse(Request.QueryString["maxPrice"].ToString());
+    }
+    int minest = ViewBag.minPrice;
+    int maxest = ViewBag.maxPrice;
+}
+
+
+<main class="main">
+
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="shpl">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">آرشیو محصولات</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="toolbox">
+                        <div class="toolbox-left">
+                            <div class="toolbox-info">
+                                نمایش موارد <span>@((pageId-1)*take+1)</span> تا <span>@(((pageId) * take < total)? (pageId) * take: total)</span> از <span>@total</span> مورد
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-left -->
+
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">مرتب سازی براساس : </label>
+                                <div class="">
+                                    <select name="sortby" id="sortby" class="form-control" onchange="sortProducts(this.value)">
+                                        <option value="popularity" selected="selected">بیشترین خرید</option>
+                                        <option value="theMostExpensive">گران ترین</option>
+                                        <option value="theCheapest">ارزان ترین</option>
+                                        <option value="date">تاریخ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @*<div class="toolbox-layout">
+                                    <a href="category-list.html" class="btn-layout">
+                                        <svg width="16" height="10">
+                                            <rect x="0" y="0" width="4" height="4"></rect>
+                                            <rect x="6" y="0" width="10" height="4"></rect>
+                                            <rect x="0" y="6" width="4" height="4"></rect>
+                                            <rect x="6" y="6" width="10" height="4"></rect>
+                                        </svg>
+                                    </a>
+
+                                    <a href="category-2cols.html" class="btn-layout">
+                                        <svg width="10" height="10">
+                                            <rect x="0" y="0" width="4" height="4"></rect>
+                                            <rect x="6" y="0" width="4" height="4"></rect>
+                                            <rect x="0" y="6" width="4" height="4"></rect>
+                                            <rect x="6" y="6" width="4" height="4"></rect>
+                                        </svg>
+                                    </a>
+
+                                    <a href="category.html" class="btn-layout active">
+                                        <svg width="16" height="10">
+                                            <rect x="0" y="0" width="4" height="4"></rect>
+                                            <rect x="6" y="0" width="4" height="4"></rect>
+                                            <rect x="12" y="0" width="4" height="4"></rect>
+                                            <rect x="0" y="6" width="4" height="4"></rect>
+                                            <rect x="6" y="6" width="4" height="4"></rect>
+                                            <rect x="12" y="6" width="4" height="4"></rect>
+                                        </svg>
+                                    </a>
+
+                                    <a href="category-4cols.html" class="btn-layout">
+                                        <svg width="22" height="10">
+                                            <rect x="0" y="0" width="4" height="4"></rect>
+                                            <rect x="6" y="0" width="4" height="4"></rect>
+                                            <rect x="12" y="0" width="4" height="4"></rect>
+                                            <rect x="18" y="0" width="4" height="4"></rect>
+                                            <rect x="0" y="6" width="4" height="4"></rect>
+                                            <rect x="6" y="6" width="4" height="4"></rect>
+                                            <rect x="12" y="6" width="4" height="4"></rect>
+                                            <rect x="18" y="6" width="4" height="4"></rect>
+                                        </svg>
+                                    </a>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="products mb-3" id="">
+                        @if (ViewBag.NoBrand != null)
+                        {
+                            <div class="mb-3 alert alert-danger text-white text-center">
+                                @ViewBag.NoBrand
+                            </div>
+                            <div class="text-center"><a href="/Archive" class="btn btn-outline-info shpl">بازگشت</a></div>
+                        }
+                        else
+                        {
+                            <div class="row" id="prodcutContainer">
+
+                                @if (Model.Any() && Model != null)
+                                {
+                                    foreach (var product in Model)
+                                    {
+                                        <div class="col-6 col-md-3 col-lg-3 product-item">
+                                            @Html.Partial("_product", product)
+                                        </div><!-- End .col-sm-6 col-lg-4 -->
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="text-center card w-100 p-2">
+                                        <div class="alert alert-warning text-center text-white mb-2">
+                                            @ViewBag.NoProducts
+                                        </div>
+                                        <br />
+                                        <a class="btn btn-outline-info w-25 m-auto shpl" href="/archive">بازگشت به لیست محصولات</a>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            if (ViewBag.PageCount > 1)
+                            {
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item @((pageId==1)?"disabled":"")">
+                                            <a class="page-link page-link-prev shpl" onclick="changePage(@(pageId-1))" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                                <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
+                                            </a>
+                                        </li>
+                                        @{
+                                            int pageCount = ViewBag.PageCount;
+                                        }
+
+                                        @if (pageCount - pageId < 5)
+                                        {
+                                            <li>
+                                                <a class="page-link shpl @((ViewBag.pageId == 1) ? "active" : "")" onclick="changePage(1)">1</a>
+                                            </li>
+                                            <li>
+                                                <span>...</span>
+                                            </li>
+                                        }
+
+                                        @for (int i = (pageCount > pageId+4?pageId:pageCount-4); i <= (ViewBag.PageCount > pageId + 4 ? (pageId + 4) : pageCount); i++)
+                                        {
+                                            <li><a class="page-link shpl @((ViewBag.pageId == i) ? "active" : "")" onclick="changePage(@i)">@i</a></li>
+                                        }
+
+                                        @if (pageCount - pageId > 5)
+                                        {
+                                            <li>
+                                                <span>...</span>
+                                            </li>
+                                        }
+
+                                        @if (pageCount - pageId >= 5)
+                                        {
+                                            <li>
+                                                <a class="page-link shpl @((ViewBag.pageId == pageCount) ? "active" : "")" onclick="changePage(@pageCount)">@pageCount</a>
+                                            </li>
+                                        }
+                                        <li class="page-item-total">از @pageCount</li>
+                                        <li class="page-item @((take > Model.Count())?"disabled":"")">
+                                            <a class="page-link page-link-next shpl" onclick="changePage(@(pageId+1))" aria-label="Next">
+                                                بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            }
+                        }
+
+                        <!-- End .row -->
+                    </div><!-- End .products -->
+
+
+                </div><!-- End .col-lg-9 -->
+                <aside class="col-lg-3 order-lg-first">
+                    <div class="sidebar sidebar-shop">
+                        <div class="widget widget-clean">
+                            <label>فیلترها : </label>
+                            <a class="sidebar-filter-clear text-warning shpl" onclick="window.location.href='/archive'">پاک کردن همه</a>
+                        </div><!-- End .widget widget-clean -->
+
+                        <form action="/Archive" id="filterForm">
+                            <input type="hidden" value="@ViewBag.pageId" id="pageId" name="pageId" />
+                            <div class="widget widget-collapsible">
+                                <p>عنوان</p>
+                                <p>
+                                    <input type="text" name="title" style="width:100%" class="form-control" value="@ViewBag.productTitle" />
+                                </p>
+                            </div>
+                            <div class="widget widget-collapsible">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                        دسته بندی
+                                    </a>
+                                </h3><!-- End .widget-title -->
+
+
+                                <div class="collapse show" id="widget-1">
+                                    <div class="widget-body">
+                                        <div class="filter-items filter-items-count">
+                                            @{
+                                                List<DataLayer.Product_Groups> list = ViewBag.Groups;
+                                                List<int> selected = ViewBag.selectGroup ?? new List<int>();
+                                            }
+                                            @foreach (var group in list.Where(g => g.ParentID == null))
+                                            {
+                                                <div class="">
+                                                    <div class="custom-control custom-checkbox maingroup">
+                                                        <input type="checkbox" name="selectedGroups" @((selected.Any(s => s == group.GroupID)) ? "checked" : "") value="@group.GroupID" class="custom-control-input" id="cat-@group.GroupID">
+                                                        <label class="custom-control-label" for="cat-@group.GroupID">@group.GroupTitle</label>
+                                                    </div>
+                                                    @if (list.Any(g => g.ParentID == group.GroupID))
+                                                    {
+
+                                                        foreach (var subGroup in list.Where(g => g.ParentID == group.GroupID).OrderByDescending(p => p.Product_Selected_Groups.Count()).Take(5))
+                                                        {
+                                                            <div class="custom-control custom-checkbox subgroup" style="margin-right: 20px;padding: 3px">
+                                                                <input type="checkbox" name="selectedGroups" @((selected.Any(s => s == subGroup.GroupID)) ? "checked" : "") value="@subGroup.GroupID" />
+                                                                <span>@subGroup.GroupTitle</span>
+                                                            </div>
+                                                        }
+                                                        <div class="custom-control custom-checkbox subgroup text-left" style="margin-right: 20px;padding: 3px">
+                                                            <a href="/Categories?parentId=@group.GroupID" class="text-info shpl">موارد بیشتر...</a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            @if (Model.Any())
+                            {
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title">
+                                        <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
+                                            برند
+                                        </a>
+                                    </h3><!-- End .widget-title -->
+
+                                    <div class="collapse show" id="widget-4">
+                                        @Html.Action("ShowBrand")
+                                    </div>
+                                    <!-- End .collapse -->
+                                </div><!-- End .widget -->
+
+                                @*<div class="widget widget-collapsible">
+                                        <h3 class="widget-title">
+                                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                                قیمت
+                                            </a>
+                                        </h3>
+                                        <div class="" id="widget-5">
+
+
+                                            <p>قیمت از</p>
+                                            <p>
+                                                <input type="number" value="@((ViewBag.minPrice == 0) ? Model.Select(p => p.Price).Min() : ViewBag.minPrice)" min="ViewBag.minPrice" name="minPrice" id="minPrice" class="form-control" />
+                                            </p>
+                                            <p>قیمت تا</p>
+                                            <p>
+                                                <input type="number" value="@((ViewBag.maxPrice == 0) ? Model.Select(p => p.Price).Max() : ViewBag.maxPrice)" max="ViewBag.maxPrice" name="maxPrice" id="maxPrice" class="form-control" />
+                                            </p>
+                                        </div>
+
+
+                                    </div>*@
+                                <input type="hidden" value="@max" max="@maxest" name="maxPrice" id="maxPriceVal" />
+                                <input type="hidden" value="@min" min="@minest" name="minPrice" id="minPriceVal" />
+
+                                <div class="widget widget-collapsible">
+                                    <div class="widget-body">
+                                        <h3 class="widget-title">
+                                            <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true" aria-controls="widget-5">
+                                                قیمت
+                                            </a>
+                                        </h3>
+                                        <div class="filter-price" id="widget-5">
+
+                                            <div class="filter-price-text">
+                                                محدوده قیمت :
+                                                <span id="filter-price-range"></span>
+                                            </div>
+
+                                            <div id="price-slider"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <button type="button" onclick="submitArchiveForm('#filterForm')" class="btn btn-block btn-primary">اعمال</button> <!-- End .collapse -->
+
+                        </form><!-- End .widget -->
+                    </div><!-- End .sidebar sidebar-shop -->
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main>
+
+@section Scripts{
+    <script src="~/Content/js/nouislider.min.js"></script>
+    <script src="~/Content/js/wNumb.js"></script>
+    <script>
+        $(document).ready(() => {
+            if (typeof noUiSlider === 'object') {
+                var priceSlider = document.getElementById('price-slider');
+
+                // Check if #price-slider elem is exists if not return
+                // to prevent error logs
+                if (priceSlider == null) return;
+                noUiSlider.create(priceSlider, {
+                    start: [@min, @max],
+                    connect: true,
+                    step: 50000,
+                    margin: 0,
+                    range: {
+                        'min': @minest,
+                        'max': @maxest
+                    },
+                    tooltips: true,
+                    format: wNumb({
+                        decimals: 0, // default is 2
+                        thousand: ',', // thousand delimiter
+                        postfix: ' تومان'
+                    })
+                });
+
+                // Update Price Range
+                priceSlider.noUiSlider.on('update', function (values, handle) {
+                    $('#filter-price-range').text(values.join(' - '));
+                    $('#minPriceVal').val(+(values[0].split(' ')[0].replace(/,/g, '')))
+                    $('#maxPriceVal').val(+(values[1].split(' ')[0].replace(/,/g, '')))
+                });
+            }
+        })
+    </script>
+}

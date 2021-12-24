@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DataLayer.DeliveryWays>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+    int c = 1;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">شیوه های ارسال محصول</h2>
+
+    <p>
+        <a class="btn btn-primary" href="/admin/deliveryways/create">ایجاد شیوه ارسال جدید</a>
+    </p>
+    <table class="table border table-responsive d-table">
+        <tr>
+            <th>
+                ردیف
+            </th>
+            <th>
+                عنوان
+            </th>
+            <th>
+                هزینه
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @c
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @if (item.Price != null)
+                    {
+                        <span>@item.Price.ToString()</span>
+                    }
+                    else
+                    {
+                        <span>متغیر</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline-info text-info p-2"
+                       data-toggle="tooltip" data-placement="top"
+                       title="جزئیات" href="/admin/deliveryways/details/@item.DeliveryID">
+                        <i class="now-ui-icons travel_info"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-warning text-warning p-2"
+                       data-toggle="tooltip" data-placement="top"
+                       title="ویرایش" href="/admin/deliveryways/edit/@item.DeliveryID">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger text-danger p-2" data-toggle="tooltip" data-placement="top" title="حذف"
+                       href="/admin/deliveryways/delete/@item.DeliveryID">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </a>
+                    
+                </td>
+            </tr>
+            c++;
+        }
+
+    </table>
+
+</div>

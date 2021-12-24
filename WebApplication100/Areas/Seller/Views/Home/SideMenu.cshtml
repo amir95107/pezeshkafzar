@@ -1,0 +1,41 @@
+﻿@{
+    bool isAccepted = ViewBag.IsAccepted;
+}
+
+@if (isAccepted)
+{
+    @Html.Action("Order", "Home")
+    <li>
+        <a href="#" onclick="toggleDiv('#nav-item-products')">
+            <i class="now-ui-icons location_map-big"></i>
+            <p>محصولات</p>
+        </a>
+        <ul style="display: none" class="nav text-right inner-nav hide" id="nav-item-products">
+            <li class="nav-item"><a href="/seller/Products">همه محصولات</a></li>
+            <li class="nav-item"><a href="/seller/Products/Create">افزودن محصول جدید</a></li>
+            <li class="nav-item"><a href="/seller/Features">تعریف ویژگی محصولات</a></li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="/seller/orders/reports">
+            <i class="now-ui-icons education_atom"></i>
+            <p>گزارش فروش </p>
+        </a>
+    </li>
+    <li>
+        <a href="/Seller/SellersAccount">
+            <i class="now-ui-icons education_atom"></i>
+            <p>اطلاعات فروشنده </p>
+        </a>
+    </li>
+}
+else
+{
+    <li>
+        <a href="/Seller/SellersAccount">
+            <i class="now-ui-icons education_atom"></i>
+            <p>تکمیل اطلاعات فروشنده </p>
+        </a>
+    </li>
+}

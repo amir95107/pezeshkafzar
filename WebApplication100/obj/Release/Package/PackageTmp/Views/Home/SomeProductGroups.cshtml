@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DataLayer.Product_Groups>
+
+<div class="container featured mb-0">
+    <div class="row">
+        @foreach (var item in Model.Where(g => g.ParentID == null))
+        {
+            <div class="col-md-4 p-0">
+                <div class="card text-center text-white product-groups product-group-@item.GroupID">
+                    <div class="card-body text-center">
+                        <a href="/Archive?selectedGroups=@item.GroupID" class="shpl">
+                            <span>@item.GroupTitle</span>
+                        </a>
+                    </div>
+                    <div class="card-footer d-flex p-0">
+                        @foreach (var sub in Model.Where(s => s.ParentID == item.GroupID).OrderByDescending(p => p.Product_Selected_Groups.Count()).Take(3))
+                        {
+                            <div class="border col-4">
+                                <a href="/Archive?selectedGroups=@sub.GroupID" class="shpl">
+                                    <span >@sub.GroupTitle</span>
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        @*<div class="col-md-4 p-0">
+                <div class="card text-center bg-light">
+                    <div class="card-body text-center">
+                        <span>دسته بندی</span>
+                    </div>
+                    <div class="card-footer d-flex p-0">
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 p-0">
+                <div class="card text-center bg-info">
+                    <div class="card-body text-center">
+                        <span>دسته بندی</span>
+                    </div>
+                    <div class="card-footer d-flex p-0">
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                        <div class="border col-4">
+                            <span>دسته بندی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+    </div>
+</div>

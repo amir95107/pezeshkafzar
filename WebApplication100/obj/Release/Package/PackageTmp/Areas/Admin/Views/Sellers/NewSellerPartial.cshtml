@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DataLayer.Sellers>
+@{
+    ViewBag.Title = "NewSellers";
+    Layout = null;
+}
+<table class="table table-responsive d-md-table">
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.SellerFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAcceptedByAdmin)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SellerFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                <a class="btn btn-success" onclick="acceptSeller(@item.SellerID)">تایید فروشنده</a>
+            </td>
+
+        </tr>
+    }
+
+</table>

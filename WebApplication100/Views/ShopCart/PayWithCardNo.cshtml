@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "اطلاعات بانکی - پزشک افزار";
+    ViewBag.Description = "در این صفحه اطلاعات بانکی ما وجود دارد. در صورتی که میخواهید در محل و یا به صورت کارت به کارت پرداخت را انجام دهید میتوانید از این اطلاعات استفاده کنید.";
+    var data = ViewBag.Data;
+    bool isFinally = ViewBag.IsFinally;
+}
+
+<div class="container text-center">
+    @if (isFinally)
+    {
+        <div class="alert alert-warning text-center mt-3" dir="rtl">
+            کاربر گرامی، سفارش شما قبلا نهایی و پرداخت شما انجام شده است.
+        </div>
+    }
+    <div class="card-box m-auto mt-2 w-md-50">
+        <table class="d-table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <th>مبلغ قابل پرداخت</th>
+                    <th>مجموع تخفیف</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@data[0]</td>
+                    <td>@data[1]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-box text-center mt-2">
+        <img src="~/Content/images/card.png" class="m-auto rounded" />
+    </div>
+    <div class="card-body text-center mt-2">
+        <div class="card-box m-auto w-md-50">
+            <table class="d-block d-md-table table-responsive table-bordered ">
+                <thead>
+                    <tr>
+                        <th>شماره کارت</th>
+                        <th>شماره حساب</th>
+                        <th>شماره شبا</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5022291091367191</td>
+                        <td>2028000129569631</td>
+                        <td>IR34057002028012956963101</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div class="alert alert-info text-center text-white mb-2" dir="rtl">
+            لطفا پس از واریز وجه با این شماره تماس بگیرید.
+        </div>
+        <div class="d-block text-center">
+            <a class="m-auto btn btn-outline-info" href="tel:09120624426">09120624426</a>
+        </div>
+    </div>
+</div>
+<style>
+    td{
+        padding:10px
+    }
+    @@media(min-width: 992px){
+        .w-md-50 {
+            width: 50%
+        }
+    }
+</style>

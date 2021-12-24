@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-category">All Persons List</h5>
+        <h4 class="card-title"> Employees Stats</h4>
+    </div>
+    <div class="card-body">
+        <div class="">
+            <table class="table table-bordered table-responsive d-md-table" dir="rtl">
+                <thead class=" text-primary">
+                    <tr>
+                        <th>
+                            محصول
+                        </th>
+                        <th>
+                            قیمت
+                        </th>
+                        <th width="75">
+                            موجودی
+                        </th>
+                        <th class="">
+                            نام فروشنده
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div>
+                                    <span>@item.Title</span>
+                                    <img width="80" src="~/Images/ProductImages/Thumb/@item.ImageName" alt="@item.Title" />
+                                </div>
+                            </td>
+                            <td>
+                                @item.PriceAfterDiscount.ToString("#,0") تومان
+                            </td>
+                            <td>
+                                @item.Stock
+                            </td>
+                            <td class="">
+                                @if (item.SellerID > 0)
+                                {
+                                    <span>@item.Sellers.SellerFullName.ToString()</span>
+                                }
+                                else
+                                {
+                                    <span>ادمین</span>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

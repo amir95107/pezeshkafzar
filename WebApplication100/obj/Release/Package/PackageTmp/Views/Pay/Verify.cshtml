@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Verify";
+}
+
+
+
+
+
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">وضعیت پرداخت</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav>
+    <div class="page-content">
+        <div class="cart">
+            <div class="container">
+                <div class="jumbotron">
+                    <h2 class="text-center">@ViewBag.msg</h2>
+                    @if (ViewBag.Trace != null)
+                    {
+                        <h4 class="text-center">کد پیگیری سفارش از سایت: @ViewBag.Trace</h4>
+                        <div class="text-center">
+                            <a class="btn btn-info text-white" href="/Pay/OrderTracking/@ViewBag.Trace">
+                                پیگیری سفارش
+                            </a>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</main>

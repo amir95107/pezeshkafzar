@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C3CF09BE-73AE-4EF6-A0D9-9887016A2221}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLayer</RootNamespace>
+    <AssemblyName>DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addresses.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blogs.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Brands.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comments.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactForm.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryWays.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Discounts.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Features.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lead_Clients.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LikeProduct.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedCart.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medab_DBEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medab_DBEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medab_DBEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medab_DBEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medab_DBEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MetaDataClasses\AddressMetaData.cs" />
+    <Compile Include="MetaDataClasses\BlogsMetaData.cs" />
+    <Compile Include="MetaDataClasses\BrandsMetaData.cs" />
+    <Compile Include="MetaDataClasses\DiscountsMetaData.cs" />
+    <Compile Include="MetaDataClasses\FeaturesMetaData.cs" />
+    <Compile Include="MetaDataClasses\Lead_ClientsMetaData.cs" />
+    <Compile Include="MetaDataClasses\LikeProductMetaData.cs" />
+    <Compile Include="MetaDataClasses\OrderDetailsMetaData.cs" />
+    <Compile Include="MetaDataClasses\OrdersMetaData.cs" />
+    <Compile Include="MetaDataClasses\PageMetaData.cs" />
+    <Compile Include="MetaDataClasses\Prodct_Selected_GroupsMetaData.cs" />
+    <Compile Include="MetaDataClasses\ProductBrandMetaData.cs" />
+    <Compile Include="MetaDataClasses\ProductsMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_CommentsMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_FeaturesMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_GalleriesMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_GroupsMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_TagsMetaData.cs" />
+    <Compile Include="MetaDataClasses\RolesMetaData.cs" />
+    <Compile Include="MetaDataClasses\SellersMetaData.cs" />
+    <Compile Include="MetaDataClasses\SiteVisitMetaData.cs" />
+    <Compile Include="MetaDataClasses\SliderMetaData.cs" />
+    <Compile Include="MetaDataClasses\SpecialProductsMetaData.cs" />
+    <Compile Include="MetaDataClasses\UserInfoMetaData.cs" />
+    <Compile Include="MetaDataClasses\UsersMetaData.cs" />
+    <Compile Include="OrderDetails.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Page.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBrand.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Features.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Galleries.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Groups.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Selected_Groups.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Tags.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sellers.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteVisit.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Slider.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpecialProducts.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>medab_DBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\CompareListViewModels.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\ShopCartViewModel.cs" />
+    <Compile Include="ViewModels\VisitSiteViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="medab_DBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>medab_DBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="medab_DBEntities.edmx.diagram">
+      <DependentUpon>medab_DBEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="medab_DBEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>medab_DBEntities.Context.cs</LastGenOutput>
+      <DependentUpon>medab_DBEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="medab_DBEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>medab_DBEntities.edmx</DependentUpon>
+      <LastGenOutput>medab_DBEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

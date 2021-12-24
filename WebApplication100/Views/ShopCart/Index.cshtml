@@ -1,0 +1,20 @@
+﻿@{ 
+    ViewBag.Title = "سبد خرید - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید تعداد محصولی که در سبد خریدتان هست را افزایش و یا کاهش بدهید و یا اینکه آن را حذف کنید.";
+}
+
+<div id="showOrder">
+     @Html.Action("Order")
+</div>
+
+<script>
+    commandOrder = (id, count) => {
+        $.ajax({
+            url: "/ShopCart/CommandOrder/" + id,
+            type: "Get",
+            data: { count: count }
+        }).done((res) => {
+            $("#showOrder").html(res);
+        });
+    }
+</script>

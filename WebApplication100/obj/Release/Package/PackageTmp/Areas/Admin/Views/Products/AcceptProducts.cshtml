@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "AcceptProducts";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl" style="margin-top: 100px;text-align: right">
+
+    </div>
+    <div class="table-wrapper" id="productsList">
+        @Html.Action("AcceptProductsTable")
+    </div>
+</div>
+
+@section Scripts {
+    <link href="~/Areas/Admin/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/DataTables/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable()
+        })
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿@model DataLayer.Products
+
+<div class="text-center">
+    <div>
+        <img id="qv-big-image" class="m-auto" src="/Images/ProductImages/@Model.ImageName" alt="@Model.Title" title="@Model.Title" />
+
+    </div>
+    @if (Model.Product_Galleries.Any())
+    {
+        <div class="row mt-2">
+            <div class=" product-gallery-item active">
+                <a onclick="showThisImage(this)">
+                    <img src="~/Images/ProductImages/Thumb/@Model.ImageName" alt="@Model.Title" title="@Model.Title" />
+                </a>
+            </div>
+            @foreach (var image in Model.Product_Galleries)
+            {
+                <div class=" product-gallery-item">
+                    <a onclick="showThisImage(this)">
+                        <img src="~/Images/ProductImages/Thumb/@image.ImageName" alt="@image.Title" title="@image.Title" />
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    <h6>@Model.Title</h6>
+    @if (Model.PriceAfterDiscount > 0)
+    {
+        <p class="text-center"><strong>@Model.PriceAfterDiscount</strong> تومان</p>
+        if (Model.Stock > 0)
+        {
+            <a class="btn btn-success btn-block" onclick="addToCart(@Model.ProductID)">افزودن به سبد خرید</a>
+        }
+        else
+        {
+            <div class="text-danger">عدم موجودی</div>
+        }
+    }
+    else
+    {
+        <a class="btn btn-info btn-block" onclick="getNumber(@Model.ProductID)">تماس بگیرید</a>
+    }
+</div>

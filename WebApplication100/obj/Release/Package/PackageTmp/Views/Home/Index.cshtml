@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "پزشک افزار | تخصصی ترین مرجع کالای پزشکی";
+    ViewBag.Description = "بررسی ، مقایسه و خرید انواع تجهیزات پزشکی";
+}
+
+<main class="main">
+    <div class="intro-section pt-1 pb-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    @Html.Action("Slider")
+                </div><!-- End .col-lg-8 -->
+
+                <div class="col-lg-4">
+                    <div class="intro-banners" id="SpecialProducts">
+                        @Html.Action("SpecialProducts", "Product")
+                    </div><!-- End .intro-banners -->
+                </div><!-- End .col-lg-4 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .intro-section -->
+
+    <div class="row-container bg-green pr-0 pl-0" id="LastProduct">
+        @Html.Action("LastProduct", "Product")
+    </div>
+
+    <div class="row-container" id="SomeProductGroups">
+        @Html.Action("SomeProductGroups")
+    </div>
+
+    <div class="row-container bg-blue pr-0 pl-0" id="SpecialOffer">
+        @Html.Action("SpecialOffer", "Product")
+    </div>
+    <div class="container brands-container pt-3 pb-3" id="brands-container">
+        <div class="owl-carousel mt-3 mb-3 owl-simple" data-toggle="owl" data-owl-options='{
+                            "nav": false,
+             "autoplay": true,"autoplayTimeout":5000,"autoplayHoverPause":true,
+                            "dots": false,
+                            "margin": 30,
+                            "loop": true,
+                            "lazyload":true,
+                            "responsive": {
+                                "0": {
+                                    "items":2
+                                },
+                                "420": {
+                                    "items":3
+                                },
+                                "600": {
+                                    "items":4
+                                },
+                                "900": {
+                                    "items":5
+                                },
+                                "1024": {
+                                    "items":6
+                                }
+                            }
+                        }'>
+            @{
+                var bList = ViewBag.Brands;
+            }
+            @foreach (var item in bList)
+            {
+                <a href="/Archive?brandId=@item.BrandID" class="brand shpl">
+                    <img class="" src="~/Images/ProductImages/@item.BrandImageName" alt="@item.BrandTitle" title="@item.BrandTitle">
+                </a>
+            }
+
+
+
+        </div><!-- End .owl-carousel -->
+    </div><!-- End .container -->
+
+
+    @Html.Action("LastSeenProducts", "Product")
+
+    <div class="container">
+        @Html.Action("LastBlogs", "Blog")
+    </div>
+
+
+
+    <div class="container">
+        <div class="cta cta-separator cta-border-image cta-half mb-0">
+            <div class="cta-border-wrapper bg-white">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cta-wrapper cta-text text-center">
+                            <h3 class="cta-title">شبکه های اجتماعی</h3><!-- End .cta-title -->
+                            <p class="cta-desc text-center">
+                                با ما در شبکه های اجتماعی همراه باشید
+                            </p><!-- End .cta-desc -->
+
+                            <div class="social-icons social-icons-colored justify-content-center">
+
+
+                                <a href="https://www.instagram.com/pezeshkafzar" class="social-icon social-instagram" title="اینستاگرام"
+                                   target="_blank">
+                                    <i class="icon-instagram"></i>
+                                </a>
+                                <a href="https://www.aparat.com/pezeshkafzar" class="social-icon social-youtube" title="یوتیوب" target="_blank">
+                                    <i class="icon-youtube"></i>
+                                </a>
+                                <a href="https://www.instagram.com/pezeshkafzar" class="social-icon social-telegram" title="اینستاگرام"
+                                   target="_blank">
+                                    <i class="icon-telegram "></i>
+                                </a>
+                                <a href="https://www.instagram.com/pezeshkafzar" class="social-icon social-whatsapp" title="اینستاگرام"
+                                   target="_blank">
+                                    <i class="icon-whatsapp"></i>
+                                </a>
+
+                            </div><!-- End .soial-icons -->
+                        </div><!-- End .cta-wrapper -->
+                    </div><!-- End .col-lg-6 -->
+
+                    <div class="col-lg-6">
+                        <div class="cta-wrapper text-center">
+                            <h4 class="cta-title">اطلاع از جدیدترین تخفیف ها</h4><!-- End .cta-title -->
+                            <br />
+                            <form onsubmit="getEmailNumber(event)">
+                                <div class="input-group">
+                                    <input type="text" name="Mobile" class="form-control" id="lead-mobile"
+                                           placeholder="موبایل خود را وارد کنید" aria-label="Email Adress" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success btn-rounded" type="submit">
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </div><!-- .End .input-group-append -->
+                                </div><!-- .End .input-group -->
+                            </form>
+                        </div><!-- End .cta-wrapper -->
+                    </div><!-- End .col-lg-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .bg-white -->
+        </div><!-- End .cta -->
+    </div><!-- End .container -->
+
+</main>
+
+
+

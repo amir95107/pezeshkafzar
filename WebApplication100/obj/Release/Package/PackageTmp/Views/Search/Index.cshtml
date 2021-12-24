@@ -1,0 +1,121 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+@{
+    ViewBag.Title = " نتیجه جستجو برای " + ViewBag.Search;
+    int pageId = ViewBag.pageId;
+    int take = ViewBag.Take;
+    int total = ViewBag.ProductsCount;
+}
+<input type="hidden" value="@ViewBag.pageId" id="pageId" name="pageId" />
+<div class="page-content mt-2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 ">
+                <div class="toolbox">
+                    <div class="toolbox-left">
+                        <div class="toolbox-info">
+                        نمایش @total مورد
+                            @*نمایش موارد <span>@((pageId-1)*take+1)</span> تا <span>@(((pageId) * take < total)? (pageId) * take: total)</span> از <span>@total</span> مورد*@
+                        </div><!-- End .toolbox-info -->
+                    </div><!-- End .toolbox-left -->
+
+                    <div class="toolbox-right">
+                        <div class="toolbox-sort">
+                            <label for="sortby">مرتب سازی براساس : </label>
+                            <div class="">
+                                <select name="sortby" id="sortby" class="form-control" onchange="sortProducts(this.value)">
+                                    <option value="popularity" selected="selected">بیشترین خرید</option>
+                                    <option value="theMostExpensive">گران ترین</option>
+                                    <option value="theCheapest">ارزان ترین</option>
+                                    <option value="date">تاریخ</option>
+                                </select>
+                            </div>
+                        </div><!-- End .toolbox-sort -->
+                        @*<div class="toolbox-layout">
+                                <a href="category-list.html" class="btn-layout">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="10" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="10" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="category-2cols.html" class="btn-layout">
+                                    <svg width="10" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="category.html" class="btn-layout active">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="12" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                        <rect x="12" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="category-4cols.html" class="btn-layout">
+                                    <svg width="22" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="12" y="0" width="4" height="4"></rect>
+                                        <rect x="18" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                        <rect x="12" y="6" width="4" height="4"></rect>
+                                        <rect x="18" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+                            </div>*@<!-- End .toolbox-layout -->
+                    </div><!-- End .toolbox-right -->
+                </div>
+                <div class="products mb-3" id="">
+                    <div class="row">
+                        @foreach (var product in Model)
+                        {
+                            <div class="col-6 col-md-3 col-lg-3">
+                                @Html.Partial("_product", product)
+                            </div><!-- End .col-sm-6 col-lg-4 -->
+                        }
+
+
+                    </div><!-- End .row -->
+                </div><!-- End .products -->
+                @*@if (ViewBag.PageCount > 1)
+                {
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @((pageId==1)?"disabled":"")">
+                                <a class="page-link page-link-prev" onclick="changeSearchPage(@(pageId-1))" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                    <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>قبلی
+                                </a>
+                            </li>
+
+
+                            @for (int i = 1; i <= ViewBag.PageCount; i++)
+                            {
+                                <li><a class="page-link @((ViewBag.pageId == i) ? "active" : "")" onclick="changeSearchPage(@i)">@i</a></li>
+                            }
+
+
+
+                            <li class="page-item-total">از @ViewBag.PageCount</li>
+                            <li class="page-item @((take > Model.Count())?"disabled":"")">
+                                <a class="page-link page-link-next" onclick="changeSearchPage(@(pageId+1))" aria-label="Next">
+                                    بعدی <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                }*@
+            </div>
+        </div>
+    </div>
+</div>

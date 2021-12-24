@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DataLayer.Orders>
+<table class="table table-responsive d-md-table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                ردیف
+            </th>
+            <th>
+                شماره پیگیری
+            </th>
+
+            <th>
+                تاریخ
+            </th>
+            <th>
+                مبلغ پرداخت شده
+            </th>
+
+            <th>
+                شیوه پرداخت
+            </th>
+
+            <th>وضعیت</th>
+
+            <th>جزئیات</th>
+
+            <th>عملیات</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{ 
+            int c = 1;
+        }
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+                <td>
+                    @c
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraceCode)
+                </td>
+
+                <td>
+                    @item.Date.ToString("yyyy/MM/dd")
+                </td>
+                <td>
+                    <span>@item.Payable.ToString("#,0")</span>
+                    <small>تومان</small>
+                </td>
+
+                <td>
+                    @if (item.IsFinaly)
+                    {
+                        <span>@((item.Payable==1)?"کارت به کارت":"اینترنتی")</span>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+
+                <td>
+                    @if (item.IsFinaly)
+                    {
+                        <span class="text-success">نهایی</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">عدم پرداخت فاکتور</span>
+                    }
+                </td>
+
+                <td>
+                    <a onclick="showOrderDetails(@item.OrderID)" class="btn btn-info text-white m-2">
+                        مشاهده جزئیات
+                    </a>
+                </td>
+                <td>
+                    @if (!item.IsFinaly)
+                    {
+                        <a class="btn btn-success m-2 d-block" href="/Pay/Pay?orderId=@item.OrderID">پرداخت و نهایی کردن سفارش</a>
+                        @*<a class="btn btn-warning m-2 d-block">ویرایش سفارش و نهایی کردن خرید</a>*@
+                        <a class="btn btn-danger m-2 d-block" onclick="deleteOrder(@item.OrderID)">حذف سفارش</a>
+                    }
+                </td>
+            </tr>
+            c++;
+        }
+    </tbody>
+
+</table>

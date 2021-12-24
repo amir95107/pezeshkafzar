@@ -1,0 +1,130 @@
+﻿﻿@model DataLayer.Products
+
+@{
+    if (Model.Price == 0)
+    {
+        Model.Price = 1;
+    }
+    int discount = (Model.Price - Model.PriceAfterDiscount) * 100 / Model.Price;
+    Random rnd = new Random();
+    int score = 60 + rnd.Next(40);
+}
+
+<div class="product product-2" data-price="@Model.PriceAfterDiscount" data-discount="@discount" data-date="@Model.CreateDate.ToString()">
+    <figure class="product-media">
+        <a href="/ShowProduct/@Model.ProductID/@Model.SefUrl" class="shpl">
+            <img data-src="/Images/ProductImages/Thumb/@Model.ImageName" alt="@Model.Title" title="@Model.Title"
+                 class="product-image lazy">
+        </a>
+
+        <div class="tag-p-right">
+            @if (discount > 0 && Model.PriceAfterDiscount > 0)
+            {
+                <span class="tag discount-tag">
+                    @discount %
+                </span>
+            }
+            else if (Model.PriceAfterDiscount == 0)
+            {
+                <span class="tag call-tag">
+                    <i class="icon-phone"></i>
+                </span>
+            }
+        </div>
+
+
+        <div class="product-action-vertical">
+            <a onclick="addToWishList(@Model.ProductID)" class="btn-product-icon btn-wishlist btn-expandable">
+                <i class="icon-heart-o"></i>
+                <span>
+                    افزودن به
+                    لیست علاقه مندی
+                </span>
+            </a>
+            <a onclick="quickView(@Model.ProductID)" class="btn-product-icon btn-quickview  btn-expandable" title="مشاهده سریع">
+                <span>مشاهده سریع</span>
+            </a>
+        </div><!-- End .product-action -->
+
+        <div class="product-action product-action-dark">
+            @if (Model.Stock > 0 && Model.PriceAfterDiscount > 0)
+            {
+                <a onclick="addToCart(@Model.ProductID)" class="btn-product btn-cart" title="افزودن به سبد خرید">
+                    <span>
+                        افزودن
+                        به
+                        سبد خرید
+                    </span>
+                </a>
+            }
+            else if (Model.PriceAfterDiscount == 0)
+            {
+                <div class="alert alert-info text-center w-100 call-for-price p-0">
+                    <span>
+                        جهت آگاهی از قیمت تماس بگیرید
+                    </span>
+                </div>
+            }
+            else
+            {
+                <a class="btn-product btn-danger" title="ناموجود">
+                    <span>
+                        ناموجود
+                    </span>
+
+                </a>
+            }
+
+        </div><!-- End .product-action -->
+    </figure><!-- End .product-media -->
+
+    <div class="product-body">
+        <div class="product-cat">
+            <a href="/archive?selectedGroups=@Model.Product_Selected_Groups.Single(g=>g.Product_Groups.ParentID==null).Product_Groups.GroupID" class="shpl">
+                @Model.Product_Selected_Groups.Single(g => g.Product_Groups.ParentID == null).Product_Groups.GroupTitle
+            </a>
+            <span>،</span>
+            <a href="/archive?selectedGroups=@Model.Product_Selected_Groups.Where(p => p.ProductID == Model.ProductID).Last().Product_Groups.GroupID" class="shpl">
+                @Model.Product_Selected_Groups.Where(p => p.ProductID == Model.ProductID).Last().Product_Groups.GroupTitle
+            </a>
+        </div><!-- End .product-cat -->
+        <h3 class="product-title">
+            <a href="/ShowProduct/@Model.ProductID/@Model.SefUrl" class="shpl">
+                @Model.Title
+            </a>
+        </h3><!-- End .product-title -->
+        <div class="product-price">
+            @if (Model.PriceAfterDiscount > 0)
+            {
+                if (Model.PriceAfterDiscount < Model.Price)
+                {
+                    <div class="">
+                        <strong style="font-size: 2rem">@Model.PriceAfterDiscount.ToString("#,0")</strong><small>تومان</small>
+                        <br />
+                        <del style="color:crimson">@Model.Price.ToString("#,0")</del>
+                    </div>
+                }
+                else
+                {
+                    <strong style="font-size: 2rem">@Model.PriceAfterDiscount.ToString("#,0")</strong><small>تومان</small>
+                }
+            }
+            else
+            {
+                <div class="text-center w-100 btn btn-info call-for-price">
+                    <a class="btn w-100 call-for-price justify-content-center getNumber" href="tel:09120869780" @*onclick="getNumber(@Model.ProductID)"*@>
+                        <span class="call-span">تماس بگیرید</span>
+                        <span class="number-span">09120869780</span>
+                    </a>
+                </div>
+            }
+        </div><!-- End .product-price -->
+        <div class="ratings-container">
+            <div class="ratings">
+                <div class="ratings-val" style="width: @score%;"></div>
+            </div>
+
+        </div><!-- End .rating-container -->
+    </div><!-- End .product-body -->
+</div>
+

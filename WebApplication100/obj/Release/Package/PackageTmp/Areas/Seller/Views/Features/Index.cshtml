@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DataLayer.Features>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">ویژگی ها</h2>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-success">افزودن ویژگی جدید</a>
+    </p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FeatureTitle)
+            </th>
+            <th width="120"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeatureTitle)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit",new {id=item.FeatureID})" class="btn btn-outline-warning btn-sm">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                    </a>
+                    <a href="@Url.Action("Delete",new {id=item.FeatureID})" class="btn btn-outline-danger btn-sm">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

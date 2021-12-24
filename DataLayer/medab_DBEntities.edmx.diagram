@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9f2678cc62241e5becf8de0428f9140" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="medab_DBModel.Addresses" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="medab_DBModel.Blogs" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="medab_DBModel.Brands" Width="1.5" PointX="10.5" PointY="47.375" />
+        <EntityTypeShape EntityType="medab_DBModel.ContactForm" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="medab_DBModel.DeliveryWays" Width="1.5" PointX="3" PointY="28.5" />
+        <EntityTypeShape EntityType="medab_DBModel.Discounts" Width="1.5" PointX="5.25" PointY="18.625" />
+        <EntityTypeShape EntityType="medab_DBModel.Features" Width="1.5" PointX="10.5" PointY="56.375" />
+        <EntityTypeShape EntityType="medab_DBModel.Lead_Clients" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="medab_DBModel.LikeProduct" Width="1.5" PointX="9.75" PointY="28.625" />
+        <EntityTypeShape EntityType="medab_DBModel.OrderDetails" Width="1.5" PointX="12.75" PointY="31.5" />
+        <EntityTypeShape EntityType="medab_DBModel.Orders" Width="1.5" PointX="5.25" PointY="25.125" />
+        <EntityTypeShape EntityType="medab_DBModel.Product_Features" Width="1.5" PointX="12.75" PointY="41" />
+        <EntityTypeShape EntityType="medab_DBModel.Product_Galleries" Width="1.5" PointX="9.75" PointY="49.875" />
+        <EntityTypeShape EntityType="medab_DBModel.Product_Groups" Width="1.5" PointX="10.5" PointY="44.125" />
+        <EntityTypeShape EntityType="medab_DBModel.Product_Selected_Groups" Width="1.5" PointX="12.75" PointY="35.25" />
+        <EntityTypeShape EntityType="medab_DBModel.Product_Tags" Width="1.5" PointX="9.75" PointY="35.125" />
+        <EntityTypeShape EntityType="medab_DBModel.ProductBrand" Width="1.5" PointX="12.75" PointY="38.25" />
+        <EntityTypeShape EntityType="medab_DBModel.Products" Width="1.5" PointX="7.5" PointY="35.75" />
+        <EntityTypeShape EntityType="medab_DBModel.Roles" Width="1.5" PointX="0.75" PointY="24" />
+        <EntityTypeShape EntityType="medab_DBModel.SiteVisit" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="medab_DBModel.Slider" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="medab_DBModel.SpecialProducts" Width="1.5" PointX="9.75" PointY="52.625" />
+        <EntityTypeShape EntityType="medab_DBModel.LoggedCart" Width="1.5" PointX="9.75" PointY="32.125" />
+        <EntityTypeShape EntityType="medab_DBModel.Page" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="medab_DBModel.FK_ProductBrand_Brands" />
+        <AssociationConnector Association="medab_DBModel.FK_Orders_DeliveryWays" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Features_Features" />
+        <AssociationConnector Association="medab_DBModel.FK_LikeProduct_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_OrderDetails_Orders" />
+        <AssociationConnector Association="medab_DBModel.FK_OrderDetails_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Features_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Galleries_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Groups_Product_Groups" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Selected_Groups_Product_Groups" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Selected_Groups_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_Product_Tags_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_ProductBrand_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_LoggedCart_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_Products_Products" />
+        <AssociationConnector Association="medab_DBModel.FK_SpecialProducts_Products" />
+        <EntityTypeShape EntityType="medab_DBModel.UserInfo" Width="1.5" PointX="5.25" PointY="42.625" />
+        <EntityTypeShape EntityType="medab_DBModel.Users" Width="1.5" PointX="3" PointY="41.5" />
+        <AssociationConnector Association="medab_DBModel.FK_Addresses_Users" />
+        <AssociationConnector Association="medab_DBModel.FK_ContactForm_Users" />
+        <AssociationConnector Association="medab_DBModel.FK_Discounts_Users" />
+        <AssociationConnector Association="medab_DBModel.FK_LikeProduct_Users" />
+        <AssociationConnector Association="medab_DBModel.FK_Orders_Users" />
+        <AssociationConnector Association="medab_DBModel.FK_Users_Roles" />
+        <AssociationConnector Association="medab_DBModel.FK_UserInfo_Users" />
+        <EntityTypeShape EntityType="medab_DBModel.Sellers" Width="1.5" PointX="5.25" PointY="46.125" />
+        <AssociationConnector Association="medab_DBModel.FK_Products_Sellers" />
+        <AssociationConnector Association="medab_DBModel.FK_Sellers_Users" />
+        <EntityTypeShape EntityType="medab_DBModel.Comments" Width="1.5" PointX="9.75" PointY="20.5" />
+        <AssociationConnector Association="medab_DBModel.FK_Comments_Blogs" />
+        <AssociationConnector Association="medab_DBModel.FK_Comments_Products" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,42 @@
+﻿
+@{
+    string title = ViewBag.PageTitle;
+    string content = ViewBag.Content;
+}
+
+<div class="container faq">
+    <h1 class="text-center mt-2"><span class="title">@title</span></h1>
+    @if (content != null)
+    {
+        <div class="border card p-4 mb-2">
+            <p>@Html.Raw(content)</p>
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+    <style>
+        #accordionExample .card {
+            border: 1px solid #ccc
+        }
+
+        .faq h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid #ccc;
+        }
+
+        .faq h1, .faq .title {
+            line-height: 1.65;
+        }
+
+        .faq .title {
+            border-bottom: 3px solid #00b58c
+        }
+
+        .terms-content li {
+            list-style: decimal;
+            margin-right: 25px
+        }
+    </style>
+}

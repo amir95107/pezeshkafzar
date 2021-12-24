@@ -1,0 +1,30 @@
+﻿
+    <div class="bottom-menu in-mobile">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-4">
+                    <div class="text-center search">
+                        <div class="icon">
+                            <a href="/search/MobileSearch" class="shpl">
+                                <i class="icon-search"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div id="showCart3" class="cart-empty" onclick="goToPage('/shopCart')">
+                        @Html.Action("ShowCart", "ShopCart")
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="text-center my-account">
+                        <div class="icon">
+                            <a href="/account" class="shpl">
+                                <i class="icon-user"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

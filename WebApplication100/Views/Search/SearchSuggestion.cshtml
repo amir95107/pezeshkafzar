@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+@if (Model.Any())
+{
+    <div class="search-suggestion-wrapper p-1 border text-right">
+        <label class="text-right m-0 p-2 float-none">@ViewBag.Count نتیجه برای جستجو: @ViewBag.search</label>
+        <hr class="m-1" />
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li class="search-suggestion-li">
+                    <div>
+                        <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="shpl" onclick="setLastSearchedCookies(event,@item.ProductID)">
+                            <div style="display:flex;direction:rtl;align-items: center" class="p-3">
+                                <h5 style="font-size: 1.5rem" class=" mb-0">@item.Title</h5>
+                                <h6 class="ml-1 mr-1 mb-0"> در دسته بندی </h6>
+                                <h6 class="text-info mb-0">@item.Product_Selected_Groups.Where(p => p.Product_Groups.ParentID != null).FirstOrDefault(p => p.ProductID == item.ProductID).Product_Groups.GroupTitle</h6>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="search-suggestion-wrapper text-center"><label class="text-center text-warning float-none">هیچ موردی یافت نشد!</label></div>
+}
+

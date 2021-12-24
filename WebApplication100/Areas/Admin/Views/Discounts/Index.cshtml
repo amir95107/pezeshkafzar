@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DataLayer.Discounts>
+
+@{
+    ViewBag.Title = "Index";
+    int c = 1;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">کد های تخفیف</h2>
+
+    <p>
+        <a href="/admin/discounts/create" class="btn btn-success">ایجاد کد تخفیف جدید</a>
+    </p>
+    <div class="table-wrapper">
+        <table class="table table-responsive d-table table-bordered table-hover table-striped">
+            <tr>
+                <th>ردیف</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiscountCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpireDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DiscountPercent)
+                </th>
+                <th>تا سقف</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsUsed)
+                </th>
+                <th>
+                    کاربر
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@c</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiscountCode)
+                    </td>
+                    <td>
+                        @item.ExpireDate.ToString("yyyy/MM/dd --- hh:MM:ss")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiscountPercent) %
+                    </td>
+                    <td>@item.MaxDiscountValue.ToString("#,0")</td>
+                    <td>
+                        @if (item.IsUsed)
+                        {
+                            <span>بله</span> <span class="k-separator">/</span> <a onclick="">جزئیات</a>
+                        }
+                        else
+                        {
+                            <span>خیر</span>
+                        }
+                    </td>
+                    <td>
+                        <a onclick="showUserInformation(@item.UserID)" class="btn btn-outline-dark">
+                            @{ 
+                                string userName = item.Users.Mobile;
+                                if (item.Users.IsUserInfoCompleted)
+                                {
+                                    userName = item.Users.UserInfo.FirstOrDefault(u => u.UserID == item.UserID).FullName;
+                                }
+                            }
+                            <span>@userName</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-warning btn-xs mb-1"
+                           data-toggle="tooltip" data-placement="top" title="ویرایش"
+                           href="/admin/discounts/edit/@item.DiscountID">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                        </a>
+                        <a class="btn btn-outline-danger btn-xs mb-1"
+                           data-toggle="tooltip" data-placement="top" title="حذف"
+                           href="/admin/discounts/delete/@item.DiscountID">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+                c++;
+            }
+
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,147 @@
+﻿@model DataLayer.Blogs
+
+@{
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+    <main class="main">
+       
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="shpl">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="/Blog/AllBlogs" class="shpl">بلاگ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <article class="entry single-entry card p-3">
+                            <figure class="entry-media">
+                                <img src="~/Images/BlogImages/@Model.ImageName" alt="توضیحات عکس">
+                            </figure><!-- End .entry-media -->
+
+                            <div class="entry-body">
+                                <div class="entry-meta">
+                                    <span class="entry-author">
+                                        نویسنده : <a href="#">@Model.Author</a>
+                                    </span>
+                                    <span class="meta-separator">|</span>
+                                    <a href="#">@Model.CreateDate.ToString("yyyy/MM/dd")</a>
+                                </div><!-- End .entry-meta -->
+
+                                <h2 class="entry-title">
+                                    @Model.Title
+                                </h2><!-- End .entry-title -->
+
+                                
+
+                                <div class="entry-content editor-content">
+                                    @Html.Raw(Model.Text)
+                                </div><!-- End .entry-content -->
+
+                                <div class="entry-footer row no-gutters flex-column flex-md-row">
+                                    <div class="col-md">
+                                        <div class="entry-tags">
+                                            <span>برچسب : </span>
+                                            @foreach (var tag in Model.Tags.Split('،'))
+                                            {
+                                                <a href="/Blog/Search?q=@tag">@tag</a> 
+                                            }
+                                        </div><!-- End .entry-tags -->
+                                    </div><!-- End .col -->
+
+                                    <div class="col-md-auto mt-2 mt-md-0">
+                                        <div class="social-icons social-icons-color">
+                                            <span class="social-label">اشتراک گذاری این پست : </span>
+                                            <a href="#" class="social-icon social-facebook" title="فیسبوک" target="_blank"><i class="icon-facebook-f"></i></a>
+                                            <a href="#" class="social-icon social-twitter" title="توییتر" target="_blank"><i class="icon-twitter"></i></a>
+                                            <a href="#" class="social-icon social-pinterest" title="پینترست" target="_blank"><i class="icon-pinterest"></i></a>
+                                            <a href="#" class="social-icon social-linkedin" title="لینکدین" target="_blank"><i class="icon-linkedin"></i></a>
+                                        </div><!-- End .soial-icons -->
+                                    </div><!-- End .col-auto -->
+                                </div><!-- End .entry-footer row no-gutters -->
+                            </div><!-- End .entry-body -->
+
+                            
+                        </article><!-- End .entry -->
+
+                        @*<nav class="pager-nav" aria-label="Page navigation">
+                            <a class="pager-link pager-link-prev" href="#" aria-label="Previous" tabindex="-1">
+                                پست قبلی
+                                <span class="pager-link-title">لورم ایپسوم متن ساختگی با تولید سادگی</span>
+                            </a>
+
+                            <a class="pager-link pager-link-next" href="#" aria-label="Next" tabindex="-1">
+                                پست بعدی
+                                <span class="pager-link-title">لورم ایپسوم متن ساختگی</span>
+                            </a>
+                        </nav>*@<!-- End .pager-nav -->
+
+                       
+
+                       
+                    </div><!-- End .col-lg-9 -->
+
+                    <aside class="col-lg-3">
+                        <div class="sidebar">
+                            <div class="widget widget-search">
+                                <h3 class="widget-title">جستجو</h3><!-- End .widget-title -->
+
+                                <form action="/Blog/Search" method="post">
+                                    <label for="ws" class="sr-only">جستجوی بلاگ</label>
+                                    <input type="search" class="form-control" name="q" id="ws" placeholder="جستجوی بلاگ مورد نظر" required="">
+                                    <button type="submit" class="btn shpl"><i class="icon-search"></i><span class="sr-only">جستجو</span></button>
+                                </form>
+                            </div><!-- End .widget -->
+
+                           @{ 
+                               List<DataLayer.Blogs> top = ViewBag.Top;
+                           }
+
+                            <div class="widget">
+                                <h3 class="widget-title">محبوب ترین اخبار</h3><!-- End .widget-title -->
+
+                                <ul class="posts-list">
+                                    @foreach (var item in top)
+                                    {
+                                        <li>
+                                            <figure>
+                                                <a href="/Blog/ShowBlog/@item.BlogID" class="shpl">
+                                                    <img src="~/Images/BlogImages/Thumb/@item.ImageName" alt="@item.Title">
+                                                </a>
+                                            </figure>
+
+                                            <div>
+                                                <span>@item.CreateDate.ToString("yyyy/MM/dd")</span>
+                                                <h4><a href="/Blog/ShowBlog/@item.BlogID">@item.Title</a></h4>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ul><!-- End .posts-list -->
+                            </div><!-- End .widget -->
+
+                            @*<div class="widget widget-banner-sidebar">
+                                <div class="banner-sidebar-title">قسمت تبلیغات 280 در 280</div>
+
+                                <div class="banner-sidebar banner-overlay">
+                                    <a href="#">
+                                        <img src="assets/images/blog/sidebar/banner.jpg" alt="بنر">
+                                    </a>
+                                </div>
+                            </div>*@
+
+                            
+
+                            
+                        </div><!-- End .sidebar -->
+                    </aside><!-- End .col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .page-content -->
+    </main>

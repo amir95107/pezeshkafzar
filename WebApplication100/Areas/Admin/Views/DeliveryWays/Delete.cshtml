@@ -1,0 +1,57 @@
+﻿@model DataLayer.DeliveryWays
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">حذف؟</h2>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                توضیحات
+            </dt>
+
+            <dd>
+                @if (Model.Description != null)
+                {
+                    @Html.DisplayFor(model => model.Description)
+                }
+                else
+                {
+                    <span>-</span>
+                }
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="حذف" class="btn btn-danger" /> |
+                @Html.ActionLink("بازگشت", "Index")
+            </div>
+        }
+    </div>
+</div>

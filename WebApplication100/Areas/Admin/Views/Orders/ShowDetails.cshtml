@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+
+
+<table class="table table-responsive d-table" dir="rtl">
+    <thead>
+        <tr>
+
+            <th>
+                محصول
+            </th>
+            <th>
+                قیمت
+            </th>
+            <th>تعداد</th>
+            <th>
+                تخفیف
+            </th>
+            <th>فروشنده</th>
+
+            <th>وضعیت</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="od_@item.DetailID" data-conditoionSelected="2">
+
+                <td>
+                    <div class="text-center">
+                        <img src="~/Images/ProductImages/@item.Products.ImageName" width="80" />
+                        <br />
+                        <span>@item.Products.Title</span>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalDiscount)
+                </td>
+                <td>
+                    @((item.Products.SellerID>0 || item.Products.SellerID != null)? item.Products.Sellers.StoreName:"ادمین")
+                </td>
+                @if (item.Orders.IsFinaly)
+                {
+            <td class="condition" style="@((item.Condition < 2)?"display:none":"")">
+                <a onclick="setODCondition(@item.DetailID,1,@item.Orders.OrderID)" class="btn btn-success">ارسال شد</a>
+                <a onclick="setODCondition(@item.DetailID,0,@item.Orders.OrderID)" class="btn btn-danger">موجود ندارم</a>
+            </td>
+                    <td style="@((item.Condition == 2)?"display:none":"")">
+                        @if (item.Condition == 0)
+                        {
+                            <span>موجود ندارم</span>
+                        }
+                        else if (item.Condition == 1)
+                        {
+                            <span>ارسال شد</span>
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td>در انتظار نهایی شدن سفارش...</td>
+                }
+            </tr>
+        }
+    </tbody>
+
+</table>
+@if (!ViewBag.isFinally)
+{
+    <hr />
+    <div class="text-center text-white">
+        <a class="btn btn-warning">
+            ویرایش سفارش
+        </a>
+    </div>
+}

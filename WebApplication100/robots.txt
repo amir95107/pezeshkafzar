@@ -1,0 +1,9 @@
+﻿user-agent: *
+disallow: /shopcart
+disallow: /factor
+disallow: /pay
+disallow: *?*
+disallow: /search?q=*
+
+
+Sitemap: https://pezeshkafzar.com/sitemap.xml

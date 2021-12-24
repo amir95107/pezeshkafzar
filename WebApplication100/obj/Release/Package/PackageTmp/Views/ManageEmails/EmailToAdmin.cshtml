@@ -1,0 +1,10 @@
+﻿
+@using System.Configuration
+@model DataLayer.Users
+<div style="direction: rtl; padding: 20px">
+    <p>
+        یک فرد جدید با نام کاربری @Model.UserName درخواست فروشندگی دارد!
+        <a style="background-color: darkred;padding: 5px; border-radius: 5px" href="@ConfigurationManager.AppSettings["MyDomain"]/Admin/Sellers/NewSellers">برو تو کارش</a>
+    </p>
+</div>
+

@@ -1,0 +1,93 @@
+﻿@model DataLayer.SpecialProducts
+
+@{
+    ViewBag.Title = "CreateSpecialProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<h2>CreateSpecialProduct</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SpecialProducts</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @{
+            List<DataLayer.Products> list = ViewBag.Products;
+        }
+
+        <div class="form-group ">
+            <label class="control-label col-md-2">
+                انتخاب محصولات
+            </label>
+            <div class="col-md-10">
+                <select name="ProductID">
+                    <optgroup label="محصولات">
+                        @foreach (var item in list)
+                        {
+                            <option value="@item.ProductID">@item.Title</option>
+                        }
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CreateDate)
+                @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExpireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ExpireDate)
+                @Html.ValidationMessageFor(model => model.ExpireDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts{
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.2.918/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/Areas/Admin/Content/js/kendo.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // create DatePicker from input HTML element
+            $("#CreateDate").kendoDatePicker();
+            $("#ExpireDate").kendoDatePicker();
+        });
+    </script>
+}

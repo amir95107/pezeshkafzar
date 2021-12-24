@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DataLayer.SpecialProducts>
+
+@{
+    ViewBag.Title = "SpecialProducts";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+    <div class="container">
+        <div class="pb-2 d-flex align-items-center justify-content-between " dir="rtl" style="margin-top: 100px;text-align: right">
+            <a class="m-0 btn btn-primary " href="@Url.Action("CreateSpecialProduct")">افزودن محصول ویژه جدید</a>
+            <select class="" onchange="sellectSellerProducts(this.value)" id="sellerOpt">
+                <option>
+                    همه محصولات
+                </option>
+                <option value="0">
+                    ادمین
+                </option>
+                @{
+                    List<DataLayer.Sellers> sellers = ViewBag.Sellers;
+                    foreach (var seller in sellers)
+                    {
+                        <option value="@seller.SellerID">
+                            @seller.StoreName
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+
+        
+        <table class="table table-responsive d-md-table bg-white" dir="rtl">
+            <tr>
+
+                <th>
+                    محصول
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpireDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>عملیات</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="text-center">
+                            <img src="~/Images/ProductImages/Thumb/@item.Products.ImageName" width="200" title="@item.Products.Title" alt="@item.Products.Title" />
+                            <br />
+                            <label>@item.Products.Title</label>
+                        </div>
+                    </td>
+                    <td>
+                        @item.CreateDate.ToString("yyyy/MM/dd - hh:MM")
+                    </td>
+                    <td>
+                        @item.ExpireDate.ToString("yyyy/MM/dd - hh:MM")
+                    </td>
+                    <td>
+                        @((item.IsActive)?"فعال":"غیرفعال")
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-danger btn-sm" href="/Admin/Products/DeleteSepcialProduct/@item.SPID"><i style="color: red" class="now-ui-icons ui-1_simple-remove "></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>

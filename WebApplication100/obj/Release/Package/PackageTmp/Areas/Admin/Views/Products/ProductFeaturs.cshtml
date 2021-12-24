@@ -1,0 +1,106 @@
+﻿@using DataLayer
+@model DataLayer.Product_Features
+@{
+    Products product = ViewBag.Product;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">ویژگی محصول</h2>
+
+    @using (Html.BeginForm(new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            @Html.HiddenFor(m => m.ProductID)
+            <div class="col-md-4">
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="card ">
+                            <div class="card-body text-center">
+                                <img src="~/Images/ProductImages/Thumb/@product.ImageName" alt="@product.Title" />
+                            </div>
+                            <div class="card-footer text-center">
+                                 <h3 class="text-center">@product.Title</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FeatureID, htmlAttributes: new { @class = "control-label " })
+                        <div class="">
+                            @Html.DropDownList("FeatureID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FeatureID, "", new { @class = "text-danger" })
+                        </div>
+                        ویژگی موردنظر را پیدا نکردید؟
+                        <a href="/admin/features/create" class="btn btn-outline-info">افزودن ویژگی جدید<i class="now-ui-icons ui-1_simple-add mr-1"></i></a>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label " })
+                        <div class="">
+                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="">
+                            <input type="submit" value="ثبت ویژگی" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                @{
+                    List<Product_Features> list = ViewBag.Features;
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>ویژگی</th>
+                            <th>مقدار</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in list)
+                        {
+                            <tr id="feature_@(item.PF_ID)">
+                                <td>
+                                    @item.Features.FeatureTitle
+                                </td>
+                                <td>
+                                    @item.Value
+                                </td>
+                                <td width="50px">
+                                    <a class="btn-sm" href="#" onclick="DeleteFeature(@item.PF_ID)">
+                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts{
+    <script>
+        function DeleteFeature(id) {
+            if (confirm('آیا از حذف مطمئن هستید ؟')) {
+                $.get("/Admin/Products/DeleteFeature/" + id,
+                    function () {
+                        $("#feature_" + id).hide('slow');
+                    });
+            }
+        }
+    </script>
+}

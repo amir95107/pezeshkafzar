@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DataLayer.Product_Groups>
+@{
+    List<DataLayer.Products> products = ViewBag.Products;
+}
+
+
+<div class="mh-25">
+    @if (Model.Any())
+    {
+        <div class="row p-4 mt-2">
+            @foreach (var cat in Model)
+            {
+                <div class="@((cat.ParentID==null)?"col-md-4":"col-md-3") mb-2">
+                    <div class="card border">
+                        <div class="card-body text-center">
+                            <a href="/Categories?parentId=@cat.GroupID" class="d-inline-block w-100 shpl">
+                                <label class="float-none m-0">@cat.GroupTitle</label>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    @if (Model.Any() && products.Any())
+    {
+        <hr />
+    }
+
+    @if (products.Any())
+    {
+        <div class="row p-4">
+
+            @foreach (var product in products)
+            {
+                <div class="col-md-3">
+                    @Html.Partial("_product", product)
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="mt-2 mb-2">
+            <div class="text-center w-100"><a class="btn btn-outline-warning text-warning" onclick="window.history.back()">بازگشت</a></div>
+        </div>
+    }
+    else if (Request.Url.PathAndQuery.ToLower() != "/categories")
+    {
+        <div class="mt-2 mb-2">
+            <div class="alert alert-warning text-white w-100 text-center">هیچ محصولی در این دسته بندی وجود ندارد!</div>
+            <div class="text-center mt-2 w-100"><a class="btn btn-outline-warning text-warning" onclick="window.history.back()">بازگشت</a></div>
+        </div>
+    }
+</div>
+
+
+<style>
+    .mh-25 {
+        min-height: 25rem;
+    }
+</style>

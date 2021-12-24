@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DataLayer.Page>
+
+@{
+    ViewBag.Title = "صفحات";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+    int c = 1;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">افزودن صفحه جدید</h2>
+
+    <p>
+        @Html.ActionLink("افزودن صفحه جدید", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                ردیف
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@c</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageTitle)
+                </td>
+                <td dir="ltr">
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PageID })
+                </td>
+            </tr>
+            c++;
+        }
+
+    </table>
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataLayer.Blogs>
+@if (Model.Count() >= 3)
+{
+    <div class="container">
+        <ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" style="border-bottom-color: #000" id="products-featured-link" data-toggle="tab" href="#products-featured-tab" role="tab" aria-controls="products-featured-tab" aria-selected="true">آخرین بلاگ ها</a>
+            </li>
+
+        </ul>
+        <div class="row row justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="product product-2">
+                        <figure class="product-media">
+                            <a href="/blog/@item.BlogID/@item.SefUrl" class="shpl">
+                                <img data-src="/Images/BlogImages/Thumb/@item.ImageName" alt="@item.Title" class="product-image lazy" width="200" height="200">
+                            </a>
+                        </figure><!-- End .product-media -->
+
+                        <div class="product-body">
+                            @*<div class="product-cat">
+                                    @foreach (var tag in item.Tags.Split('،').Take(3))
+                                    {
+                                        <a href="/Blog/Search?q=@tag" class="shpl">@tag</a>
+                                        <span class="meta-separator"> ، </span>
+                                    }
+                                    <span> ...</span>
+                                </div>*@<!-- End .product-cat -->
+                            <h3 class="product-title">
+                                <a href="/blog/@item.BlogID/@item.SefUrl" class="shpl">
+                                    @item.Title
+                                </a>
+                            </h3><!-- End .product-title -->
+
+                            <div class="ratings-container">
+
+                                <span class="ratings-text">( <span id="visitCount">@item.Visit</span> بازدید )</span>
+                            </div><!-- End .rating-container -->
+                        </div><!-- End .product-body -->
+                    </div><!-- End .product -->
+                </div>
+            }
+
+
+        </div>
+        <div class="text-center">
+            <a class="btn btn-outline-warning btn-round shpl" href="/blog/All">مشاهده همه بلاگ ها</a>
+        </div>
+    </div>
+}

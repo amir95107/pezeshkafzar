@@ -1,0 +1,30 @@
+﻿
+@{
+    bool[] list = ViewBag.Level;
+    string[] _list = ViewBag.ListName;
+    int count = 0;
+    string[] url = ViewBag.Url;
+}
+
+
+
+<div class="stepwizard table-responsive">
+    <div class="stepwizard-row">
+        @for (int i = 0; i < 5; i++)
+        {
+        <div class="stepwizard-step">
+            <a href="@((list[i]==true)?url[i]:"#")" class="stepwizard-btn btn btn-default btn-circle shpl @((list[i]==true)?"active":"")">@_list[i]</a>
+        </div>
+            if (list[i] == true)
+            {
+                count++;
+            }
+        }
+    </div>
+</div>
+<style>
+    
+    .stepwizard-row:after {
+        width: @(20* count)%;
+    }
+</style>

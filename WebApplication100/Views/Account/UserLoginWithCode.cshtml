@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "ورود - پزشک افزار";
+    ViewBag.Description = "صفحه مربوط به ورود به بخش کاربری و یا پنل ادمین - پزشک افزار";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="login-page bg-image pt-1 pb-1">
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-selected="true">ورود</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shpl" href="/Register" id="registerBtn" aria-selected="false">ثبت نام</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                        <form action="/account/UserLoginWithCode?ReturnUrl=@Request.QueryString["ReturnUrl"]" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+
+                                @if (Request.QueryString["recovery"] != null)
+                                {
+                                    <div class="alert alert-success">
+                                        <p>کلمه عبور شما با موفقیت تغییر کرد .</p>
+                                        <p>میتوانید لاگین کنید</p>
+                                    </div>
+                                    <hr />
+                                }
+                                @if (TempData["LoginError"] != null)
+                                {
+                                    <div class="alert alert-warning text-center" dir="rtl">
+                                        @TempData["LoginError"]
+                                    </div>
+                                    <hr />
+                                }
+                                @if (TempData["NoVerifyError"] != null)
+                                {
+                                    <div class="alert alert-warning text-center" dir="rtl">
+                                        @TempData["NoVerifyError"]
+                                    </div>
+                                    <div class="text-center mt-1">
+                                        <a class="btn btn-outline-info" href="/Account/ResendRegisterVerificationCode?mobile=@Model.Mobile">تایید شماره موبایل</a>
+                                    </div>
+                                    <hr />
+                                }
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label class="control-label">موبایل</label>
+                                    @*<div class="col-md-10">*@
+                                    <input type="tel" id="Mobile" name="Mobile" class="form-control" placeholder="09*********" required dir="ltr"/>
+                                    @*</div>*@
+                                </div>
+
+
+                                <div class="form-footer">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-primary-2 spl">
+                                            <span>ارسال</span>
+                                            <i class="icon-long-arrow-left"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <a href="/Login" class="forgot-link shpl extrenal-links">ورود با شماره موبایل و رمز ثابت</a>
+                                    <br />
+                                    <a href="/Register" class="forgot-link shpl extrenal-links">حساب کاربری ندارید؟</a>
+                                </div>
+                                <hr />
+                                <div class="text-center">
+                                    <a class="btn btn-outline-warning shpl" href="/">بازگشت صفحه اصلی</a>
+                                </div>
+
+
+
+
+                            </div>
+                        </form>
+
+                        @*<div class="form-choice">
+                                <p class="text-center">یا ورود با </p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-g">
+                                            <i class="icon-google"></i>
+                                            حساب کاربری گوگل
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="#" class="btn btn-login btn-f">
+                                            <i class="icon-facebook-f"></i>
+                                            حساب کاربری فیسبوک
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>*@<!-- End .form-choice -->
+                    </div><!-- .End .tab-pane -->
+
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            var searchUrl = location.search;
+            if (searchUrl.toLowerCase().indexOf('returnurl') != -1) {
+                var returnUrl = searchUrl.split('=')[1];
+                var href = $('#registerBtn').attr('href');
+                $('#registerBtn').attr('href', href + '?returnUrl=' + returnUrl);
+            }
+            hideOverlayer();
+        })
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa"></script>
+
+}
+@section Styles{
+    <style>
+        .g-recaptcha > div {
+            margin: auto
+        }
+        .extrenal-links {
+            border: 1px dashed;
+            padding: 5px;
+            margin-bottom: 5px !important;
+            display: inline-block;
+        }
+            .extrenal-links:hover {
+                color: #fff;
+                background-color: var(--green)
+            }
+    </style>
+}

@@ -1,0 +1,7 @@
+﻿@using System.Configuration
+@model DataLayer.Sellers
+
+<div>
+    <p>فروشنده گرامی،جناب آقای / سرکار خانم @Model.SellerFullName <br />حساب شما با موفقیت توسط ادمین تایید شد</p>
+    <a style="background:green;border: 1px solid black" href="@ConfigurationManager.AppSettings["MyDomain"]/Login">ورود به حساب کاربری</a>
+</div>

@@ -1,0 +1,75 @@
+﻿@model DataLayer.Comments
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsShow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsShow)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blogs.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blogs.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Products.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

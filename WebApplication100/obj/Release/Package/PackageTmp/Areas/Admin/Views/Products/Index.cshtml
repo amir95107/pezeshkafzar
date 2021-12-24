@@ -1,0 +1,42 @@
+﻿
+
+@{
+    ViewBag.Title = "محصولات";
+}
+
+
+<div class="container">
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl" style="margin-top: 100px;text-align: right">
+        <a class="m-0 btn btn-primary " href="@Url.Action("Create")">افزودن محصول جدید</a>
+        <select class="" onchange="sellectSellerProducts(this.value)" id="sellerOpt">
+            <option>
+                همه محصولات
+            </option>
+            <option value="0">
+                ادمین
+            </option>
+            @{
+                List<DataLayer.Sellers> sellers = ViewBag.Sellers;
+                foreach (var seller in sellers)
+                {
+                    <option value="@seller.SellerID">
+                        @seller.StoreName
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    <div class="table-wrapper" id="productsList">
+       @Html.Action("ProductsList")
+    </div>
+</div>
+
+@section Scripts {
+    <link href="~/Areas/Admin/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/DataTables/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable()
+        })
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<DataLayer.Brands>
+
+@if (Model.Any())
+{
+    <div class="widget-body">
+        <div class="filter-brands d-flex">
+            @foreach (var item in Model)
+            {
+                <a href="/Archive?brandId=@item.BrandID" class="m-1 text-center shpl">
+                    <img src="~/Images/ProductImages/@item.BrandImageName" alt="@item.BrandTitle" width="50" />
+                    
+                </a>
+            }
+        </div>
+    </div>
+    <div class="text-center mb-2"><a class="btn btn-outline-dark shpl" href="/ShowAllBrands">نمایش همه ی برندها</a></div>
+}
+else
+{
+<div class="text-center pt-1 mb-1 alert text-danger">
+    <small class=" p-0">متاسفانه هیچ کدام از محصولات دارای برند نیستند!!</small>
+</div>
+}

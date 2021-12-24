@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DataLayer.Users>
+
+@{
+    int c = 1;
+}
+
+<table class="table table-responsive d-md-table">
+    <tr>
+        <th>
+            ردیف
+        </th>
+        <th>
+            نقش
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @c
+            </td>
+            <td>
+                @item.Roles.RoleTitle
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisterDate)
+            </td>
+
+            <td>
+                <a href="/Admin/Users/Edit/@item.UserID" class="btn btn-outline-warning">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
+                </a>
+                @if (item.IsUserInfoCompleted)
+                {
+                    <a onclick="showUserInformation(@item.UserID)" class="btn btn-outline-info">
+                        <i class="now-ui-icons travel_info"></i>
+                    </a>
+                }
+            </td>
+        </tr>
+        c++;
+    }
+
+</table>

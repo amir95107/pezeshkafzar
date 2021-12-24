@@ -1,0 +1,371 @@
+﻿@model DataLayer.Sellers
+
+@{
+    ViewBag.Title = "ویرایش اطلاعات";
+    Layout = "~/Areas/Seller/Views/Shared/_DefaultSeller.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">
+        @if (!Model.IsAcceptedByAdmin)
+        {
+            <span>تکمیل اطلاعات</span>
+        }
+        else
+        {
+            <span>ویرایش اطلاعات</span>
+
+        }
+    </h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.UserID)
+        @Html.HiddenFor(m => m.IsAcceptedByAdmin)
+        @Html.HiddenFor(m => m.Point)
+        @Html.HiddenFor(m => m.StartDate)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.SellerID)
+
+            <div class="row m-0">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SellerFullName, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SellerFullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SellerFullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StoreName, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.StoreName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StoreName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label ">ایمیل</label>
+                        <div class="col-md-10">
+                            <input type="email" name="Email" id="Email" class="form-control" value="@Model.Users.Email"/>
+                            @Html.ValidationMessageFor(model => model.Users.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label float-none">استان</label>
+
+                        <div class="">
+                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label float-none">شهر</label>
+
+                        <div class="">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StoreAddress, htmlAttributes: new { @class = "control-label " })
+                <div class="col-md-10">
+                    <textarea name="StoreAddress" id="StoreAddress" class="form-control">@Model.StoreAddress</textarea>
+                    @Html.ValidationMessageFor(model => model.StoreAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <input name="Long" id="Long" type="hidden" value="" />
+            <input name="Lat" id="Lat" type="hidden" value="" />
+
+            <div class="form-group">
+                <label class="control-label float-none">مشخص کردن روی نقشه</label>
+
+                <div class="border w-100 text-center p-2 map-wrapper">
+                    <div class="mapOverlayer position-relative" id="mapOverlayer">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="text-center">
+                                <svg xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                    <rect x="17.5" y="30" width="15" height="40" fill="#00b58c">
+                                        <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="18;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s" />
+                                        <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="64;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s" />
+                                    </rect>
+                                    <rect x="42.5" y="30" width="15" height="40" fill="#6d6e71">
+                                        <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s" />
+                                        <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s" />
+                                    </rect>
+                                    <rect x="67.5" y="30" width="15" height="40" fill="#ef4351">
+                                        <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" />
+                                        <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" />
+                                    </rect>
+                                </svg>
+                                <p class="text-center">لطفا برای مشخص کردن آدرس روی نقشه، لوکیشن دستگاه خود را روشن کنید و سپس این صفحه را مجددا رفرش کنید. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div id="map" style="width:100%;display: none"></div>
+                        <div class="controllers-btn" style="height: 50px">
+                            <a class="btn btn-outline-success" onclick="GoToMyLocation()" id="myLocBtn" style="display: none">موقعیت من</a>
+                            <a class="btn btn-warning" onclick="createNewMap()" id="reMap" style="display: none">انتخاب مجدد</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="ذخیره" class="btn btn-purple btn-lg" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-left">
+        <a class="btn btn-outline-purple" href="/Seller/SellersAccount">
+            بازگشت
+        </a>
+    </div>
+
+</div>
+@{
+    dynamic lat = 51.33770424191574;
+    dynamic lng = 35.6997743477966;
+    if (Model.Lat != null && Model.Long != null)
+    {
+        //lat = float.Parse(Model.Lat);
+        //lng = float.Parse(Model.Long);
+        lat = Model.Lat;
+        lng = Model.Long;
+    }
+    bool isLocSelected = (Model.Lat != null);
+}
+@section Scripts{
+    <style>
+        .map-wrapper {
+            min-height: 420px
+        }
+
+        #map {
+            height: 400px
+        }
+
+        @@media(max-width: 768px) {
+            .map-wrapper {
+                min-height: 320px
+            }
+
+            .form-box {
+                padding: 2rem 0.5rem 2rem
+            }
+        }
+    </style>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script>
+        var spinner = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="38px" height="38px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<rect x="17.5" y="30" width="15" height="40" fill="#00b58c">
+  <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="18;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"/>
+  <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="64;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"/>
+</rect>
+<rect x="42.5" y="30" width="15" height="40" fill="#6d6e71">
+  <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"/>
+  <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"/>
+</rect>
+<rect x="67.5" y="30" width="15" height="40" fill="#ef4351">
+  <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"/>
+  <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"/>
+</rect>
+</svg>`;
+
+        $(document).ready(() => {
+             navigator.geolocation.getCurrentPosition(function (pos) {
+                 var lat = pos.coords.latitude;
+                 if (lat == null) {
+                    $('#signin-modal').modal('show').find('.modal-body').html('لطفا برای مشخص کردن آدرس روی نقشه، لوکیشن دستگاه خود را روشن کنید و سپس این صفحه را مجددا رفرش کنید.')
+                 } else {
+                     $('#map,#myLocBtn').show();
+                     map.resize()
+                    $('#mapOverlayer').hide()
+                }
+             });
+        })
+
+        var modelLat = "@(lat.ToString())";
+        var modelLong = "@(lng.ToString())";
+        var _lng = parseFloat(modelLong.toString().replace('/', '.'))
+        var _lat = parseFloat(modelLat.toString().replace('/', '.'))
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pcmhvc3NlaW4xOTc2IiwiYSI6ImNrZ2V6aXJidjFjMDAycXFhZmEwbWhwYXkifQ.5EOb3mKcTGZi53qdAzMWpA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [_lat, _lng],
+            zoom: 13
+        });
+        mapboxgl.setRTLTextPlugin(
+            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+            null,
+            false // Lazy load the plugin
+        );
+
+        var isLocSelected = "@isLocSelected"
+
+        if (isLocSelected.toLowerCase() == "true") {
+            new mapboxgl.Marker({
+            color: "#00b58c",
+            draggable: false
+            }).setLngLat([_lat, _lng])
+            .addTo(map);
+        }
+
+        // Add the control to the map.
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+            function GoToMyLocation() {
+
+            $('#myLocBtn').html(spinner).addClass('pt-0 pb-0')
+                if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(function (pos) { showPosition(pos.coords.latitude + "," + pos.coords.longitude, ''); }, function (error) { }, {}); }
+            else { console.log("Geolocation is not supported by this browser."); }
+
+        }
+        function showPosition(position, locality) {
+                clickCountOnMap++;
+            $("#Lat").val(position.split(',')[1]);
+            $("#Long").val(position.split(',')[0]);
+            $('#map').html('');
+                mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pcmhvc3NlaW4xOTc2IiwiYSI6ImNrZ2V6aXJidjFjMDAycXFhZmEwbWhwYXkifQ.5EOb3mKcTGZi53qdAzMWpA';
+
+                var map1 = new mapboxgl.Map({ container: 'map', style: 'mapbox://styles/mapbox/streets-v11', center: [position.split(',')[1], position.split(',')[0]], zoom: 16 });
+
+            theMarkers = new mapboxgl.Marker({ draggable: false, color: '#00b58c', anchor: 'center' }).setLngLat([position.split(',')[1], position.split(',')[0]]).addTo(map1);
+            map1.addControl(
+                new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl
+                })
+            );
+            $('#reMap').show()
+            $('#myLocBtn').removeClass('pt-0 pb-0').html('موقعیت من');
+
+
+            map1.on('click', function (e) {
+                if (clickCountOnMap === 0) {
+                    var coordinates = e.lngLat;
+
+                    new mapboxgl.Marker({
+                        color: "#00b58c",
+                        draggable: false
+                    }).setLngLat([coordinates.lng, coordinates.lat])
+                        .addTo(map1);
+
+                    $('#Long').val(coordinates.lng)
+                    $('#Lat').val(coordinates.lat);
+                    clickCountOnMap++;
+                    $('#reMap').show()
+                } else {
+                    reClickOnMap()
+                }
+            });
+        }
+        var clickCountOnMap = 0;
+
+            map.on('click', function (e) {
+                if (clickCountOnMap === 0) {
+                    var coordinates = e.lngLat;
+
+                    new mapboxgl.Marker({
+                    color: "#00b58c",
+                    draggable: false
+                }).setLngLat([coordinates.lng, coordinates.lat])
+                    .addTo(map);
+
+                $('#Long').val(coordinates.lng)
+                    $('#Lat').val(coordinates.lat);
+                    clickCountOnMap++;
+                $('#reMap').show()
+                } else {
+                    reClickOnMap()
+            }
+            });
+
+
+            reClickOnMap = () => {
+                $('#AllModal').modal('show').find('.modal-body').html('لطفا برای انتخاب نقطه ای دیگر بر روی نقشه روی دکمه <span class="text-warning">انتخاب مجدد</span> کلیک کنید.')
+            }
+
+        createNewMap = () => {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pcmhvc3NlaW4xOTc2IiwiYSI6ImNrZ2V6aXJidjFjMDAycXFhZmEwbWhwYXkifQ.5EOb3mKcTGZi53qdAzMWpA';
+
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [51.33770424191574, 35.6997743477966],
+                zoom: 13
+            });
+            map.addControl(
+                new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl
+                })
+            );
+            $('#reMap').hide();
+            clickCountOnMap = 0;
+            map.on('click', function (e) {
+                if (clickCountOnMap === 0) {
+                    var coordinates = e.lngLat;
+
+                    new mapboxgl.Marker({
+                        color: "#00b58c",
+                        draggable: false
+                    }).setLngLat([coordinates.lng, coordinates.lat])
+                        .addTo(map);
+
+                    $('#Long').val(coordinates.lng)
+                    $('#Lat').val(coordinates.lat);
+                    clickCountOnMap++;
+                    $('#reMap').show()
+                } else {
+                    reClickOnMap()
+                }
+            });
+        }
+
+    </script>
+}

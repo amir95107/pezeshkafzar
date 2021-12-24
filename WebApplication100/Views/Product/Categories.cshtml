@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "دسته بندی ها - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید تمامی دسته بندی های محصولات را مشاهده فرمایید.";
+    Layout = "~/Views/Shared/_DefaultLayOut.cshtml";
+}
+<div class="container" id="categories">
+    @Html.Action("CategoriesPartial")
+</div>
+<style>
+    a, label, .card-body {
+        cursor: pointer
+    }
+</style>

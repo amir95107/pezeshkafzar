@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+@{ int c = 1; }
+<table class="table table-bordered table-responsive d-table dataTable" dir="rtl">
+    <thead class=" text-primary">
+        <tr>
+            <th>ردیف</th>
+            <th>تاریخ</th>
+            <th>
+                محصول
+            </th>
+            <th>
+                قیمت
+            </th>
+
+            <th class="">
+                نام فروشنده
+            </th>
+            <th>خریدار</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(o=>o.Orders.IsFinaly == true))
+        {
+            <tr>
+                <td>@c</td>
+                <td>@item.Orders.Date</td>
+                <td>
+                    <div>
+                        <span>@item.Products.Title</span>
+                        <img width="80" src="~/Images/ProductImages/Thumb/@item.Products.ImageName" alt="@item.Products.Title" />
+                    </div>
+                </td>
+                <td>
+                    @item.Products.PriceAfterDiscount.ToString("#,0") تومان
+                </td>
+
+                <td class="">
+                    @if (item.Products.SellerID > 0)
+                    {
+                        <a href="#"><span>@item.Products.Sellers.SellerFullName.ToString()</span></a>
+                    }
+                    else
+                    {
+                        <span>ادمین</span>
+                    }
+                </td>
+                <td><a href="#"><span>@item.Orders.Users.UserName</span></a></td>
+            </tr>
+            c++;
+        }
+
+
+    </tbody>
+    <tfoot class=""><tr><td colspan="2">مجموع:</td><td colspan="4">@Model.Sum(o=>o.Orders.Payable).ToString("#,0") <small>تومان</small></td></tr></tfoot>
+</table>

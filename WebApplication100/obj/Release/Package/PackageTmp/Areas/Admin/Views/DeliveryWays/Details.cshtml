@@ -1,0 +1,60 @@
+﻿@model DataLayer.DeliveryWays
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">شیوه های ارسال محصول</h2>
+
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                عنوان
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                هزینه
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                توضیحات
+            </dt>
+
+            <dd>
+                @if (Model.Description != null)
+                {
+                    @Html.DisplayFor(model => model.Description)
+                }else
+                {
+                    <a class="btn btn-info" href="/admin/deliveryways/edit/@Model.DeliveryID">
+                        افزودن توضیحات
+                    </a>
+                }
+            </dd>
+
+        </dl>
+    </div>
+    <div class="text-left">
+        <a class="btn btn-sm btn-outline-warning text-warning p-2"
+           data-toggle="tooltip" data-placement="top"
+           title="ویرایش" href="/admin/deliveryways/edit/@Model.DeliveryID">
+            <i class="now-ui-icons ui-2_settings-90"></i>
+        </a>
+        <a class="btn btn-sm btn-outline-danger text-danger p-2" data-toggle="tooltip" data-placement="top" title="حذف"
+           href="/admin/deliveryways/delete/@Model.DeliveryID">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+        </a>
+    </div>
+</div>

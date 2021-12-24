@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_DefaultLayOut.cshtml";
+}
+<div class="container" id="categories">
+    @Html.Action("CategoriesPartial")
+</div>
+<style>
+    a, label, .card-body {
+        cursor: pointer
+    }
+</style>

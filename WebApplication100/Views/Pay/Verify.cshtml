@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Verify";
+    bool isSuccess = false;
+    if (ViewBag.Trace != null)
+    {
+        isSuccess = true;
+    }
+}
+
+
+
+
+
+<main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">وضعیت پرداخت</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav>
+    <div class="page-content">
+        <div class="cart">
+            <div class="container">
+                <div class="card border @(isSuccess?"border-success":"border-danger") p-5">
+                    <h3 class="text-center">@ViewBag.msg</h3>
+
+                    @if (isSuccess)
+                    {
+                        <hr />
+                        <h4 class="text-center">کد پیگیری سفارش از سایت: @ViewBag.Trace</h4>
+                        <div class="text-center">
+                            <a class="btn btn-info text-white" href="/OrderTracking/@ViewBag.Trace">
+                                پیگیری سفارش
+                            </a>
+                        </div>
+                        <hr />
+                    }
+                    else
+                    {
+                        <h6 class="text-center">مشتری گرامی، در صورتی که مبلغ واریزی تا 72 ساعت به حساب شما بازنشگت، با پشتیبانی تماس بگیرید.</h6>
+                    }
+
+                    <div class="text-center">
+                        تلفن پشتیبانی: <a class="btn btn-outline-info" href="tel:09375692968">09375692968</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>

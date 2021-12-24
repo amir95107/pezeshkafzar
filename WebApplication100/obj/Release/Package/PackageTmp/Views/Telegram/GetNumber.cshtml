@@ -1,0 +1,16 @@
+﻿@model DataLayer.Products
+@{
+    string name = "' "+ Model.Title+" '";
+}
+
+<div class="form-group text-center">
+    <label class="float-none text-center">
+        برای دریافت قیمت آنلاین @name لطفا شماره تماس خود را وارد نمایید.<br />
+        همکاران ما در کمترین زمان ممکن با شما تماس خواهند گرفت.
+    </label>
+    <form name="GetNumber" onsubmit="sendNumber(event,@Model.ProductID)">
+        <input type="tel" name="num" id="phoneNumber" class="form-control" />
+        <input type="submit" class="btn btn-success mt-2" id="btnGetNumber" value="ارسال" />
+    </form>
+</div>
+

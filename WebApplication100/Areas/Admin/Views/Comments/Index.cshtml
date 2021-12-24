@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DataLayer.Comments>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow m-0">کامنت ها</h2>
+
+    <a class="btn btn-success" href="/Admin/Comments/Create">افزودن کامنت جدید</a>
+    <table class="table table-responsive table-bordered table-hover table-striped">
+        <tr>
+            <td>
+                نام
+            </td>
+            <td>
+                متن نظر
+            </td>
+            <td>
+                تاریخ ایجاد
+            </td>
+            <td>
+                نمایش
+            </td>
+            <td>
+                محصول یا مطلب
+            </td>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            int type = 1;
+            if (item.BlogID != null && item.ProductID == null)
+            {
+                type = 2;
+            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @item.CreateDate.ToString("yyyy/MM/dd  hh:MM")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsShow)
+                </td>
+                <td>
+                    @if (item.ProductID != null && item.BlogID == null)
+                    {
+                        <span>
+                            @Html.DisplayFor(modelItem => item.Products.Title)
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            @Html.DisplayFor(modelItem => item.Blogs.Title)
+                        </span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-warning btn-xs p-2 m-1" href="/Admin/Comments/Create/@item.CommentID?type=@type">پاسخ</a>
+                    @if (!item.IsShow)
+                    {
+                        <a class="btn btn-primary btn-xs p-2 m-1" href="/Admin/Comments/ShowInSite/@item.CommentID?isShow=true">نمایش</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger btn-xs p-2 m-1" href="/Admin/Comments/ShowInSite/@item.CommentID?isShow=false">عدم نمایش</a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

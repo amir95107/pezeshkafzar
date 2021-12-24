@@ -1,0 +1,319 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/Areas/Admin/Content/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/Areas/Admin/Content/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        @ViewBag.Title
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!-- CSS Files -->
+    <link href="/Areas/Admin/Content/css/bootstrap.min.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <link href="~/Areas/Admin/Content/css/now-ui-dashboard.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/Areas/Admin/Content/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="">
+    <div class="overlayer" id="overlayer"></div>
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+            <!--
+                Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+            -->
+            <div class="logo text-center">
+                <a href="/admin">
+                    <img src="~/Content/images/logo/white-logo.png" title="logo" alt="logo" />
+                </a>
+            </div>
+            <div class="sidebar-wrapper" id="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="nav-item" data-page="admin">
+                        <a href="/admin">
+                            <i class="now-ui-icons shopping_shop"></i>
+                            <p>داشبورد</p>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a href="/">
+                            <i class="now-ui-icons business_globe"></i>
+                            <p>نمایش سایت</p>
+                        </a>
+                    </li>
+                    @Html.Action("Order", "Home")
+
+                    <li class="nav-item" data-page="product_groups">
+                        <a href="/admin/orders/create">
+                            <i class="now-ui-icons tech_headphones"></i>
+                            <p>ثبت سفارش تلفنی</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="product_groups">
+                        <a href="/admin/Message">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>پیام های سایت</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="product_groups">
+                        <a href="/admin/comments">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>نظرات سایت</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="products">
+                        <a href="#" onclick="toggleDiv('#nav-item-products')">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>محصولات</p>
+                        </a>
+                        <ul style="display: none" class="nav text-right inner-nav hide" id="nav-item-products">
+                            <li class="nav-item"><a href="/Admin/Products">همه محصولات</a></li>
+                            <li class="nav-item"><a href="/Admin/Products/Create">افزودن محصول جدید</a></li>
+                            <li class="nav-item"><a href="/Admin/Products/AcceptProducts">تایید محصولات جدید</a></li>
+                            <li class="nav-item"><a href="/Admin/Features">تعریف ویژگی محصولات</a></li>
+                            <li class="nav-item"><a href="/Admin/Products/brands">تعریف برند جدید</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-page="discounts">
+                        <a href="#" onclick="toggleDiv('#nav-item-discounts')">
+                            <i class="now-ui-icons shopping_tag-content"></i>
+                            <p>مدیریت کد تخفیف ها</p>
+                        </a>
+                        <ul style="display: none" class="nav text-right inner-nav hide" id="nav-item-discounts">
+                            <li class="nav-item"><a href="/Admin/Discounts">همه کد تخفیف ها</a></li>
+                            <li class="nav-item"><a href="/Admin/Discounts/Create">افزودن کد تخفیف جدید</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-page="product_groups">
+                        <a href="/admin/product_groups">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>دسته بندی محصولات</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="reports">
+                        <a href="/admin/orders/reports">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>گزارش فروش </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="DeliveryWays">
+                        <a href="/admin/DeliveryWays">
+                            <i class="now-ui-icons shopping_delivery-fast"></i>
+                            <p>مدیریت شیوه ارسال سفارش </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="sellers">
+                        <a href="#" onclick="toggleDiv('#sellersDiv')">
+                            <i class="now-ui-icons business_badge"></i>
+                            <p>فروشندگان</p>
+                        </a>
+                        <ul style="display: none" class="nav text-right inner-nav hide" id="sellersDiv">
+                            <li class="nav-item"><a href="/Admin/Sellers/Create">افزودن فروشنده</a></li>
+                            <li class="nav-item"><a href="/Admin/Sellers">همه فروشندگان</a></li>
+                            <li class="nav-item"><a href="/Admin/Sellers/NewSellers">فروشندگان جدید</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-page="blogs">
+                        <a href="#" onclick="toggleDiv('#blogsDiv')">
+                            <i class="now-ui-icons ui-1_email-85"></i>
+                            <p>بلاگ</p>
+                        </a>
+                        <ul style="display: none" class="nav text-right inner-nav hide" id="blogsDiv">
+                            <li class="nav-item"><a href="/Admin/Blogs/Create">افزودن بلاگ جدید</a></li>
+                            <li class="nav-item"><a href="/Admin/Blogs">همه بلاگ ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-page="sliders">
+                        <a href="/admin/sliders">
+                            <i class="now-ui-icons media-1_album"></i>
+                            <p>اسلایدر</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" data-page="users">
+                        <a href="#" onclick="toggleDiv('#usersDiv')">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>کاربران</p>
+                        </a>
+                        <ul style="display: none" class="nav text-right inner-nav hide" id="usersDiv">
+                            <li class="nav-item"><a href="/Admin/Users/GetUsers">همه کاربران</a></li>
+                            <li class="nav-item"><a href="/Admin/Users/GetAllCustomers">مشتریان</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-page="pages">
+                        <a href="/admin/pages">
+                            <i class="now-ui-icons media-1_album"></i>
+                            <p>اطلاعات صفحات</p>
+                        </a>
+                    </li>
+
+                    @*<li class="nav-item" data-page="media">
+            <a href="#" onclick="toggleDiv('#mediaDiv')">
+                <i class="now-ui-icons education_agenda-bookmark"></i>
+                <p>کتاب خانه رسانه</p>
+            </a>
+            <ul style="display: none" class="nav text-right inner-nav hide" id="mediaDiv">
+                <li class="nav-item"><a href="/Admin/home/media">همه تصاویر</a></li>
+                <li class="nav-item"><a href="/Admin/Users/GetAllCustomers">بارگذاری تصویر جدید</a></li>
+            </ul>
+        </li>*@
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel" id="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="#pablo">@ViewBag.Title</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <form>
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <i class="now-ui-icons media-2_sound-wave"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Stats</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/" target="_blank">نمایش سایت</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Account</span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+
+            @RenderBody()
+
+            <footer class="footer">
+                <div class=" container ">
+                    <nav>
+                        <div dir="rtl">
+                            طراحی و توسعه: <a href="http://amho.ir" target="_blank"><img class="d-inline" src="/Images/amho-logo.png" width="60"></a>
+                        </div>
+                    </nav>
+                    <div class="copyright" id="copyright">
+                        تمامی حقوق این وبسایت محفوظ است &copy;
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div class="modal fade" id="AllModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body" id="modal-body">
+                    <div class="text-center">
+                        <i id="modalIcon" class="now-ui-icons loader_refresh spin"></i>
+                    </div>
+                </div>
+            </div><!-- End .modal-content -->
+        </div><!-- End .modal-dialog -->
+    </div>
+
+    <div data-notify="container" class="col-xs-11 col-sm-4 alert alert-primary alert-with-icon animated fadeOutUp"
+         role="alert" data-notify-position="top-left" dir="rtl"
+         style="display: none; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1060;
+top: 20px; left: 20px;" data-closing="true">
+        <button type="button" aria-hidden="true" class="close" data-notify="dismiss"
+                style="position: absolute; right: 10px; top: 50%; margin-top: -13px; z-index: 1062;">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+        </button>
+        <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+        <span data-notify="title"></span> 
+        <span data-notify="message">
+            تعداد محصول در سبد خرید با موفقیت تغییر کرد.
+        </span>
+        <a href="#" target="_blank" data-notify="url"></a>
+    </div>
+    <style>
+        span[data-notify="message"]{
+            direction: rtl
+        }
+    </style>
+
+    <!--   Core JS Files   -->
+    <script src="/Areas/Admin/Content/js/core/jquery.min.js"></script>
+    <script src="/Areas/Admin/Content/js/core/popper.min.js"></script>
+    <script src="/Areas/Admin/Content/js/core/bootstrap.min.js"></script>
+    <script src="/Areas/Admin/Content/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Chart JS -->
+    <script src="/Areas/Admin/Content/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="/Areas/Admin/Content/js/plugins/bootstrap-notify.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+
+
+    @RenderSection("Scripts", false)
+    <script src="~/Areas/Admin/Content/js/now-ui-dashboard.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(() => {
+            if (typeof (CKEDITOR) !== "undefined") {
+                CKEDITOR.env.isCompatible = true;
+            }
+        })
+    </script>
+
+</body>
+</html>

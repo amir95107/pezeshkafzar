@@ -1,0 +1,162 @@
+﻿@model DataLayer.Users
+@{
+    ViewBag.Title = "حساب کاربری";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    bool isUserInfoCompleted = Model.IsUserInfoCompleted;
+    var userInfo = Model.UserInfo.FirstOrDefault(u => u.UserID == Model.UserID);
+    bool isEmailConfirmed = false;
+    var email = "";
+    if (userInfo != null)
+    {
+        isEmailConfirmed = userInfo.IsEmailConfirmed;
+        email = userInfo.Email;
+    }
+}
+
+<div class="container p-3">
+    <h1 class="text-center mt-2"><span class="title">حساب کاربری</span></h1>
+    @if (isUserInfoCompleted == false || isEmailConfirmed == false)
+    {
+        <div class="row alert border p-2 mb-2">
+            @if (isUserInfoCompleted == false)
+            {
+                <a class="btn btn-warning text-white m-2" href="/Account/UserInformation">تکمیل اطلاعات کاربری</a>
+            }
+            @if (isEmailConfirmed == false)
+            {
+                
+                <a class="btn btn-info text-white m-2" onclick="activateEmail('@email')">تایید ایمیل</a>
+            }
+            @if (!Model.Addresses.Any())
+            {
+                <a class="btn btn-primary text-white m-2" href="/Address/Create">افزوردن آدرس</a>
+            }
+        </div>
+    }
+    <div class="row justify-content-center">
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a onclick="showOrders()">
+                        <div class="icon">
+                            <img src="~/Content/images/order-processed(1).png" title="پیگیری سفارش" alt="پیگیری سفارش" class="m-auto" />
+                        </div>
+                        <span>پیگیری سفارش</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/MyOrders" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/checklist(1).png" title="تاریخچه سفارشات" alt="تاریخچه سفارشات" class="m-auto" />
+                        </div>
+                        <span>تاریخچه سفارشات</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/EditUserInfo" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/user(1).png" title="ویرایش اطلاعات کاربری" alt="ویرایش اطلاعات کاربری" class="m-auto" />
+                        </div>
+                        <span>ویرایش اطلاعات کاربری</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/changepassword" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/lock(1).png" title="تغییر رمز عبور" alt="تغییر رمز عبور" class="m-auto" />
+                        </div>
+                        <span>تغییر رمز عبور</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/Address" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/location(1).png" title="لیست آدرس ها" alt="لیست آدرس ها" class="m-auto" />
+                        </div>
+                        <span>لیست آدرس ها</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/wishlist" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/letter(1).png" title="لیست علاقه مندی ها" alt="لیست علاقه مندی ها" class="m-auto" />
+                        </div>
+                        <span>لیست علاقه مندی ها</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-outline-danger m-auto logout shpl" href="/account/LogOff">خروج از حساب کاربری</a>
+    </div>
+</div>
+
+@section Scripts{
+    <style>
+        h1, h1 .title {
+            line-height: 1.65;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid #ccc;
+        }
+
+            h1 .title {
+                border-bottom: 3px solid #00b58c;
+            }
+    </style>
+    <script>
+        showOrders = () => {
+            $('#signin-modal').modal('show');
+            $.get('/Account/GetListOrder', (res) => {
+                if (res == null || res.length == 0) {
+                    $('.modal-body').html('شما در حال حاضر سفارش فعالی ندارید.')
+                } else {
+
+                    var li = "";
+                    for (var i = 0; i < res.length; i++) {
+                        li += `<li class="p-2 border m-2"><a href="/OrderTracking/${res[i]}">فاکتور ${res[i]}</a></li>`
+                    }
+                    var ul = `<ul class="p-0">${li}</ul>`;
+                    $('.modal-body').html(ul)
+                }
+            })
+        }
+        activateEmail = (email) => {
+            $('#signin-modal').modal('show').find('.modal-body').html(loader);
+            $.post('/account/ActivateEmail', (res) => {
+                if (res.toLowerCase() == "false") {
+                    $('.modal-body').html('لطفا ابتدا اطلاعات کاربری خود را تکمیل کنید.');
+                    setTimeout(() => {
+                        window.location.href ='/account/EditUserInfo?returnUrl=/account'
+                    }, 5000)
+                } else {
+                    $('.modal-body').html(`یک ایمیل شامل لینک فعالسازی به ${email} ارسال شد. لطفا به ایمیل خود مراجعه کنید و روی لینک فعالسازی کلیک کنید.`);
+                }
+            })
+        }
+    </script>
+}
+

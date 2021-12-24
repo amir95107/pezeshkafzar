@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DataLayer.Orders>
+
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    int c = 1;
+}
+
+
+
+    <div class="container mt-2 mb-2">
+        @if (Model.Any())
+        {
+            <table class="table table-responsive d-md-table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            ردیف
+                        </th>
+                        <th>
+                            شماره پیگیری
+                        </th>
+
+                        <th>
+                            تاریخ
+                        </th>
+                        <th>
+                            مبلغ پرداخت شده
+                        </th>
+
+                        <th>
+                            شیوه پرداخت
+                        </th>
+
+                        <th>جزئیات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @c
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TraceCode)
+                            </td>
+
+                            <td>
+                                @item.Date.ToString("yyyy/MM/dd")
+                            </td>
+                            <td>
+                                <span>@item.Payable.ToString("#,0")</span>
+                                <small>تومان</small>
+                            </td>
+
+                            <td>
+                                @((item.Payable==1)?"کارت به کارت":"اینترنتی")
+                            </td>
+
+                            <td>
+                                <a onclick="showOrderDetails(@item.OrderID)" class="btn btn-info text-white">
+                                    مشاهده جزئیات خرید
+                                </a>
+                            </td>
+                        </tr>
+                        c++;
+                    }
+                </tbody>
+
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center text-white">
+               شما تا بحال هیچ سفارشی را نهایی نکرده اید!
+            </div>
+        }
+    </div>
+<style>
+    td, th {
+        text-align: center !important
+    }
+</style>

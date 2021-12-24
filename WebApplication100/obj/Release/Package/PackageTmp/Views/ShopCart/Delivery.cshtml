@@ -1,0 +1,118 @@
+﻿@model IEnumerable<DataLayer.Addresses>
+@{
+    ViewBag.Title = "Delivery";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    List<DataLayer.DeliveryWays> dWays = ViewBag.DeliveryWays;
+}
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('Content/images/page-header-bg.jpg')">
+        <div class="container" id="OrderingLevel">
+            @Html.Action("OrderingLevel")
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="shpl">خانه</a></li>
+                <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">شیوه ارسال</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    @if (Model.Any())
+                    {
+                    <div class="alert alert-info text-center mb-2 alert-dismissible fade show" role="alert">
+                        <strong>لطفا یکی از آدرسهای زیر انتخاب کنید.</strong>
+                    </div>
+                        foreach (var item in Model)
+                        {
+                            <div class="card mb-1 p-1 addresses @(item.IsDefault?"default-address":"")">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            @item.Address
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            @if (!item.IsDefault)
+                                            {
+                                                <a onclick="setDefaultAddress1(@item.AddressID)" class="btn btn-info text-white">به این آدرس ارسال شود</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/address/edit/@item.AddressID?ReturnUrl=/ShopCart/Delivery" class="btn btn-warning text-white shpl">ویرایش</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning text-center">هیچ آدرسی تا کنون ثبت نکرده اید!</div>
+                        <hr />
+                        <div class="text-center"><a class="btn btn-info" href="/address/create?ReturnUrl=/ShopCart/Delivery">افزودن آدرس جدید</a></div>
+                    }
+                </div>
+                <div class="col-md-3 mt-sm-2 mt-md-0">
+                    @if (ViewBag.EmptyShipping != null)
+                    {
+                        <div class="alert alert-warning text-white text-right">
+                            @ViewBag.EmptyShipping
+                        </div>
+                    }
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table d-table">
+                                <tbody>
+
+                                    <tr class="summary-shipping">
+                                        <td class="p-0">شیوه ارسال : </td>
+                                        <td class="p-0">&nbsp;</td>
+                                    </tr>
+
+                                    
+
+                                    @foreach (var item in dWays)
+                                    {
+                                        <tr class="summary-shipping-row" id="shipping-tr-@item.DeliveryID">
+                                            <td class="p-0">
+                                                <div class="custom-control custom-radio p-0">
+                                                    <input onchange="shipping(@item.DeliveryID)" type="radio" id="shipping-@item.DeliveryID" name="shipping" class="custom-control-input" value="@item.DeliveryID">
+                                                    <label class="custom-control-label" for="shipping-@item.DeliveryID">
+                                                        @item.Title
+                                                    </label>
+                                                    <br />
+                                                    @if (item.Time != "" && item.Time != null)
+                                                    {
+                                                        <small>(@item.Time)</small>
+                                                    }
+                                                    @if (item.Usage != "" && item.Usage != null)
+                                                    {
+                                                        <small>(@item.Usage)</small>
+                                                    }
+                                                </div><!-- End .custom-control -->
+                                            </td>
+                                            <td class="text-left p-0">@item.Price.ToString() <small>تومان</small></td>
+                                        </tr><!-- End .summary-shipping-row -->
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="/ShopCart/Factor" class="btn btn-outline-primary-2 btn-order btn-block mt-2 shpl">
+                        تایید و ادامه فرآیند خرید
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

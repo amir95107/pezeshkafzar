@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DataLayer.ViewModels.ShowOrderViewModel>
+
+@{
+
+    var _discount = Session["Discount"] as DataLayer.Discounts;
+    //if (Session["Discount"] == null)
+    //{
+    //    _discount.DiscountPercent = 0;
+    //}
+    List<DataLayer.DeliveryWays> dList = ViewBag.DList;
+}
+
+@if (Model.Any())
+{
+    <main class="main">
+        <input type="hidden" value="@_discount" id="dCode" />
+        <div class="page-header text-center" style="background-image: url('Content/images/page-header-bg.jpg')">
+            <div class="container" id="OrderingLevel">
+                @Html.Action("OrderingLevel")
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="shpl">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">سبد خرید</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="cart">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9">
+
+                            <table class="table table-cart table-mobile">
+                                <thead>
+                                    <tr>
+                                        <th>محصول</th>
+                                        <th>قیمت</th>
+                                        <th>قیمت پس از تخفیف</th>
+                                        <th>تعداد</th>
+                                        <th>مجموع</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="product-col">
+                                                <div class="product">
+                                                    <figure class="product-media">
+                                                        <a href="/ShowProduct/@item.ProductID/@item.SefUrl">
+                                                            <img src="/Images/ProductImages/Thumb/@item.ImageName" alt="@item.Title" title="@item.Title">
+                                                        </a>
+                                                    </figure>
+
+                                                    <h3 class="product-title">
+                                                        <a href="/ShowProduct/@item.ProductID/@item.SefUrl">@item.Title</a>
+                                                    </h3><!-- End .product-title -->
+                                                </div><!-- End .product -->
+                                            </td>
+                                            <td class="price-col">
+                                                <span class="in-desktop">@item.Price.ToString("#,0")</span>
+                                                <span class="@(item.Price==item.PriceAfterDiscount?"d-none":"in-mobile")">
+                                                    <del>@item.Price.ToString("#,0")</del><small class="mr-2">تومان</small>
+                                                </span>
+                                            </td>
+                                            <td class="price-col"><span class="FontBig-sm">@item.PriceAfterDiscount.ToString("#,0")</span><small class="mr-2">تومان</small></td>
+                                            <td class="quantity-col">
+                                                <div class="cart-product-quantity">
+                                                    <input onchange="commandOrder(@item.ProductID,$(this).val())" type="number" class="form-control" value="@item.Count" min="1" max="10"
+                                                           step="1" data-decimals="0" required>
+                                                </div>
+                                                <!-- End .cart-product-quantity -->
+                                            </td>
+                                            <td class="total-col">@((item.PriceAfterDiscount * item.Count).ToString("#,0"))</td>
+                                            <td class="remove-col"><button onclick="commandOrder(@item.ProductID,0)" class="btn-remove"><i class="icon-close"></i></button></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table><!-- End .table table-wishlist -->
+
+                            <div class="cart-bottom">
+                                <div class="cart-discount">
+                                    <form id="discountCode" onsubmit="submitDiscountCode(event)">
+                                        <div class="input-group">
+                                            <input id="discountCuponCode" type="text" class="form-control" required="" placeholder="کد تخفیف">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-left mr-0"></i></button>
+                                            </div><!-- .End .input-group-append -->
+                                        </div><!-- End .input-group -->
+                                    </form>
+                                </div><!-- End .cart-discount -->
+                                @*<div class="checkout-discount">
+                                        <form onsubmit="submitDiscountCode(event)">
+                                            <input type="text" class="form-control" required="" id="discountCuponCode">
+                                            <label for="discountCuponCode" class="text-truncate" style="opacity: 1;">کد تخفیف دارید؟ <span>برای وارد کردن کد تخفیف خود اینجا کلیک کنید</span></label>
+                                            <button class="btn-check-discount" type="submit"><i class="icon-check"></i></button>
+                                        </form>
+
+                                    </div>*@
+
+                                <a onclick="updateShopCart()" class="btn btn-outline-dark-2"><span>به روز رسانی سبد خرید</span><i class="icon-refresh"></i></a>
+                            </div><!-- End .cart-bottom -->
+                        </div><!-- End .col-lg-9 -->
+                        <aside class="col-lg-3">
+                            <div class="summary summary-cart">
+                                <h3 class="summary-title">جمع سبد خرید</h3><!-- End .summary-title -->
+                                @{
+                                    var priceWithOutDiscount = Model.Sum(p => p.Sum);
+                                    int extraDiscount = (_discount == null) ? 0 : Math.Min(Model.Sum(p => p.PriceAfterDiscount) * _discount.DiscountPercent / 100, _discount.MaxDiscountValue);
+                                    var __discount = Model.Sum(p => p.Discount) + extraDiscount;
+
+                                    var priceWithDiscount = priceWithOutDiscount - __discount;
+                                }
+                                <table class="table table-summary">
+                                    <tbody>
+                                        <tr class="summary-subtotal">
+                                            <td>جمع کل سبد خرید : </td>
+                                            <td class="text-left">@priceWithOutDiscount.ToString("#,0") تومان</td>
+                                        </tr>
+                                        <tr class="summary-subtotal">
+                                            <td>جمع کل تخفیف : </td>
+
+                                            <td class="text-left">@((__discount).ToString("#,0")) تومان</td>
+
+
+
+                                        </tr><!-- End .summary-subtotal -->
+                                        <!-- End .summary-shipping-row -->
+                                        <!-- End .summary-shipping-row -->
+
+                                        <tr class="summary-total">
+                                            <td>مبلغ قابل پرداخت :</td>
+                                            <td class="text-left"><span id="payable">@(priceWithDiscount.ToString("#,0"))</span> تومان</td>
+                                        </tr><!-- End .summary-total -->
+                                    </tbody>
+                                </table><!-- End .table table-summary -->
+                                <input type="hidden" id="tCost" value="@(priceWithDiscount.ToString())" />
+                                <a href=@((ViewBag.Redirect != null) ? "/Account/UserInformation?previousUrl=ShopCart" : "/ShopCart/Delivery") class="btn btn-outline-primary-2 btn-order btn-block">
+                                    تایید و ادامه فرآیند خرید
+                                </a>
+                            </div><!-- End .summary -->
+
+                            <a href="/Archive" class="btn btn-outline-warning btn-block mb-3 shpl">
+                                <span>
+                                    بازگشت به لیست محصولات
+                                </span>
+                            </a>
+                        </aside><!-- End .col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .cart -->
+        </div><!-- End .page-content -->
+    </main>
+}
+else
+{
+    <div class="row justify-content-center mt-5 mb-5 ">
+        <div class="col-9 col-md-6 col-lg-4 text-center border p-5">
+            <p class="text-center">
+                سبد خرید شما خالی است!
+            </p>
+            <br />
+            <a class="btn btn-warning text-white shpl" href="/Archive">بازگشت به لیست محصولات</a>
+        </div>
+    </div>
+}

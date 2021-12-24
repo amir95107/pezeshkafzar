@@ -1,0 +1,80 @@
+﻿@model DataLayer.Brands
+
+@{
+    ViewBag.Title = "Brands";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">افزودن محصول جدید</h2>
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="search-brands mb-2 text-center">
+                جستجو:
+                <input id="searchBrands" oninput="searchBrand(this.value)" />
+            </div>
+            <table class="table-bordered w-100">
+                <tbody>
+                    <tr>
+                        <th>برند</th>
+                        <th>عکس</th>
+                        <th>حذف</th>
+                    </tr>
+                    @{List<DataLayer.Brands> list = ViewBag.Brands;}
+                    @foreach (var item in list)
+                    {
+                        <tr class="brand-item" data-brand-name="@item.BrandTitle">
+                            <td>@item.BrandTitle</td>
+                            <td><img src="/Images/ProductImages/@item.BrandImageName" /></td>
+                            <td><a class="p-2" href="/admin/Products/DeleteBrand/@item.BrandID"><i class="now-ui-icons ui-1_simple-remove"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            @using (Html.BeginForm("CreateBrands", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal p-1">
+                    <h4>افزودن</h4>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BrandTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="w-75">
+                            @Html.EditorFor(model => model.BrandTitle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BrandTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BrandImageName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="w-75">
+                            <input type="file" name="imgUp" id="imgUp" />
+                            @Html.ValidationMessageFor(model => model.BrandImageName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="">
+                            <input type="submit" value="ثبت" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+
+</div>
+
+<style>
+    td,th{
+        text-align: center
+    }
+</style>

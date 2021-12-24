@@ -1,0 +1,20 @@
+﻿@model DataLayer.Users
+@{
+    ViewBag.Title = "ثبت نام";
+}
+
+
+
+<div class="tab-content">
+    <div class="tab-pane fade active show p-0" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+        <div class="login-page pt-5 pb-5">
+            <div class="container">
+                <div class="form-box border border-success shadow text-center p-5 bg-light">
+                    <h4>@Model.UserName عزیز ، با تشکر از ثبت نام شما در وبسایت پزشک افزار  .</h4>
+                    <p class="text-center">ایمیلی حاوی لینک فعالسازی به ایمیل " @Model.Email " ارسال شد ، لطفا وارد ایمیل فوق شوید و روی لینک کلیک کنید .</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

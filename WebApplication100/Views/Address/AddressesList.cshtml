@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DataLayer.Addresses>
+@{
+    int c = 1;
+}
+@if (Model.Any())
+{
+<div class="table-wrapper">
+    <table class="table table-bordered table-responsive d-table">
+        <tr>
+            <th>ردیف</th>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Long)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lat)
+                </th>*@
+
+
+            <th>
+                آدرس
+            </th>
+
+            <th>
+                آدرس پیشفرض
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.IsDefault ? "default-address" : "") address-row address-@item.AddressID">
+                <td>@c</td>
+                <td>
+                    @item.Address.Substring(0, 20)
+                    <span>...</span>
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Long)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lat)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDefault)
+                </td>
+
+                <td style="max-width: 250px">
+                    @if (!item.IsDefault)
+                    {
+                        <div class="m-1"><a class="btn btn-info" onclick="setDefaultAddress(@item.AddressID)">انتخاب به عنوان پیشفرض</a></div>
+                    }
+                    else
+                    {
+                        <div class="m-1"><a class="badge btn-outline-info text-info">آدرس پیش فرض</a></div>
+                    }
+                    <div class="m-1"><a class="btn btn-warning text-white shpl" href="/address/edit/@item.AddressID"> ویرایش</a></div>
+                    <div class="m-1"><a class="btn btn-danger " onclick="confirmDeleteAddress(@item.AddressID)">حذف</a></div>
+                </td>
+            </tr>
+            c++;
+        }
+
+    </table>
+</div>
+}
+else
+{
+    <div class="border border-warning text-warning text-center p-2" dir="rtl">تا کنون آدرسی ثبا نشده است.</div>
+}

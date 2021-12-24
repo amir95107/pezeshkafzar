@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DataLayer.Brands>
+@{
+    ViewBag.Title = "برندها - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید تمامی برندهای مجود در سایت را مشاهده فرمایید.";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+@if (Model.Any())
+{
+    <div class="page-content mt-2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 ">
+                    <div class="toolbox">
+
+
+                        <div class="toolbox-right">
+
+                            <div class="toolbox-layout">
+                                <a href="#" class="btn-layout">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="10" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="10" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="#" class="btn-layout">
+                                    <svg width="10" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="#" class="btn-layout active">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="12" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                        <rect x="12" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+
+                                <a href="#" class="btn-layout">
+                                    <svg width="22" height="10">
+                                        <rect x="0" y="0" width="4" height="4"></rect>
+                                        <rect x="6" y="0" width="4" height="4"></rect>
+                                        <rect x="12" y="0" width="4" height="4"></rect>
+                                        <rect x="18" y="0" width="4" height="4"></rect>
+                                        <rect x="0" y="6" width="4" height="4"></rect>
+                                        <rect x="6" y="6" width="4" height="4"></rect>
+                                        <rect x="12" y="6" width="4" height="4"></rect>
+                                        <rect x="18" y="6" width="4" height="4"></rect>
+                                    </svg>
+                                </a>
+                            </div><!-- End .toolbox-layout -->
+                        </div><!-- End .toolbox-right -->
+                    </div>
+                    <div class="products mb-3" id="">
+                        <div class="row">
+                            @foreach (var brand in Model)
+                            {
+                                <div class="col-6 col-md-3 col-lg-2">
+                                    <a href="/Archive?brandId=@brand.BrandID" class="shpl">
+                                        <div class="card border text-center">
+                                            <img src="~/Images/ProductImages/@brand.BrandImageName" class="p-1" title="@brand.BrandTitle" alt="@brand.BrandTitle" />
+                                            <div class="text-center" dir="rtl">
+                                                <label class="m-0 float-none">@brand.BrandTitle</label>
+                                                <br />
+                                                <span class="badge badge-secondary badge-pill">@brand.ProductBrand.Count()</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div><!-- End .col-sm-6 col-lg-4 -->
+                            }
+
+
+                        </div><!-- End .row -->
+                    </div><!-- End .products -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row justify-content-center mt-5 mb-5 ">
+        <div class="col-9 col-md-6 col-lg-4 text-center border p-5">
+            <p class="text-center">
+                هیچ برندی موجود نیست!
+            </p>
+            <br />
+            <a class="btn btn-warning text-white shpl" href="/Archive">بازگشت به لیست محصولات</a>
+        </div>
+    </div>
+}

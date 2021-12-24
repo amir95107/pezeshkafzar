@@ -1,0 +1,49 @@
+﻿@model DataLayer.Users
+@{
+    ViewBag.Title = "تایید کد";
+}
+
+
+
+<div class="tab-content">
+    <div class="tab-pane fade active show p-0" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+        <div class="login-page pt-5 pb-5">
+            <div class="container">
+                <div class="form-box border border-success shadow text-center p-5 bg-light">
+                    <strong>فروشنده عزیز، لطفا کد ارسالی به شماره @Model.Mobile را وارد نمایید. </strong>
+                    <hr />
+                    @if (TempData["RegisterError"] != null)
+                    {
+                        <div class="alert alert-warning">
+                            @TempData["RegisterError"]
+                        </div>
+                    }
+
+                    @if (TempData["VerifyError"] != null)
+                    {
+                        <div class="alert alert-warning">
+                            @TempData["VerifyError"]
+                        </div>
+                    }
+                    <form action="/account/VerifyCode" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Mobile)
+                        <input type="hidden" name="referPage" id="referPage" value="seller" />
+                        <div class="form-group">
+                            <label class="control-label">کد تایید</label>
+                            <input type="text" class="form-control" name="code" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-primary-2 spl" id="btnVerifySubmit">
+                                <span>تایید</span>
+                            </button>
+                            <a class="btn btn-warning" id="resendVerifyCode" href="/Account/ResendRegisterVerificationCode?mobile=@Model.Mobile&role=seller" style="display: none">ارسال مجدد کد تایید</a>
+                            <span id="timer" class="mr-2 ml-2 text-dark" style="width:35px">02:00</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

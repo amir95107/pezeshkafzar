@@ -1,0 +1,132 @@
+﻿@model DataLayer.Sellers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Seller/Views/Shared/_DefaultSeller.cshtml";
+    var successMessage = TempData["SuccessEditInfo"];
+    var warningMessage = TempData["WarningEditInfo"];
+}
+
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">اطلاعات فروشنده</h2>
+
+    <p>
+        <a class="btn btn-primary" href="/Seller/SellersAccount/Edit/@Model.SellerID">ویرایش اطلاعات</a>
+    </p>
+
+    @if (successMessage != null)
+    {
+        <div class="alert alert-success text-center">
+            @successMessage
+        </div>
+    }
+    @if (warningMessage != null)
+    {
+        <div class="alert alert-danger text-center">
+            @warningMessage
+        </div>
+    }
+    @if (TempData["SuccessEmailActive"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["SuccessEmailActive"]
+        </div>
+    }
+
+    @if (!Model.Users.IsActive || Model.Lat == null)
+    {
+        <div class="border border-purple row mr-0 ml-0 mb-2">
+            @if (!Model.Users.IsActive)
+            {
+                string email = (Model.Users.Email == null) ? "" : Model.Users.Email;
+                <a class="btn btn-secondary m-1" onclick="activateEmail('@email')">تایید ایمیل</a>
+            }
+            @if (Model.Lat == null)
+            {
+                <a class="btn btn-warning m-1">تعیین موقعیت مکانی</a>
+            }
+        </div>
+    }
+
+    <div class="overflow-auto">
+        <table class="table d-table table-responsive border table-bordered table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SellerFullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAcceptedByAdmin)
+                </th>
+                <th>
+                    امتیاز
+                </th>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Model.SellerFullName
+                </td>
+                <td>
+                    @Model.StoreName
+                </td>
+                <td>
+                    @Model.StoreAddress
+                </td>
+                <td>
+                    @Model.Telephone
+                </td>
+                <td>
+                    @Model.StartDate
+                </td>
+                <td>
+                    @if (Model.IsAcceptedByAdmin)
+                    {
+                        <span class="text-success">فعال</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">منتظر تایید ادمین</span>
+                    }
+                </td>
+                <td>
+                    @Model.Point
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        activateEmail = (email) => {
+            $('#AllModal').modal('show').find('.modal-body').html(loader);
+            $.post('/Seller/SellersAccount/ActivateEmail', (res) => {
+                if (res.toLowerCase() == "false") {
+                    $('.modal-body').html('لطفا ابتدا اطلاعات کاربری خود را تکمیل کنید.');
+                    setTimeout(() => {
+                        window.location.href = '/Seller/SellersAccount/Edit/@Model.SellerID?returnUrl=/Seller/SellersAccount'
+                    }, 5000)
+                } else {
+                    $('.modal-body').html(`یک ایمیل شامل لینک فعالسازی به ${email} ارسال شد. لطفا به ایمیل خود مراجعه کنید و روی لینک فعالسازی کلیک کنید.`);
+                }
+            })
+        }
+    </script>
+}

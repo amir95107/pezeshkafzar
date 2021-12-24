@@ -1,0 +1,64 @@
+﻿@model DataLayer.Orders
+@{
+    ViewBag.Title = "OrderTracking";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="main p-5">
+    <div class="container">
+        <div class="alert alert-success text-center">
+            @Model.Users.UserName عزیز ، با تشکر از خرید شما . شما میتوانید وضعیت سفارش خود را در این صفحه پیگیری نمایید.
+            <br />
+            کد پیگیری: @Model.TraceCode
+            <br />
+            تاریخ: @Model.Date.ToString("yyyy/MM/dd")
+            <hr />
+            <a class="btn btn-outline-success text-white text-center border-white" onclick="showOrderList()">
+                مشاهده جزئیات سفارش
+            </a>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-4 mb-1" id="submitingOrder">
+                <div class="card @(Model.IsFinaly?"complete":"")">
+                    <div class="card-body p-5 text-center">
+                        سفارش شما ایجاد شد لطفا پرداخت را نهایی کنید 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-1" id="processingOrder">
+                <div class="card @(Model.IsFinaly?"complete":"")">
+                    <div class="card-body p-5 text-center">
+                        سفارش با موقیت ثبت شد و در حال پردازش می باشد
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-1" id="sendingOrder">
+                <div class="card @(Model.IsFinaly&& Model.IsSent?"complete":"")">
+                    <div class="card-body p-5 text-center">
+                        سفارش شما ارسال شد
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<style>
+    .card{
+        border: 2px dashed #ccc
+    }
+        .card.complete {
+            border-color: #00b58c;
+            background-color: #7CE9D3;
+        }
+    </style>
+<script>
+        showOrderList = () => {
+            $('#signin-modal').modal('show');
+            $.get('/Pay/OrderedList?traceCode=@Model.TraceCode', (res) => {
+                $('.modal-body').html(res)
+            })
+        }
+</script>
+}

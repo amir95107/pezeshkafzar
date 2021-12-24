@@ -1,0 +1,10 @@
+﻿@model DataLayer.Orders
+
+
+<div class="text-center" dir="rtl">
+    <p>آیا از حذف سفارش با شماره پیگیری @Model.TraceCode اطمینان دارید؟</p>
+    <div class="text-center">
+        <a class="btn btn-danger" href="/admin/orders/DeleteConfirmed/@Model.OrderID">بله</a>
+        <a class="btn btn-warning" data-dismiss="modal">خیر</a>
+    </div>
+</div>

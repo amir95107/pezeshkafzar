@@ -1,0 +1,116 @@
+﻿@model IEnumerable<DataLayer.ContactForm>
+@{
+    ViewBag.Title = "Faq";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+
+
+<div class="container faq">
+    <h1 class="text-center mt-2"><span class="title">پرسش های متداول</span></h1>
+    <div class="p-1" id="accordionExample">
+        @foreach (var item in Model)
+        {
+            <div class="card mb-2">
+                <div class="card-header accordion p-4">
+                    <a class="">
+                        @item.Text
+                    </a>
+                    <span class="icon-angle-down arrow-icon"></span>
+                </div>
+
+                <div id="" class="panel">
+                    <div class="card-body bg-transparent">
+                        @item.Answer
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts{
+    <style>
+        #accordionExample .card {
+            border: 1px solid #ccc
+        }
+
+        .faq  h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid #ccc;
+        }
+
+        .faq h1, .faq .title {
+            line-height: 1.7;
+        }
+
+        .faq .title {
+            border-bottom: 3px solid #00b58c
+        }
+
+        #accordionExample .accordion {
+            background-color: #eee;
+            cursor: pointer;
+            padding: 5px 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: 0.4s;
+            text-align: right;
+        }
+
+        #accordionExample .icon-angle-down {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            transition: 0.4s ease-in-out
+        }
+
+        #accordionExample .active .icon-angle-down {
+            transform: rotate(180deg);
+            top: 11px;
+        }
+
+        #accordionExample .card-header, #accordionExample a {
+            font-size: 1.6rem;
+            color: #6d6e71
+        }
+
+        
+
+        #accordionExample .accordion.active, #accordionExample .accordion.active a {
+            color: #fff !important;
+            text-decoration: none
+        }
+
+        #accordionExample .accordion.active, #accordionExample .accordion:hover {
+            background-color: #6d6e71;
+        }
+
+            #accordionExample .active, #accordionExample .accordion:hover, #accordionExample .active a, #accordionExample .accordion:hover a {
+                color: #fff
+            }
+
+        #accordionExample .panel {
+            display: none;
+            background-color: white;
+            overflow: hidden;
+            color: #6d6e71 !important;
+            font-size: 1.6rem;
+        }
+    </style>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                $(panel).toggle('slow');
+            });
+        }
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+<div class="container">
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl" style="margin-top: 100px;text-align: right">
+        <select class="" onchange="reportSelling(this.value)" id="sellerOpt">
+            <option value="">
+                همه سفارشها
+            </option>
+            @{
+                List<DataLayer.Sellers> sellers = ViewBag.Sellers;
+                foreach (var seller in sellers)
+                {
+                    <option value="@seller.SellerID">
+                        @seller.SellerFullName
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title"> گزارش فروش</h4>
+        </div>
+        <div class="card-body">
+            <div class="" id="reportTable">
+                @Html.Action("ReportOrders", "Orders")
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <link href="~/Areas/Admin/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/DataTables/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable()
+        })
+    </script>
+}

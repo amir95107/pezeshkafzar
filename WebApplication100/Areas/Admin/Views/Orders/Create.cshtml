@@ -1,0 +1,226 @@
+﻿@model DataLayer.Orders
+
+@{
+    ViewBag.Title = "سفارش جدید";
+    List<DataLayer.Products> productList = ViewBag.Products;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">افزودن سفارش جدید</h2>
+
+    <form id="main-form" action="/Admin/Orders/Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label">مشتری</label>
+                <div class="">
+                    @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">محصول</label>
+                <div class="">
+                    <select value="" id="ProductID" class="form-control" name="ProductList" multiple @*onchange="addToList(this.value)"*@>
+                        @foreach (var item in productList)
+                        {
+                            <option value="@item.ProductID">@item.Title</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-list row m-0" id="product-list">
+                @Html.Action("AdminOrderList")
+            </div>
+
+            <hr />
+
+            <div class="user-form" id="userFormWrapper" style="display: none">
+                <form method="post" id="userForm">
+                    <input type="hidden" id="userId" />
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">نام کامل</label>
+                            <div class="">
+                                <input type="text" id="FullName" required class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">موبایل</label>
+                            <div class="">
+                                <input type="text" id="Mobile" required class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">تلفن</label>
+                            <div class="">
+                                <input type="text" id="Telephone" required class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="button" id="btnSubmitUserInfo" class="btn btn-info">ثبت اطلاعات شخص</button>
+                    </div>
+                </form>
+                <hr />
+            </div>
+
+            <div class="form-group" id="userAddress" style="display: none">
+                <form id="userAddressForm">
+                    <label class="control-label">آدرس</label>
+                    <div class="">
+                        <textarea id="Address" class="form-control"></textarea>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" id="btnSubmitUserAddress" class="btn btn-info">ثبت آدرس شخص</button>
+                    </div>
+                </form>
+                <hr />
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 ">
+                    <button type="button" id="btnSubmitMainForm" class="btn btn-success">ثبت سفارش</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        @Html.ActionLink("بازگشت به لیست", "Index")
+    </div>
+</div>
+
+@section Scripts{
+    <link href="~/Areas/Admin/Content/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/Admin/Content/js/plugins/select2.min.js" rel="stylesheet" type="text/javascript"></script>
+    <script>
+        var select = $('#ProductID')
+        $(() => {
+            $('#UserID,#ProductID').select2();
+        })
+
+        addToList = (id) => {
+            $('/admin/api/shop/' + id, () => {
+                var title = $(`#ProductID option[value=${id}]`).html();
+                var div = `<div class="product-item border p-2 m-2 text-center" id="product-item-${id}"><span style="color:red" onclick="deleteFromList(${id},event)">X</span><img src="/images/productimages/thumb/${id}"><p class="text-center">${title}</p><div>تعداد:<input type="number" /></div></div>`;
+                $('#product-list').append(div)
+            })
+
+        }
+
+        select.on('select2:select', (e) => {
+            var $id = e.params.data.id;
+            $.get('/api/adminshop/' + $id, (res) => {
+                $('#product-list').load('/admin/orders/AdminOrderList');
+            })
+        })
+
+        select.on('select2:unselect', (e) => {
+            var $id = e.params.data.id;
+            commandOrder($id, 0);
+            $('#product-item-' + $id).remove();
+        })
+
+        function commandOrder(id, count) {
+            $.ajax({
+                url: "/admin/orders/CommandOrder/" + id,
+                type: "Get",
+                data: { count: count },
+                success: () => {
+                    nowuiDashboard.showNotification('bottom', 'left', "تعداد محصول در سبد خرید با موفقیت تغییر کرد.",'success')
+                }
+            });
+        }
+
+        $('#UserID').on('change', (e) => {
+            var $id = e.currentTarget.value;
+            var btn = $('#btnSubmitMainForm');
+            $.get('/admin/orders/IsUserInfoComplete/' + $id, (res) => {
+                if (res == "True") {
+                    $('#userFormWrapper').fadeOut();
+                } else {
+                    $('#userFormWrapper').fadeIn();
+                    btn.addClass('no-info')
+                }
+            });
+            $.get('/admin/orders/HasAddress/' + $id, (res) => {
+                if (res == "True") {
+                    $('#userAddress').fadeOut();
+                } else {
+                    $('#userAddress').fadeIn();
+                    btn.addClass('no-address')
+                }
+            });
+            $('#userId').val($id)
+            
+        })
+
+        $('#btnSubmitUserInfo').click(() => {
+            //$('#userForm').submit()
+            userInformation()
+        })
+
+        $('#btnSubmitUserAddress').click(() => {
+            //$('#userForm').submit()
+            userAddress()
+        })
+
+        userInformation = () => {
+            $('#btnSubmitUserInfo').html(loader);
+            $.ajax({
+                type: 'POST',
+                url: '/admin/orders/userinformation',
+                data: { userId: $('#userId').val(), mobile: $('#Mobile').val(), telephone: $('#Telephone').val(), fullName: $('#FullName').val() },
+                success: (res) => {
+                    if (res) {
+                        $('#btnSubmitUserInfo').addClass('text-success border border-success').removeClass('btn btn-info').attr('disabled', 'disabled').html('ثبت شد');
+                        $('#btnSubmitMainForm').removeClass('no-info')
+                    }
+                },
+                error: (err) => {
+                    $('#btnSubmitUserInfo').addClass('bg-danger text-white').html('خطا');
+                    console.log(err)
+                }
+            })
+        }
+
+        userAddress = () => {
+            $('#btnSubmitUserAddress').html(loader)
+            $.ajax({
+                type: 'POST',
+                url: '/admin/orders/AddAddress',
+                data: { userId: $('#userId').val(), address: $('#Address').val() },
+                success: () => {
+                    $('#btnSubmitUserAddress').addClass('text-success border border-success').removeClass('btn btn-info').attr('disabled', 'disabled').html('ثبت شد');
+                    $('#btnSubmitMainForm').removeClass('no-address')
+                }
+            })
+        }
+
+        $('#btnSubmitMainForm').on('click', () => {
+            submitMainForm()
+        })
+
+        submitMainForm = () => {
+            if ($('#btnSubmitMainForm').hasClass('no-address') || $('#btnSubmitMainForm').hasClass('no-info')) {
+                nowuiDashboard.showNotification('bottom', 'left', "آدرس و یا اطلاعات کاربری هنوز ثبت نشده", 'danger')
+            } else {
+                $('#main-form').submit()
+            }
+        }
+    </script>
+}

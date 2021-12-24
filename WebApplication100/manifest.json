@@ -1,0 +1,59 @@
+﻿{
+  "name": "pezeshkafzar",
+  "short_name": "pezeshkafzar",
+  "lang": "fa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00B58C",
+  "dir": "rtl",
+  "description": "Pezeshkafzar Web App",
+  "scope": "/",
+  "orientation": "portrait",
+  "author": "Amirhossein Janmohammadi",
+  "prefer_related_applications": "true",
+  "icons": [
+    {
+      "src": "/Content/images/logo/main-logo_180_67.png",
+      "sizes": "180x67",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Content/images/logo/logo-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

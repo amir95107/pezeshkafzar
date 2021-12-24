@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DataLayer.Users>
+
+@{
+    int c = 1;
+}
+
+<table class="table d-table table-responsive d-md-table">
+    <tr> 
+        <th>
+            ردیف
+        </th>
+        <th>
+            نقش
+        </th>
+        <th>
+            موبایل
+        </th>
+        <th>
+            موبایل تایید شده؟
+        </th>
+        <th>
+            تاریخ عضویت
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @c
+            </td>
+            <td>
+                @item.Roles.RoleTitle
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMobileConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisterDate)
+            </td>
+
+            <td>
+                <a href="/Admin/Users/Edit/@item.UserID" class="btn btn-outline-warning">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
+                </a>
+                @if (item.IsUserInfoCompleted)
+                {
+                    <a onclick="showUserInformation(@item.UserID)" class="btn btn-outline-info">
+                        <i class="now-ui-icons travel_info"></i>
+                    </a>
+                }
+            </td>
+        </tr>
+        c++;
+    }
+
+</table>

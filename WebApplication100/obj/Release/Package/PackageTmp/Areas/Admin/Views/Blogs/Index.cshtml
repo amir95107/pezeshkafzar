@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DataLayer.Blogs>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+<div style="height:75px"></div>
+<div class="container text-right pr-0">
+    <a class="btn btn-primary" href="/admin/blogs/create">افزودن بلاگ جدید</a>
+</div>
+<div class="container bg-white p-2" dir="rtl">
+    
+    <h2 class="text-center p-2 border shadow ">همه بلاگها</h2>
+    <div class="container">
+        
+        <div class="row">
+            @foreach (var blog in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card border">
+                        <div class="card-title m-0">
+                            <label class="m-0">@blog.Title</label>
+                            <div class="visit-count text-primary d-flex">
+                                <i class="now-ui-icons gestures_tap-01"></i>
+                                <span class="">@blog.Visit</span>
+                            </div>
+                        </div>
+                        <div class="card-body gestures_tap-01 p-0">
+                            <div class="card-img text-center ">
+                                <img src="~/Images/BlogImages/Thumb/@blog.ImageName" title="@blog.Title" alt="@blog.Title" />
+                                <hr />
+                                <p class="m-0">@blog.ShortDescription</p>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer text-center">
+                            <a class="p-2 btn btn-info" href="/blog/showblog/@blog.BlogID" target="_blank">نمایش</a>
+                            <a href="/admin/blogs/Edit/@blog.BlogID" class="p-2 btn btn-warning">ویرایش بلاگ</a>
+                            <a class="p-2 btn-danger btn" onclick="confirmDeleteBlog(@blog.BlogID)"><i class="now-ui-icons ui-1_simple-remove text-white"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DataLayer.Orders>
+@{ int c = 1; }
+<table class="table table-bordered table-responsive d-md-table dataTable" dir="rtl">
+    <thead class=" text-primary">
+        <tr>
+            <th>ردیف</th>
+            <th>شماره فاکتور</th>
+            <th>تاریخ</th>
+
+            <th>
+                پرداخت شده
+            </th>
+
+            <th>هزینه ارسال</th>
+
+            <th class="">
+                نام فروشنده
+            </th>
+            <th>خریدار</th>
+            <th>
+                نمایش جزئیات
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(o=>o.IsFinaly == true&&!o.OrderDetails.Any(o=>o.Condition==3)))
+        {
+            if (item.DeliveryPrice == null)
+            {
+                item.DeliveryPrice = 0;
+            }
+        <tr>
+            <td>@c</td>
+            <td>@item.TraceCode</td>
+            <td>@item.Date.ToString("yyyy/MM/dd hh:MM:ss")</td>
+
+            <td>
+                @(item.Payable-item.DeliveryPrice) <small>تومان</small>
+            </td>
+
+            <td>
+                @if (item.DeliveryPrice != null)
+                {
+                    <span>@item.DeliveryPrice</span>
+                }
+                else
+                {
+                    <span>پساکرایه</span>
+                }
+            </td>
+
+            <td class="">
+                
+                    <span>ادمین</span>
+                
+            </td>
+            <td><a class="text-info" onclick="showUserInformation(@item.UserID)"><span>@item.Users.UserName</span></a></td>
+            <td>
+                <a onclick="showOrderDetails(@item.OrderID)" class="btn btn-sm btn-info text-white">
+                    <i class="now-ui-icons travel_info"></i>
+                </a>
+            </td>
+        </tr>
+            c++;
+        }
+
+
+    </tbody>
+    <tfoot class=""><tr><td colspan="2">مجموع:</td><td colspan="6">@Model.Sum(o=>o.Payable-o.DeliveryPrice).ToString() <small>تومان</small></td></tr></tfoot>
+</table>

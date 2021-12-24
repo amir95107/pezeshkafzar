@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "حساب کاربری";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="container p-3">
+    <div class="row justify-content-center">
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="#">
+                        <div class="icon">
+                            <img src="~/Content/images/order-processed(1).png" title="پیگیری سفارش" alt="پیگیری سفارش" class="m-auto" />
+                        </div>
+                        <span>پیگیری سفارش</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/MyOrders" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/checklist(1).png" title="تاریخچه سفارشات" alt="تاریخچه سفارشات" class="m-auto" />
+                        </div>
+                        <span>تاریخچه سفارشات</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/EditUserInfo" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/user(1).png" title="ویرایش اطلاعات کاربری" alt="ویرایش اطلاعات کاربری" class="m-auto" />
+                        </div>
+                        <span>ویرایش اطلاعات کاربری</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/account/changepassword" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/lock(1).png" title="تغییر رمز عبور" alt="تغییر رمز عبور" class="m-auto" />
+                        </div>
+                        <span>تغییر رمز عبور</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/Address" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/location(1).png" title="لیست آدرس ها" alt="لیست آدرس ها" class="m-auto" />
+                        </div>
+                        <span>لیست آدرس ها</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-2 mb-2">
+            <div class="card border">
+                <div class="card-body text-center">
+                    <a href="/wishlist" class="shpl">
+                        <div class="icon">
+                            <img src="~/Content/images/letter(1).png" title="لیست علاقه مندی ها" alt="لیست علاقه مندی ها" class="m-auto" />
+                        </div>
+                        <span>لیست علاقه مندی ها</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-outline-danger m-auto logout shpl" href="/account/LogOff">خروج از حساب کاربری</a>
+    </div>
+</div>

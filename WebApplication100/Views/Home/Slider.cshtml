@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DataLayer.Slider>
+@{
+    var list = Model.ToList();
+}
+
+@*<div class="slider-layer">
+        <div id="slider-one" class="owl-carousel">
+            @foreach (var slider in Model)
+            {
+                <div class="item">
+                    <a href="@slider.Url">
+                        <img src="~/Images/Slider/@slider.ImageName" title="@slider.Title">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>*@
+
+<div class="intro-slider-container slider-container-ratio mb-1 mb-md-2 mb-lg-0">
+    <div class="intro-slider owl-carousel owl-simple owl-dark owl-nav-inside"
+         data-toggle="owl" data-owl-options='{
+         "autoplay": true,"autoplayTimeout":5000,"autoplayHoverPause":true,
+                                        "nav": false,
+         "lazyLoad": false,
+                                        "dots": true,
+                                        "responsive": {
+                                            "768": {
+                                                "nav": true,
+                                                "dots": false
+                                            }
+                                        }
+                                    }'>
+        @foreach (var slider in Model)
+        {
+            <div class="intro-slide">
+                <figure class="slide-image">
+
+                    <picture>
+                        <source media="(max-width: 480px)"
+                                srcset="Content/images/demos/demo-3/slider/slide-1-480w.jpg">
+                        <a href="@slider.Url" class="shpl">
+                            <img src="~/Images/Slider/@slider.ImageName"
+                                 alt="@slider.Title" title="@slider.Title" class="">
+                        </a>
+                    </picture>
+
+                </figure><!-- End .slide-image -->
+
+
+            </div>
+        }<!-- End .intro-slide -->
+        <!-- End .intro-slide -->
+    </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+    <span class="slider-loader">
+        <img src="~/Content/images/Spinner.png" title="spinner" alt="spinner" width="60" height="60" />
+    </span><!-- End .slider-loader -->
+</div>
+
+<style>
+    @@media(max-width: 479px) {
+        .intro-slider-container:before, .intro-slider .slide-image:before {
+            padding-top: 51.2820512821%
+        }
+    }
+</style>

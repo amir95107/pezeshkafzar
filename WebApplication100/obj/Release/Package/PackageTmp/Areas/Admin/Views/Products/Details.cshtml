@@ -1,0 +1,78 @@
+﻿@model DataLayer.Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">افزودن محصول جدید</h2>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ShortDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Text)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                تصاویر
+            </dt>
+
+            <dd>
+                <img src="~/Images/ProductImages/Thumb/@Model.ImageName" class="border p-2 biggerSize" title="تصویر اصلی" />
+                @foreach (var item in Model.Product_Galleries)
+                {
+                    <img src="~/Images/ProductImages/Thumb/@item.ImageName" class="biggerSize"/>
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        <a href="/Admin/Products/AcceptProduct/@Model.ProductID" class="btn btn-success">
+            تایید محصول
+        </a>
+        <a href="#" class="btn btn-danger">
+            عدم تایید
+        </a>
+        <a href="/Admin/Products/AcceptProduct" class="btn btn-outline-warning">
+            بازگشت
+        </a>
+    </p>
+</div>

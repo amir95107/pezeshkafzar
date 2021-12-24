@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Addresses";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+    <div class="container">
+        <div class="text-right mt-2">
+            <a class="btn btn-primary" onclick="addEditAddress('add')">افزودن آدرس جدید</a>
+        </div>
+        <div id="AddressesList">
+            @Html.Action("AddressesList")
+        </div>
+    </div>
+

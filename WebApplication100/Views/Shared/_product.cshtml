@@ -1,0 +1,151 @@
+﻿﻿@model DataLayer.Products
+
+@{
+    if (Model.Price == 0)
+    {
+        Model.Price = 1;
+    }
+    int discount = (Model.Price - Model.PriceAfterDiscount) * 100 / Model.Price;
+    //Random rnd = new Random();
+    //int score = 60 + rnd.Next(40);
+    bool hasGaranty = false;
+    if (Model.Garanty != null && Model.Garanty != "" && Model.Garanty != " ")
+    {
+        hasGaranty = true;
+    }
+}
+
+<div class="product product-2" data-price="@Model.PriceAfterDiscount" data-discount="@discount" data-date="@Model.CreateDate.ToString()">
+    <figure class="product-media">
+        <a href="/ShowProduct/@Model.ProductID/@Model.SefUrl" class="shpl">
+            <img data-src="/Images/ProductImages/Thumb/@Model.ImageName" alt="@Model.Title" title="@Model.Title"
+                 class="product-image @(Request.Url.PathAndQuery=="/"||Request.Url.PathAndQuery.Contains("ShowProduct")?"owl-lazy":"lazy")">
+        </a>
+
+        <div class="tag-p-right">
+            @if (discount > 0 && Model.PriceAfterDiscount > 0)
+            {
+                <span class="tag discount-tag">
+                    @discount %
+                </span>
+            }
+            else if (Model.PriceAfterDiscount == 0)
+            {
+                <span class="tag call-tag">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                    </svg>
+                </span>
+            }
+            @if (hasGaranty)
+            {
+                <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="این محصول شامل گارانتی میباشد">
+                    <img src="~/Content/images/icons8-warranty-48 (1).png" title="garanty" alt="garanty" width="48" height="48" />
+                </span>
+            }
+        </div>
+
+
+
+        <div class="product-action-vertical">
+            <a onclick="addToWishList(@Model.ProductID)" class="btn-product-icon btn-wishlist btn-expandable">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                </svg>
+                <span>
+                    افزودن به
+                    لیست علاقه مندی
+                </span>
+            </a>
+            <a onclick="quickView(@Model.ProductID)" class="btn-product-icon btn-expandable" title="مشاهده سریع">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+                    <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                </svg>
+                <span>مشاهده سریع</span>
+            </a>
+        </div><!-- End .product-action -->
+
+        <div class="product-action product-action-dark">
+            @if (Model.Stock > 0 && Model.PriceAfterDiscount > 0)
+            {
+                <a onclick="addToCart(@Model.ProductID)" class="btn-product btn-cart" title="افزودن به سبد خرید">
+
+                    <span>
+                        افزودن
+                        به
+                        سبد خرید
+                    </span>
+                </a>
+            }
+            else if (Model.PriceAfterDiscount == 0)
+            {
+                <div class="alert alert-info text-center w-100 call-for-price p-0">
+                    <span>
+                        جهت آگاهی از قیمت تماس بگیرید
+                    </span>
+                </div>
+            }
+            else
+            {
+                <a class="btn-product btn-danger" title="ناموجود">
+                    <span>
+                        ناموجود
+                    </span>
+
+                </a>
+            }
+
+        </div><!-- End .product-action -->
+    </figure><!-- End .product-media -->
+
+    <div class="product-body">
+        <div class="product-cat">
+            <a href="/archive?selectedGroups=@Model.Product_Selected_Groups.Single(g=>g.Product_Groups.ParentID==null).Product_Groups.GroupID" class="shpl">
+                @Model.Product_Selected_Groups.Single(g => g.Product_Groups.ParentID == null).Product_Groups.GroupTitle
+            </a>
+            <span>،</span>
+            <a href="/archive?selectedGroups=@Model.Product_Selected_Groups.Where(p => p.ProductID == Model.ProductID).Last().Product_Groups.GroupID" class="shpl">
+                @Model.Product_Selected_Groups.Where(p => p.ProductID == Model.ProductID).Last().Product_Groups.GroupTitle
+            </a>
+        </div><!-- End .product-cat -->
+        <h3 class="product-title">
+            <a href="/ShowProduct/@Model.ProductID/@Model.SefUrl" class="shpl">
+                @Model.Title
+            </a>
+        </h3><!-- End .product-title -->
+        <div class="product-price">
+            @if (Model.PriceAfterDiscount > 0)
+            {
+                if (Model.PriceAfterDiscount < Model.Price)
+                {
+                    <div class="">
+                        <strong style="font-size: 2rem">@Model.PriceAfterDiscount.ToString("#,0")</strong><small>تومان</small>
+                        <br />
+                        <del style="color:crimson">@Model.Price.ToString("#,0")</del>
+                    </div>
+                }
+                else
+                {
+                    <strong style="font-size: 2rem">@Model.PriceAfterDiscount.ToString("#,0")</strong><small>تومان</small>
+                }
+            }
+            else
+            {
+                <div class="text-center w-100 btn btn-info call-for-price">
+                    <a class="btn w-100 call-for-price justify-content-center getNumber" @*href="tel:09120869780"*@ onclick="getNumber(@Model.ProductID)">
+                        <span class="call-span">تماس بگیرید</span>
+                        <span class="number-span">09120869780</span>
+                    </a>
+                </div>
+            }
+        </div><!-- End .product-price -->
+        @*<div class="ratings-container">
+                <div class="ratings">
+                    <div class="ratings-val" style="width: @score%;"></div>
+                </div>
+
+            </div>*@<!-- End .rating-container -->
+        
+    </div><!-- End .product-body -->
+</div>
+

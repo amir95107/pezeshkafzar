@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DataLayer.LoggedCart>
+
+@{
+    ViewBag.Title = "LoggedCarts";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+    List<DataLayer.Users> users = ViewBag.Users;
+    int c = 1;
+    string range= ViewBag.Range;
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">تحلیل سبد خرید</h2>
+    <div class="row flex-wr">
+        <div class="col-md-9">
+            <a class="btn @(range=="day"?"btn-info":"btn-outline-info") m-2" href="/Admin/Orders/LoggedCarts?range=day">24 ساعت گذشته</a>
+            <a class="btn @(range=="week"?"btn-info":"btn-outline-info") m-2" href="/Admin/Orders/LoggedCarts?range=week">1 هفته گذشته</a>
+            <a class="btn @(range=="month"?"btn-info":"btn-outline-info") m-2" href="/Admin/Orders/LoggedCarts?range=month">1 ماه گذشته</a>
+            <a class="btn @(range==""?"btn-info":"btn-outline-info") m-2" href="/Admin/Orders/LoggedCarts">کل آمار</a>
+        </div>
+        <div class="col-md-3 text-left">
+            <span class="border border-dark text-dark p-2 d-inline-block">تعداد: @Model.Count()</span>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table border table-bordered table-hover table-striped">
+            <tr>
+                <th>ردیف</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Url)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model.Where(l=>l.UserName!="admin"))
+            {
+
+                <tr>
+                    <td>@c</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Products.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Url)
+                    </td>
+                    <td>
+                        @item.Date.ToString("dd/MM/yyyy - hh:mm")
+                    </td>
+
+                </tr>
+                c++;
+            }
+
+        </table>
+    </div>
+</div>

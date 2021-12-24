@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DataLayer.Users>
+
+@{
+    ViewBag.Title = "GetAllCustomers";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">همه مشتریان</h2>
+
+
+    <table class="table">
+        <tr>
+
+            <th>
+                نام مشتری
+            </th>
+
+            <th>
+                تعداد خرید
+            </th>
+
+            <th>مقدار خرید</th>
+
+            <th>جزئیات خرید</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @item.UserInfo.Single(u => u.UserID == item.UserID).FullName
+                </td>
+                <td>
+                    @*@item.Orders.OrderDetails.Count()*@
+                </td>
+                <td>
+                    @*@Model.Where(u => u.UserID == item.UserID).Sum(u => u.Payable)*@
+                </td>
+                <td>
+                    <a onclick="showDetails(@item.UserID)" class="btn btn-info text-white">نمایش جزئیات</a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</div>

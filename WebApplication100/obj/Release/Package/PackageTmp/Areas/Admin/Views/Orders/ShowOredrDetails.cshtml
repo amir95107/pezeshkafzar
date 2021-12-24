@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+@{ int c = 1; }
+<table class="table table-bordered table-responsive d-md-table dataTable" dir="rtl">
+    <thead class=" text-primary">
+        <tr>
+            <th>ردیف</th>
+
+            <th>
+                قیمت بدون تخفیف
+            </th>
+
+            <th>
+                قیمت نهایی
+            </th>
+
+            <th>
+                تخفیف
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(o => o.Orders.IsFinaly && o.Orders.IsSent))
+        {
+            var product = item.Products;
+        <tr>
+            <td>@c</td>
+
+            <td>
+                @product.Price.ToString("#,0") تومان
+            </td>
+            <td>
+                @item.Products.PriceAfterDiscount.ToString("#,0") تومان
+            </td>
+            <td>
+                @((product.Price-product.PriceAfterDiscount).ToString("#,0")) تومان
+            </td>
+        </tr>
+            c++;
+        }
+
+
+    </tbody>
+    <tfoot class="">
+    <tr><td colspan="2">مجموع:</td><td colspan="5">@Model.Sum(o => o.Orders.Payable).ToString("#,0") <small>تومان</small></td></tr></tfoot>
+</table>

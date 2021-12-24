@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DataLayer.SpecialProducts>
+
+@{
+    ViewBag.Title = "SpecialProducts";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<h2>SpecialProducts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateSpecialProduct")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            محصول
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                <div>
+                    <img src="~/Images/ProductImages/Thumb/@item.Products.ImageName" title="@item.Products.Title" alt="@item.Products.Title" />
+                    <label>@item.Products.Title</label>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpireDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                
+                <a href="/Admin/Products/DeleteSepcialProduct/@item.SPID"><i style="color: red" class="fa fa-2x fa-times"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

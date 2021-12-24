@@ -1,0 +1,46 @@
+﻿@using System.Configuration
+@model DataLayer.Orders
+
+
+<div style="direction: rtl;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #ccc;
+">
+    <header style="font-size: 1.5rem;font-weight: 900;">فاکتور @Model.TraceCode</header>
+    <small style="margin: auto;text-align: center">
+        <span style="color: darkgreen">پزشک</span>
+        <span style="color: dimgrey">اف</span>
+        <span style="color: red">زار</span>
+    </small>
+    <hr />
+    @{ 
+        var name = Model.Users.UserInfo.FirstOrDefault(u=>u.UserID==Model.UserID).FullName.ToString().Split(' ')[0];
+    }
+    <h4>@(name!=null?name:"کاربر") عزیز</h4>
+    <p>سفارش شما با موفقیت ثبت شد. از طریق لینک زیر میتوانید وضعیت سفارش خود را پیگیری کنید.</p>
+    <p>
+        <a href="@ConfigurationManager.AppSettings["MyDomain"]/OrderTracking/@Model.TraceCode" style="padding: 10px;
+        background-color: darkgreen;
+        color: white;
+        font-weight: bolder;
+        text-decoration: none;
+        width: 250px;
+        display: inline-block;
+">پیگیری سفارش</a>
+    </p>
+    <hr />
+    <div style="text-align: center">
+        <a href="@ConfigurationManager.AppSettings["MyDomain"]">
+            <img src="@ConfigurationManager.AppSettings["MyDomain"]/Content/images/logo/main-logo_180_67.png" style="margin: auto" />
+        </a>
+        <h4 style="margin: auto;text-align: center">
+            <span style="color: darkgreen">پزشک</span>
+            <span style="color: dimgrey">اف</span>
+            <span style="color: red">زار</span> | تخصصی ترین فروشگاه اینترنتی تجهیزات پزشکی
+        </h4>
+    </div>
+</div>
+
+
+

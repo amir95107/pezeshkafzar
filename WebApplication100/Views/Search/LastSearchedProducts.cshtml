@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+@if (Model.Any())
+{
+    <div class="last-searched-products p-1 text-right">
+        <label class="float-none">جستجوهای اخیر</label>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-3 p-1">
+                    <div class="card border">
+                        <div class="card-body text-center p-0">
+                            <a href="/ShowProduct/@item.ProductID/@item.SefUrl" class="shpl">
+                                <img data-src="/Images/ProductImages/Thumb/@item.ImageName" class="m-auto lazy" title="@item.Title" alt="@item.Title" width="100" />
+                                <div class="description">
+                                    <span class="in-cat">@item.Title.Substring(0, 12) ...</span>
+                                </div>
+                                <style>
+                                    .last-searched-products .description {
+                                        height: 50px
+                                    }
+                                </style>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

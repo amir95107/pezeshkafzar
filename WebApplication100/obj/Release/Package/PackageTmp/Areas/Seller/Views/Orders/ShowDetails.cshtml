@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+
+
+<table class="table table-responsive d-table" dir="rtl">
+    <thead>
+        <tr>
+
+            <th>
+                محصول
+            </th>
+            <th>
+                قیمت
+            </th>
+            <th>تعداد</th>
+            <th>
+                تخفیف
+            </th>
+            <th>فروشنده</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                <div class="text-center">
+                    <img src="~/Images/ProductImages/Thumb/@item.Products.ImageName" width="80" />
+                    <br />
+                    <span>@item.Products.Title</span>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDiscount)
+            </td>
+            <td>
+                @((item.Products.SellerID>0 || item.Products.SellerID != null)? item.Products.Sellers.StoreName:"ادمین")
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+@if (!ViewBag.isFinally)
+{
+    <hr />
+    <div class="text-center text-white">
+        <a class="btn btn-warning">
+            ویرایش سفارش
+        </a>
+    </div>
+}
+

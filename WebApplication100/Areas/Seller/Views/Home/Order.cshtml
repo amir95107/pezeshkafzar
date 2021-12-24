@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DataLayer.OrderDetails>
+
+<li class="nav-item" data-page="orders">
+    <a href="/admin/orders">
+        <i class="now-ui-icons shopping_cart-simple"></i>
+        <p>سفارشات</p>
+        <span class="orderCount badge badge-light rounded-pill" id="orderCount"
+              data-toggle="tooltip" data-placement="left" data-original-title="تعداد سفارشات نهایی نشده">@Model.Where(o => o.Orders.IsFinaly == true).Count()</span>
+        </a>
+    </li>

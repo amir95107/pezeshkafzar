@@ -1,0 +1,32 @@
+﻿@model DataLayer.Orders
+
+<div class="table-wrapper">
+    <table class="table d-table table-responsive table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>نام محصول</th>
+                <th>تعداد</th>
+                <th>قیمت پس از تخفیف</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach(var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td><a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl">@item.Products.Title</a></td>
+                    <td>@item.Count</td>
+                    <td>@item.Products.PriceAfterDiscount.ToString("#,0") <small>تومان</small></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">مجموع: @Model.Payable.ToString("#,0") <small>تومان</small></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<style>    th, td {
+    text-align: center !important}
+</style>

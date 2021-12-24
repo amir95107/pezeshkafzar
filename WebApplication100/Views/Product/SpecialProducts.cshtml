@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DataLayer.SpecialProducts>
+    @using MyEshop
+@{
+    var spCout = Model.Count();
+}
+
+@foreach (var item in Model)
+{
+    <div class="banner mb-lg-1 mb-xl-1 border p-1" dir="ltr">
+
+        <a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="shpl">
+            <img class="w-auto lazy" data-src="/Images/ProductImages/Thumb/@item.Products.ImageName" alt="بنر">
+        </a>
+
+
+        <div class="banner-content text-right">
+            @*<h4 class="banner-subtitle d-lg-none d-xl-block">
+            <a href="#">محصولات برتر</a>
+        </h4>*@
+            <h3 class="banner-title" dir="rtl"><a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="shpl"><br>@item.Products.Title</a></h3>
+            <div class="countdown">@TimeHelper.RemainTime(item.ExpireDate)</div>
+
+            
+
+            <a href="/ShowProduct/@item.Products.ProductID/@item.Products.SefUrl" class="banner-link shpl">
+                خرید
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+}
+<div class="mb-lg-1 mb-xl-1 text-center border">
+    <div class="banner badge badge-info p-5 text-center text-dark m-0" id="banner-info-bottom"><a onclick="showHumanBody()" class="btn">جستجو بر اساس اعضای بدن</a></div>
+</div>
+
+
+
+@*<div class="banner mb-lg-1 mb-xl-2">
+        <a href="#">
+            <img src="Content/images/demos/demo-3/banners/banner-2.jpg" alt="بنر">
+        </a>
+
+        <div class="banner-content text-right">
+            <h4 class="banner-subtitle d-lg-none d-xl-block">
+                <a href="#">محصولات جدید</a>
+            </h4>
+
+            <h3 class="banner-title">
+                <a href="#">
+                    دوربین های 360 درجه<span>
+                        70%
+                        تخفیف
+                    </span>
+                </a>
+            </h3>
+            <a href="#" class="banner-link">خرید<i class="icon-long-arrow-left"></i></a>
+        </div>
+    </div>*@
+
+@*<div class="banner mb-0">
+        <a href="#">
+            <img src="Content/images/demos/demo-3/banners/banner-3.jpg" alt="بنر">
+        </a>
+
+        <div class="banner-content text-right">
+            <h4 class="banner-subtitle d-lg-none d-xl-block">
+                <a href="#">محصولات ویژه</a>
+            </h4>
+
+            <h3 class="banner-title"><a href="#">ساعت اپل 4</a></h3>
+
+            <a href="#" class="banner-link">خرید<i class="icon-long-arrow-left"></i></a>
+        </div>
+    </div>*@

@@ -1,0 +1,128 @@
+﻿
+@model IEnumerable<DataLayer.Products>
+@{
+    ViewBag.Title = "آرشیو محصولات";
+}
+
+
+
+@if (Model.Any())
+{
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('/Content/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">لیست علاقه مندی</h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">لیست علاقه مندی</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container">
+                <table class="table table-wishlist table-mobile bg-white">
+                    <thead>
+                        <tr>
+                            <th class="pr-2">محصول</th>
+                            <th>قیمت</th>
+                            <th>وضعیت محصول</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="product-col">
+                                    <div class="product">
+                                        <figure class="product-media">
+                                            <a onclick="quickView(@item.ProductID)">
+                                                <img src="/Images/ProductImages/@item.ImageName" alt="@item.Title">
+                                            </a>
+                                        </figure>
+
+                                        <h3 class="product-title">
+                                            <a href="#">@item.Title</a>
+                                        </h3><!-- End .product-title -->
+                                    </div><!-- End .product -->
+                                </td>
+                                <td class="price-col">
+                                    @if (item.PriceAfterDiscount > 0)
+                                    {
+                                        item.PriceAfterDiscount.ToString("#,0");<small>تومان</small>
+                                        <br />
+                                        <del style="color: crimson">@item.Price</del>
+                                    }
+                                    else
+                                    {
+                                        <span>---</span>
+                                    }
+
+                                </td>
+                                <td class="stock-col"><span class="@((item.Stock>=1) ?"in-stock":"out-of-stock")">@((item.Stock>=1) ?"موجود":"نا موجود")</span></td>
+                                <td class="action-col">
+                                    <div class="dropdown">
+                                        @if (item.PriceAfterDiscount > 0)
+                                        {
+                                            if (item.Stock > 0)
+                                            {
+                                                <button class="btn btn-block btn-outline-primary-2" onclick="addToCart(@item.ProductID)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                                    </svg>
+                                                    افزودن به سبد خرید
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <span class="btn btn-danger">ناموجود</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a onclick="getNumber(@item.ProductID)" class="btn btn-info">تماس بگیرید</a>
+                                        }
+
+                                    </div>
+                                </td>
+                                <td class="remove-col text-left">
+                                    <button class="btn-remove" onclick="deleteFromWishList(@item.ProductID)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table><!-- End .table table-wishlist -->
+
+            </div><!-- End .container -->
+        </div><!-- End .page-content -->
+    </main>
+}
+else
+{
+    <div class="row justify-content-center mt-5 mb-5 ">
+        <div class="col-9 col-md-6 col-lg-4 text-center border p-5">
+            <p class="text-center">
+                لیست علاقه مندی های شما خالی است!
+            </p>
+            <br />
+            <a class="btn btn-warning text-white" href="/Archive">بازگشت به لیست محصولات</a>
+        </div>
+    </div>
+}
+
+
+

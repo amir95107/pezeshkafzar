@@ -1,0 +1,123 @@
+﻿@model IEnumerable<DataLayer.Products>
+
+@{
+    ViewBag.Title = "محصولات";
+    string error = ViewBag.YouCant;
+}
+
+
+<div class="container">
+    @if(error != null)
+    {
+        <div>
+            <span class="alert alert-danger">@error</span>
+        </div>
+    }
+    <div class="pb-2 d-flex align-items-center justify-content-between" dir="rtl" style="margin-top: 100px;text-align: right">
+        <a class="m-0 btn btn-primary " href="@Url.Action("Create")">افزودن محصول جدید</a>
+        
+    </div>
+    <div class="table-wrapper">
+        <table class="dataTable table table-bordered table-responsive products_table bg-white d-table" dir="rtl">
+            <thead class=" text-primary">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        گروه های این محصول
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PriceAfterDiscount)
+                    </th>
+
+                    <th>
+                        درصد تخفیف
+                    </th>
+
+                    <th>
+                        موجودی انبار
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr data-seller-id="@item.SellerID" id="product-@item.ProductID" class="product-item">
+                        <td>
+                            <img class="thumbnail" src="/Images/ProductImages/Thumb/@item.ImageName" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @if (item.Product_Selected_Groups.Any())
+                            {
+                                <ol>
+                                    @foreach (var group in item.Product_Selected_Groups)
+                                    {
+                                        <li>
+                                            @group.Product_Groups.GroupTitle
+                                        </li>
+                                    }
+                                </ol>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PriceAfterDiscount)
+                        </td>
+
+                        <td>
+                            % @(
+                    (item.Price - item.PriceAfterDiscount)*100/item.Price
+                )
+                        </td>
+
+                        <td>
+                            @item.Stock
+                        </td>
+
+                        <td>
+                            @item.CreateDate.ToString("dddd, dd MMMM yyyy")
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs p-2 m-1" href="@Url.Action("ProductFeaturs",new {id=item.ProductID})">ویژگی های محصول</a>
+                            <a class="btn btn-info btn-xs p-2 m-1" href="@Url.Action("Gallery",new {id=item.ProductID})">گالری محصول</a>
+                            <a class="btn btn-outline-info btn-xs p-2 m-1" href="@Url.Action("ProductBrand",new {id=item.ProductID})">برند محصول</a>
+                            <a class="btn btn-warning btn-xs p-2 m-1" href="@Url.Action("Edit",new {id=item.ProductID})">ویرایش محصول</a>
+                            <a class="btn btn-danger btn-xs p-2 m-1" href="@Url.Action("Delete",new {id=item.ProductID})">حذف محصول</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <link href="~/Areas/Admin/Content/DataTables/datatables.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/Content/DataTables/datatables.min.js"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable()
+        })
+    </script>
+}

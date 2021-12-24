@@ -1,0 +1,28 @@
+﻿@model DataLayer.Orders
+
+
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('/Content/images/page-header-bg.jpg')">
+            <div class="container" id="OrderingLevel">
+                @Html.Action("OrderingLevel", "ShopCart")
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="#">فروشگاه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">پرداخت</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav>
+        <div class="page-content">
+            <div class="cart">
+                <div class="container">
+                    <div class="jumbotron">
+                        <p class="text-center mb-3">مبلغ قابل پرداخت: @Model.Payable <small>تومان</small></p>
+                        <p class="text-center"><a href="@Url.Action("Pay",new { orderId=Model.OrderID})" class="btn btn-primary btn-lg">نهایی کردن خرید و هدایت به درگاه پرداخت</a></p>
+                    </div>
+                    </div></div></div>
+
+    </main>

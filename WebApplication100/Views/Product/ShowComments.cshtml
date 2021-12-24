@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DataLayer.Comments>
+
+@foreach (var item in Model.Where(c => c.ParentID == null && c.IsShow))
+{
+    <li class="border p-2 mb-2" style="list-style:none">
+        <div>
+            <p><small>ارسال شده از : @item.Name در تاریخ : @item.CreateDate.ToString("yyyy/MM/dd")</small> </p>
+            <p>
+                <strong>@item.Comment</strong>
+            </p>
+            @if (User.Identity.Name == "09120624426")
+            {
+                <p><a onclick="answerComment(@item.CommentID)" class="reply-button border border-warning p-2 btn-outline-warning rounded d-inline-block" style="width:100px;text-align:center">پاسخ</a></p>
+            }
+        </div>
+        <div class="clearfix"></div>
+        @if (Model.Any(c => c.ParentID == item.CommentID))
+        {
+            <ul class="mr-5 mt-1">
+               @foreach (var sub in Model.Where(c => c.ParentID == item.CommentID))
+               {
+                <li class="alert border border-info text-info">
+                    <div>
+                        <p><small>ارسال شده از : @sub.Name در تاریخ : @sub.CreateDate.ToString("yyyy/MM/dd")</small> </p>
+                        <p>
+                            <strong>@sub.Comment</strong>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+               }
+            </ul>
+        }
+    </li>
+}
+
+<hr />

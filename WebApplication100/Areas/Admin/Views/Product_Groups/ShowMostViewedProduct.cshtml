@@ -1,0 +1,13 @@
+﻿@model DataLayer.Products
+    @{ 
+        int count = ViewBag.Count;
+    }
+
+<div class="text-center m-auto">
+    <img src="~/Images/ProductImages/@Model.ImageName" title="@Model.Title" alt="@Model.Title" />
+    <hr />
+    <strong style="font-size:2rem">@Model.Title</strong>
+    <br />
+    <div dir="rtl" class="text-center">تعداد بازدید: <span class="badge badge-danger">@Model.Visit</span></div>
+    <div dir="rtl" class="text-center">تعداد فروش: <span class="badge badge-success">@count</span></div>
+</div>

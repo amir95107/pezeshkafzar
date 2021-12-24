@@ -1,0 +1,38 @@
+﻿@model DataLayer.Features
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">ساخت ویژگی جدید</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FeatureTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="">
+                    @Html.EditorFor(model => model.FeatureTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FeatureTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="text-left">
+        <a href="/admin/features" class="btn btn-outline-warning">بازگشت</a>
+    </div>
+
+</div>

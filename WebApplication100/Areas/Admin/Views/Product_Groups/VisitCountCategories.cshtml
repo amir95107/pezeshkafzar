@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DataLayer.Product_Groups>
+@{
+    ViewBag.Title = "VisitCountCategories";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+    <h2 class="text-center p-2 border shadow ">آمار بازدید از دسته بندی های مختلف محصولات </h2>
+    <div class="alert alert-info text-center">مجموع بازدید از محصولات: <strong id="totalVisit"></strong></div>
+    <ul>
+        @foreach (var group in Model.Where(g => g.ParentID == null))
+        {
+            <li class="menu-level-1-li @(Model.Any(g => g.ParentID == group.GroupID)?"has-child":"")">
+                <a id="level_1_group_visit_@group.GroupID" onclick="mostViewedProduct(@group.GroupID)"><strong style="color: #007bff">@group.GroupTitle</strong></a>
+                <span class="badge badge-primary parent-group">@group.Product_Selected_Groups.Where(g => g.GroupID == group.GroupID).Select(psg => psg.Products).Sum(p => p.Visit)</span>
+                @if (Model.Any(g => g.ParentID == group.GroupID))
+                {
+                    <div class="sub-mega-menu">
+                        <ul class="child-category-menu menu-level-2">
+                            @foreach (var subGroup in Model.Where(g => g.ParentID == group.GroupID))
+                            {
+                                <li class="menu-level-2-li @(Model.Any(ss => ss.ParentID == subGroup.GroupID)?"has-child":"")">
+                                    <a id="level__group_visit_@subGroup.GroupID" style="color:#ffc107" onclick="mostViewedProduct(@subGroup.GroupID)">@subGroup.GroupTitle</a>
+                                    <span class="badge badge-warning">@subGroup.Product_Selected_Groups.Where(g => g.GroupID == subGroup.GroupID).Select(psg => psg.Products).Sum(p => p.Visit)</span>
+                                    @if (Model.Any(ss => ss.ParentID == subGroup.GroupID))
+                                    {
+                                        <div class="sub-mega-menu">
+                                            <ul class=" menu-level-3">
+                                                @foreach (var subSubGroup in Model.Where(ss => ss.ParentID == subGroup.GroupID))
+                                                {
+                                                    <li class="menu-level-3-li">
+                                                        <a id="level__group_visit_@subSubGroup.GroupID" style="" onclick="mostViewedProduct(@subSubGroup.GroupID)">@subSubGroup.GroupTitle</a>
+                                                        <span class="badge badge-secondary">@subSubGroup.Product_Selected_Groups.Where(g => g.GroupID == subSubGroup.GroupID).Select(psg => psg.Products).Sum(p => p.Visit)</span>
+
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            var parents = $('.parent-group')
+            var total = 0;
+            for (var i = 0; i < parents.length; i++) {
+                total += +(parents.eq(i).html())
+            }
+            $('#totalVisit').html(total)
+        })
+        mostViewedProduct = (id) => {
+            $('#AllModal').modal('show').find('.modal-body').html(loader)
+            $.get('/admin/Product_Groups/ShowMostViewedProduct/' + id, (res) => {
+                $('.modal-body').html(res)
+            })
+        }
+    </script>
+} 

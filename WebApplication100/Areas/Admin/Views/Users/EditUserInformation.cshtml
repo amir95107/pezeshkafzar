@@ -1,0 +1,51 @@
+﻿@model DataLayer.UserInfo
+
+    <div class="table-responsive">
+
+        @using (Ajax.BeginForm("EditUserInformation", "Users", FormMethod.Post, new AjaxOptions()
+        {
+            OnSuccess = "showUserInformation",
+            UpdateTargetId = "modal-body"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="UIID" name="UIID" value="@Model.UIID" />
+            <input type="hidden" id="UserID" name="UserID" value="@Model.UserID" />
+            <div class="form-horizontal">
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label " })
+                    <div class="">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label " })
+                    <div class="">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",type="email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label " })
+                    <div class="">
+                        @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 ">
+                        <input type="submit" value="ذخیره" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+            <a class="btn btn-outline-warning" onclick="showUserInformation(@Model.UserID)">
+                بازگشت
+            </a>
+        </div>

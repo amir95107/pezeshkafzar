@@ -1,0 +1,50 @@
+﻿@model DataLayer.UserInfo
+
+
+<table class="table table-responsive d-md-table" dir="rtl">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Users.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Telephone)
+        </td>
+        <td>
+        <td>
+            <a onclick="editUserInformation(@Model.UserID)" class="btn btn-warning text-white">
+                ویرایش
+            </a>
+        </td>
+    </tr>
+
+</table>
+<hr />
+@{ 
+    string city = "";
+    if(Model.Users.Addresses.Any(u => u.UserID == Model.UserID))
+    {
+        city = Model.Users.Addresses.FirstOrDefault(u => u.UserID == Model.UserID).City;
+    }
+}
+<div>
+    <p>آدرس:@city - @ViewBag.Address</p>
+
+    <p>تعداد سفارش: @ViewBag.OrderCount</p>
+</div>

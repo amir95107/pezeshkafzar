@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DataLayer.Orders>
+
+@{
+    ViewBag.Title = "سفارشات من - پزشک افزار";
+    ViewBag.Description = "در این صفحه میتوانید تاریخچه ای از سفارشات ثبت شده خود در سایت را مشاهده کنید.";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+
+
+<div class="container mt-2 mb-2">
+    @if (Model.Any())
+    {
+        <div id="accountOrders" class="d-flex align-items-center justify-content-center border">
+            @Html.Action("AccountOrders", "ShopCart")
+        </div>
+    }
+    else
+    {
+        <div class="alert text-warning border border-warning text-center">
+            شما تا بحال هیچ سفارشی را نهایی نکرده اید!
+        </div>
+    }
+</div>
+<style>
+    td, th {
+        text-align: center !important
+    }
+</style>
+@section Scripts{
+    <script>
+        deleteOrder = (id) => {
+
+            var div = `<p class="text-center">آیا از حذف سفارش اطمینان دارید؟</p><br/><div class="row justify-content-around"><a onclick="deleteOrderConfirm(${id})" class="btn btn-danger">حذف سفارش</a>
+                        <a onclick="$('#signin-modal').modal('hide')" class="btn btn-success">انصراف</a>
+                </div>`;
+            $('#signin-modal').modal('show').find('.modal-body').html(div);
+        }
+
+        deleteOrderConfirm = (id) => {
+            var accountOrders = $('#accountOrders')
+            var height = accountOrders.height();
+
+            accountOrders.css('min-height', height).html(loader)
+            $.post('/ShopCart/DeleteAccountOrders/' + id, (res) => {
+                accountOrders.html(res).css('min-height', 0);
+                $('#signin-modal').modal('hide')
+            })
+        }
+    </script>
+}

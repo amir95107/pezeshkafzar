@@ -1,0 +1,2022 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="medab_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Long" Type="varchar" MaxLength="100" />
+          <Property Name="Lat" Type="varchar" MaxLength="100" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Visit" Type="int" Nullable="false" />
+          <Property Name="SefUrl" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrandTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="BrandImageName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+          <Property Name="BlogID" Type="int" />
+        </EntityType>
+        <EntityType Name="ContactForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="IsFaq" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeliveryWays">
+          <Key>
+            <PropertyRef Name="DeliveryID" />
+          </Key>
+          <Property Name="DeliveryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Time" Type="nvarchar" MaxLength="350" />
+          <Property Name="Usage" Type="nvarchar" MaxLength="350" />
+          <Property Name="PayByCustomer" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DiscountCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="DiscountPercent" Type="int" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="MaxDiscountValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lead_Clients">
+          <Key>
+            <PropertyRef Name="LeadID" />
+          </Key>
+          <Property Name="LeadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LikeProduct">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="TotalDiscount" Type="int" Nullable="false" />
+          <Property Name="Condition" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TraceCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Payable" Type="int" Nullable="false" />
+          <Property Name="IsFinaly" Type="bit" Nullable="false" />
+          <Property Name="PaymentWay" Type="int" Nullable="false" />
+          <Property Name="UseDiscountCode" Type="bit" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="DeliveryID" Type="int" Nullable="false" />
+          <Property Name="DeliveryPrice" Type="int" />
+        </EntityType>
+        <EntityType Name="Product_Features">
+          <Key>
+            <PropertyRef Name="PF_ID" />
+          </Key>
+          <Property Name="PF_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImageName" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Product_Galleries">
+          <Key>
+            <PropertyRef Name="GalleryID" />
+          </Key>
+          <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupTitle" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Product_Selected_Groups">
+          <Key>
+            <PropertyRef Name="PG_ID" />
+          </Key>
+          <Property Name="PG_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Tags">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="PBID" />
+          </Key>
+          <Property Name="PBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="BrandID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="ShortDescription" Type="nchar" MaxLength="500" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="PriceAfterDiscount" Type="int" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LikeCount" Type="int" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="Point" Type="float" />
+          <Property Name="SellerID" Type="int" />
+          <Property Name="IsAcceptedByAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="SefUrl" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="Visit" Type="int" />
+          <Property Name="Garanty" Type="nvarchar(max)" />
+          <Property Name="MinCount" Type="int" />
+          <Property Name="IsInBestselling" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sellers">
+          <Key>
+            <PropertyRef Name="SellerID" />
+          </Key>
+          <Property Name="SellerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SellerFullName" Type="nvarchar" MaxLength="250" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="StoreAddress" Type="nvarchar(max)" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="250" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="IsAcceptedByAdmin" Type="bit" Nullable="false" />
+          <Property Name="Lat" Type="varchar" MaxLength="100" />
+          <Property Name="Long" Type="varchar" MaxLength="100" />
+          <Property Name="Point" Type="float" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SiteVisit">
+          <Key>
+            <PropertyRef Name="VisitID" />
+          </Key>
+          <Property Name="VisitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="SlideID" />
+          </Key>
+          <Property Name="SlideID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Url" Type="nchar" MaxLength="450" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpecialProducts">
+          <Key>
+            <PropertyRef Name="SPID" />
+          </Key>
+          <Property Name="SPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UIID" />
+          </Key>
+          <Property Name="UIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="ActiveCode" Type="varchar" MaxLength="50" />
+          <Property Name="IsEmailConfirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActiveCode" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+          <Property Name="IsUserInfoCompleted" Type="bit" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsMobileConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LoginAtempts" Type="int" />
+          <Property Name="IsLocked" Type="bit" />
+        </EntityType>
+        <EntityType Name="LoggedCart">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Url" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageID" />
+          </Key>
+          <Property Name="PageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PageContent" Type="nvarchar(max)" />
+          <Property Name="HeadTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Addresses_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Blogs">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactForm_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ContactForm" Type="Self.ContactForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ContactForm">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discounts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LikeProduct_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="LikeProduct" Type="Self.LikeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="LikeProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LikeProduct_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LikeProduct" Type="Self.LikeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="LikeProduct">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoggedCart_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="LoggedCart" Type="Self.LoggedCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="LoggedCart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DeliveryWays">
+          <End Role="DeliveryWays" Type="Self.DeliveryWays" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryWays">
+              <PropertyRef Name="DeliveryID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DeliveryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Features_Features">
+          <End Role="Features" Type="Self.Features" Multiplicity="1" />
+          <End Role="Product_Features" Type="Self.Product_Features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Features">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="Product_Features">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Features_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Product_Features" Type="Self.Product_Features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Features">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Galleries_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Product_Galleries" Type="Self.Product_Galleries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Galleries">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="0..1" />
+          <End Role="Product_Groups1" Type="Self.Product_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Product_Groups1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Selected_Groups_Product_Groups">
+          <End Role="Product_Groups" Type="Self.Product_Groups" Multiplicity="1" />
+          <End Role="Product_Selected_Groups" Type="Self.Product_Selected_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Product_Selected_Groups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Selected_Groups_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Product_Selected_Groups" Type="Self.Product_Selected_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Selected_Groups">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Tags_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Product_Tags" Type="Self.Product_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Tags">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBrand_Brands">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="ProductBrand">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBrand_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductBrand">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Products1" Type="Self.Products" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Products1">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Sellers">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="SellerID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sellers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Sellers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SpecialProducts" Type="Self.SpecialProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="SpecialProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="medab_DBModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactForm" EntityType="Self.ContactForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryWays" EntityType="Self.DeliveryWays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Features" EntityType="Self.Features" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lead_Clients" EntityType="Self.Lead_Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LikeProduct" EntityType="Self.LikeProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Features" EntityType="Self.Product_Features" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Galleries" EntityType="Self.Product_Galleries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Selected_Groups" EntityType="Self.Product_Selected_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sellers" EntityType="Self.Sellers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteVisit" EntityType="Self.SiteVisit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialProducts" EntityType="Self.SpecialProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoggedCart" EntityType="Self.LoggedCart" Schema="medab_amir" store:Type="Tables" />
+          <EntitySet Name="Page" EntityType="Self.Page" Schema="medab_amir" store:Type="Tables" />
+          <AssociationSet Name="FK_Addresses_Users" Association="Self.FK_Addresses_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Blogs" Association="Self.FK_Comments_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Products" Association="Self.FK_Comments_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactForm_Users" Association="Self.FK_ContactForm_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ContactForm" EntitySet="ContactForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discounts_Users" Association="Self.FK_Discounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LikeProduct_Products" Association="Self.FK_LikeProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="LikeProduct" EntitySet="LikeProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LikeProduct_Users" Association="Self.FK_LikeProduct_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LikeProduct" EntitySet="LikeProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoggedCart_Products" Association="Self.FK_LoggedCart_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="LoggedCart" EntitySet="LoggedCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DeliveryWays" Association="Self.FK_Orders_DeliveryWays">
+            <End Role="DeliveryWays" EntitySet="DeliveryWays" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Features_Features" Association="Self.FK_Product_Features_Features">
+            <End Role="Features" EntitySet="Features" />
+            <End Role="Product_Features" EntitySet="Product_Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Features_Products" Association="Self.FK_Product_Features_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Features" EntitySet="Product_Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Galleries_Products" Association="Self.FK_Product_Galleries_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Galleries" EntitySet="Product_Galleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="Self.FK_Product_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Groups1" EntitySet="Product_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Selected_Groups_Product_Groups" Association="Self.FK_Product_Selected_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Selected_Groups" EntitySet="Product_Selected_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Selected_Groups_Products" Association="Self.FK_Product_Selected_Groups_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Selected_Groups" EntitySet="Product_Selected_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Tags_Products" Association="Self.FK_Product_Tags_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBrand_Brands" Association="Self.FK_ProductBrand_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBrand_Products" Association="Self.FK_ProductBrand_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Products" Association="Self.FK_Products_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products1" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Sellers" Association="Self.FK_Products_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sellers_Users" Association="Self.FK_Sellers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Sellers" EntitySet="Sellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialProducts_Products" Association="Self.FK_SpecialProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SpecialProducts" EntitySet="SpecialProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Users" Association="Self.FK_UserInfo_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="medab_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="medab_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="medab_DBModel.Addresses" />
+          <EntitySet Name="Blogs" EntityType="medab_DBModel.Blogs" />
+          <EntitySet Name="Brands" EntityType="medab_DBModel.Brands" />
+          <EntitySet Name="ContactForm" EntityType="medab_DBModel.ContactForm" />
+          <EntitySet Name="DeliveryWays" EntityType="medab_DBModel.DeliveryWays" />
+          <EntitySet Name="Discounts" EntityType="medab_DBModel.Discounts" />
+          <EntitySet Name="Features" EntityType="medab_DBModel.Features" />
+          <EntitySet Name="Lead_Clients" EntityType="medab_DBModel.Lead_Clients" />
+          <EntitySet Name="LikeProduct" EntityType="medab_DBModel.LikeProduct" />
+          <EntitySet Name="OrderDetails" EntityType="medab_DBModel.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="medab_DBModel.Orders" />
+          <EntitySet Name="Product_Features" EntityType="medab_DBModel.Product_Features" />
+          <EntitySet Name="Product_Galleries" EntityType="medab_DBModel.Product_Galleries" />
+          <EntitySet Name="Product_Groups" EntityType="medab_DBModel.Product_Groups" />
+          <EntitySet Name="Product_Selected_Groups" EntityType="medab_DBModel.Product_Selected_Groups" />
+          <EntitySet Name="Product_Tags" EntityType="medab_DBModel.Product_Tags" />
+          <EntitySet Name="ProductBrand" EntityType="medab_DBModel.ProductBrand" />
+          <EntitySet Name="Products" EntityType="medab_DBModel.Products" />
+          <EntitySet Name="Roles" EntityType="medab_DBModel.Roles" />
+          <EntitySet Name="SiteVisit" EntityType="medab_DBModel.SiteVisit" />
+          <EntitySet Name="Slider" EntityType="medab_DBModel.Slider" />
+          <EntitySet Name="SpecialProducts" EntityType="medab_DBModel.SpecialProducts" />
+          <EntitySet Name="LoggedCart" EntityType="medab_DBModel.LoggedCart" />
+          <EntitySet Name="Page" EntityType="medab_DBModel.Page" />
+          <AssociationSet Name="FK_ProductBrand_Brands" Association="medab_DBModel.FK_ProductBrand_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_DeliveryWays" Association="medab_DBModel.FK_Orders_DeliveryWays">
+            <End Role="DeliveryWays" EntitySet="DeliveryWays" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Features_Features" Association="medab_DBModel.FK_Product_Features_Features">
+            <End Role="Features" EntitySet="Features" />
+            <End Role="Product_Features" EntitySet="Product_Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LikeProduct_Products" Association="medab_DBModel.FK_LikeProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="LikeProduct" EntitySet="LikeProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="medab_DBModel.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="medab_DBModel.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Features_Products" Association="medab_DBModel.FK_Product_Features_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Features" EntitySet="Product_Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Galleries_Products" Association="medab_DBModel.FK_Product_Galleries_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Galleries" EntitySet="Product_Galleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Groups_Product_Groups" Association="medab_DBModel.FK_Product_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Groups1" EntitySet="Product_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Selected_Groups_Product_Groups" Association="medab_DBModel.FK_Product_Selected_Groups_Product_Groups">
+            <End Role="Product_Groups" EntitySet="Product_Groups" />
+            <End Role="Product_Selected_Groups" EntitySet="Product_Selected_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Selected_Groups_Products" Association="medab_DBModel.FK_Product_Selected_Groups_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Selected_Groups" EntitySet="Product_Selected_Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Tags_Products" Association="medab_DBModel.FK_Product_Tags_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBrand_Products" Association="medab_DBModel.FK_ProductBrand_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoggedCart_Products" Association="medab_DBModel.FK_LoggedCart_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="LoggedCart" EntitySet="LoggedCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Products" Association="medab_DBModel.FK_Products_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Products1" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialProducts_Products" Association="medab_DBModel.FK_SpecialProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SpecialProducts" EntitySet="SpecialProducts" />
+          </AssociationSet>
+          <EntitySet Name="UserInfo" EntityType="medab_DBModel.UserInfo" />
+          <EntitySet Name="Users" EntityType="medab_DBModel.Users" />
+          <AssociationSet Name="FK_Addresses_Users" Association="medab_DBModel.FK_Addresses_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactForm_Users" Association="medab_DBModel.FK_ContactForm_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ContactForm" EntitySet="ContactForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discounts_Users" Association="medab_DBModel.FK_Discounts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Discounts" EntitySet="Discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LikeProduct_Users" Association="medab_DBModel.FK_LikeProduct_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LikeProduct" EntitySet="LikeProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="medab_DBModel.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="medab_DBModel.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Users" Association="medab_DBModel.FK_UserInfo_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <EntitySet Name="Sellers" EntityType="medab_DBModel.Sellers" />
+          <AssociationSet Name="FK_Products_Sellers" Association="medab_DBModel.FK_Products_Sellers">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sellers_Users" Association="medab_DBModel.FK_Sellers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Sellers" EntitySet="Sellers" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="medab_DBModel.Comments" />
+          <AssociationSet Name="FK_Comments_Blogs" Association="medab_DBModel.FK_Comments_Blogs">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Products" Association="medab_DBModel.FK_Comments_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_Addresses_Users" FromRole="Addresses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Visit" Type="Int32" Nullable="false" />
+          <Property Name="SefUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments" Relationship="medab_DBModel.FK_Comments_Blogs" FromRole="Blogs" ToRole="Comments" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrandTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BrandImageName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductBrand" Relationship="medab_DBModel.FK_ProductBrand_Brands" FromRole="Brands" ToRole="ProductBrand" />
+        </EntityType>
+        <EntityType Name="ContactForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsFaq" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_ContactForm_Users" FromRole="ContactForm" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DeliveryWays">
+          <Key>
+            <PropertyRef Name="DeliveryID" />
+          </Key>
+          <Property Name="DeliveryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Usage" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="PayByCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="medab_DBModel.FK_Orders_DeliveryWays" FromRole="DeliveryWays" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="DiscountID" />
+          </Key>
+          <Property Name="DiscountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DiscountCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiscountPercent" Type="Int32" Nullable="false" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="MaxDiscountValue" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_Discounts_Users" FromRole="Discounts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_Features" Relationship="medab_DBModel.FK_Product_Features_Features" FromRole="Features" ToRole="Product_Features" />
+        </EntityType>
+        <EntityType Name="Lead_Clients">
+          <Key>
+            <PropertyRef Name="LeadID" />
+          </Key>
+          <Property Name="LeadID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="LikeProduct">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_LikeProduct_Products" FromRole="LikeProduct" ToRole="Products" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_LikeProduct_Users" FromRole="LikeProduct" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="TotalDiscount" Type="Int32" Nullable="false" />
+          <Property Name="Condition" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="medab_DBModel.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TraceCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Payable" Type="Int32" Nullable="false" />
+          <Property Name="IsFinaly" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentWay" Type="Int32" Nullable="false" />
+          <Property Name="UseDiscountCode" Type="Boolean" Nullable="false" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="DeliveryID" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryPrice" Type="Int32" />
+          <NavigationProperty Name="DeliveryWays" Relationship="medab_DBModel.FK_Orders_DeliveryWays" FromRole="Orders" ToRole="DeliveryWays" />
+          <NavigationProperty Name="OrderDetails" Relationship="medab_DBModel.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product_Features">
+          <Key>
+            <PropertyRef Name="PF_ID" />
+          </Key>
+          <Property Name="PF_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="FeatureID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Features" Relationship="medab_DBModel.FK_Product_Features_Features" FromRole="Product_Features" ToRole="Features" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Product_Features_Products" FromRole="Product_Features" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product_Galleries">
+          <Key>
+            <PropertyRef Name="GalleryID" />
+          </Key>
+          <Property Name="GalleryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Product_Galleries_Products" FromRole="Product_Galleries" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product_Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupTitle" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+          <NavigationProperty Name="Product_Groups1" Relationship="medab_DBModel.FK_Product_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Groups1" />
+          <NavigationProperty Name="Product_Groups2" Relationship="medab_DBModel.FK_Product_Groups_Product_Groups" FromRole="Product_Groups1" ToRole="Product_Groups" />
+          <NavigationProperty Name="Product_Selected_Groups" Relationship="medab_DBModel.FK_Product_Selected_Groups_Product_Groups" FromRole="Product_Groups" ToRole="Product_Selected_Groups" />
+        </EntityType>
+        <EntityType Name="Product_Selected_Groups">
+          <Key>
+            <PropertyRef Name="PG_ID" />
+          </Key>
+          <Property Name="PG_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product_Groups" Relationship="medab_DBModel.FK_Product_Selected_Groups_Product_Groups" FromRole="Product_Selected_Groups" ToRole="Product_Groups" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Product_Selected_Groups_Products" FromRole="Product_Selected_Groups" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product_Tags">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Tag" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Product_Tags_Products" FromRole="Product_Tags" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="PBID" />
+          </Key>
+          <Property Name="PBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="BrandID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Brands" Relationship="medab_DBModel.FK_ProductBrand_Brands" FromRole="ProductBrand" ToRole="Brands" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_ProductBrand_Products" FromRole="ProductBrand" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="PriceAfterDiscount" Type="Int32" Nullable="false" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LikeCount" Type="Int32" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="SellerID" Type="Int32" />
+          <Property Name="IsAcceptedByAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="SefUrl" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Visit" Type="Int32" />
+          <Property Name="Garanty" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LikeProduct" Relationship="medab_DBModel.FK_LikeProduct_Products" FromRole="Products" ToRole="LikeProduct" />
+          <NavigationProperty Name="OrderDetails" Relationship="medab_DBModel.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="Product_Features" Relationship="medab_DBModel.FK_Product_Features_Products" FromRole="Products" ToRole="Product_Features" />
+          <NavigationProperty Name="Product_Galleries" Relationship="medab_DBModel.FK_Product_Galleries_Products" FromRole="Products" ToRole="Product_Galleries" />
+          <NavigationProperty Name="Product_Selected_Groups" Relationship="medab_DBModel.FK_Product_Selected_Groups_Products" FromRole="Products" ToRole="Product_Selected_Groups" />
+          <NavigationProperty Name="Product_Tags" Relationship="medab_DBModel.FK_Product_Tags_Products" FromRole="Products" ToRole="Product_Tags" />
+          <NavigationProperty Name="ProductBrand" Relationship="medab_DBModel.FK_ProductBrand_Products" FromRole="Products" ToRole="ProductBrand" />
+          <NavigationProperty Name="LoggedCart" Relationship="medab_DBModel.FK_LoggedCart_Products" FromRole="Products" ToRole="LoggedCart" />
+          <NavigationProperty Name="Products1" Relationship="medab_DBModel.FK_Products_Products" FromRole="Products" ToRole="Products1" />
+          <NavigationProperty Name="Products2" Relationship="medab_DBModel.FK_Products_Products" FromRole="Products1" ToRole="Products" />
+          <NavigationProperty Name="SpecialProducts" Relationship="medab_DBModel.FK_SpecialProducts_Products" FromRole="Products" ToRole="SpecialProducts" />
+          <Property Name="MinCount" Type="Int32" />
+          <NavigationProperty Name="Sellers" Relationship="medab_DBModel.FK_Products_Sellers" FromRole="Products" ToRole="Sellers" />
+          <Property Name="IsInBestselling" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="medab_DBModel.FK_Comments_Products" FromRole="Products" ToRole="Comments" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleTitle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SiteVisit">
+          <Key>
+            <PropertyRef Name="VisitID" />
+          </Key>
+          <Property Name="VisitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Slider">
+          <Key>
+            <PropertyRef Name="SlideID" />
+          </Key>
+          <Property Name="SlideID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="450" FixedLength="true" Unicode="true" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpecialProducts">
+          <Key>
+            <PropertyRef Name="SPID" />
+          </Key>
+          <Property Name="SPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_SpecialProducts_Products" FromRole="SpecialProducts" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="LoggedCart">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_LoggedCart_Products" FromRole="LoggedCart" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageID" />
+          </Key>
+          <Property Name="PageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HeadTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ProductBrand_Brands">
+          <End Type="medab_DBModel.Brands" Role="Brands" Multiplicity="1" />
+          <End Type="medab_DBModel.ProductBrand" Role="ProductBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="ProductBrand">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_DeliveryWays">
+          <End Type="medab_DBModel.DeliveryWays" Role="DeliveryWays" Multiplicity="1" />
+          <End Type="medab_DBModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryWays">
+              <PropertyRef Name="DeliveryID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DeliveryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Features_Features">
+          <End Type="medab_DBModel.Features" Role="Features" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Features" Role="Product_Features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Features">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="Product_Features">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LikeProduct_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.LikeProduct" Role="LikeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="LikeProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Type="medab_DBModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="medab_DBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Features_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Features" Role="Product_Features" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Features">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Galleries_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Galleries" Role="Product_Galleries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Galleries">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Groups_Product_Groups">
+          <End Type="medab_DBModel.Product_Groups" Role="Product_Groups" Multiplicity="0..1" />
+          <End Type="medab_DBModel.Product_Groups" Role="Product_Groups1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Product_Groups1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Selected_Groups_Product_Groups">
+          <End Type="medab_DBModel.Product_Groups" Role="Product_Groups" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Selected_Groups" Role="Product_Selected_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Product_Selected_Groups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Selected_Groups_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Selected_Groups" Role="Product_Selected_Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Selected_Groups">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Tags_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.Product_Tags" Role="Product_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Product_Tags">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBrand_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.ProductBrand" Role="ProductBrand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductBrand">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoggedCart_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.LoggedCart" Role="LoggedCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="LoggedCart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.Products" Role="Products1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Products1">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialProducts_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="medab_DBModel.SpecialProducts" Role="SpecialProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="SpecialProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UIID" />
+          </Key>
+          <Property Name="UIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmailConfirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_UserInfo_Users" FromRole="UserInfo" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsUserInfoCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsMobileConfirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="medab_DBModel.FK_Addresses_Users" FromRole="Users" ToRole="Addresses" />
+          <NavigationProperty Name="ContactForm" Relationship="medab_DBModel.FK_ContactForm_Users" FromRole="Users" ToRole="ContactForm" />
+          <NavigationProperty Name="Discounts" Relationship="medab_DBModel.FK_Discounts_Users" FromRole="Users" ToRole="Discounts" />
+          <NavigationProperty Name="LikeProduct" Relationship="medab_DBModel.FK_LikeProduct_Users" FromRole="Users" ToRole="LikeProduct" />
+          <NavigationProperty Name="Orders" Relationship="medab_DBModel.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Roles" Relationship="medab_DBModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="UserInfo" Relationship="medab_DBModel.FK_UserInfo_Users" FromRole="Users" ToRole="UserInfo" />
+          <NavigationProperty Name="Sellers" Relationship="medab_DBModel.FK_Sellers_Users" FromRole="Users" ToRole="Sellers" />
+          <Property Name="LoginAtempts" Type="Int32" />
+          <Property Name="IsLocked" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Addresses_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.Addresses" Role="Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactForm_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="medab_DBModel.ContactForm" Role="ContactForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ContactForm">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Discounts_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.Discounts" Role="Discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Discounts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LikeProduct_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.LikeProduct" Role="LikeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="LikeProduct">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Type="medab_DBModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sellers">
+          <Key>
+            <PropertyRef Name="SellerID" />
+          </Key>
+          <Property Name="SellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SellerFullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StoreAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="IsAcceptedByAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Lat" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Long" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Products_Sellers" FromRole="Sellers" ToRole="Products" />
+          <NavigationProperty Name="Users" Relationship="medab_DBModel.FK_Sellers_Users" FromRole="Sellers" ToRole="Users" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Products_Sellers">
+          <End Type="medab_DBModel.Sellers" Role="Sellers" Multiplicity="0..1" />
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sellers">
+              <PropertyRef Name="SellerID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sellers_Users">
+          <End Type="medab_DBModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="medab_DBModel.Sellers" Role="Sellers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Sellers">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="IsShow" Type="Boolean" Nullable="false" />
+          <Property Name="BlogID" Type="Int32" />
+          <NavigationProperty Name="Blogs" Relationship="medab_DBModel.FK_Comments_Blogs" FromRole="Comments" ToRole="Blogs" />
+          <NavigationProperty Name="Products" Relationship="medab_DBModel.FK_Comments_Products" FromRole="Comments" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Comments_Blogs">
+          <End Type="medab_DBModel.Blogs" Role="Blogs" Multiplicity="0..1" />
+          <End Type="medab_DBModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blogs">
+              <PropertyRef Name="BlogID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Products">
+          <End Type="medab_DBModel.Products" Role="Products" Multiplicity="0..1" />
+          <End Type="medab_DBModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="medab_DBModelStoreContainer" CdmEntityContainer="medab_DBEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="medab_DBModel.Addresses">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="medab_DBModel.Blogs">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="SefUrl" ColumnName="SefUrl" />
+                <ScalarProperty Name="Visit" ColumnName="Visit" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="medab_DBModel.Brands">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="BrandImageName" ColumnName="BrandImageName" />
+                <ScalarProperty Name="BrandTitle" ColumnName="BrandTitle" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactForm">
+            <EntityTypeMapping TypeName="medab_DBModel.ContactForm">
+              <MappingFragment StoreEntitySet="ContactForm">
+                <ScalarProperty Name="IsFaq" ColumnName="IsFaq" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryWays">
+            <EntityTypeMapping TypeName="medab_DBModel.DeliveryWays">
+              <MappingFragment StoreEntitySet="DeliveryWays">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PayByCustomer" ColumnName="PayByCustomer" />
+                <ScalarProperty Name="Usage" ColumnName="Usage" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="medab_DBModel.Discounts">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="MaxDiscountValue" ColumnName="MaxDiscountValue" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="medab_DBModel.Features">
+              <MappingFragment StoreEntitySet="Features">
+                <ScalarProperty Name="FeatureTitle" ColumnName="FeatureTitle" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lead_Clients">
+            <EntityTypeMapping TypeName="medab_DBModel.Lead_Clients">
+              <MappingFragment StoreEntitySet="Lead_Clients">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="LeadID" ColumnName="LeadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LikeProduct">
+            <EntityTypeMapping TypeName="medab_DBModel.LikeProduct">
+              <MappingFragment StoreEntitySet="LikeProduct">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="medab_DBModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="medab_DBModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="DeliveryPrice" ColumnName="DeliveryPrice" />
+                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="UseDiscountCode" ColumnName="UseDiscountCode" />
+                <ScalarProperty Name="PaymentWay" ColumnName="PaymentWay" />
+                <ScalarProperty Name="IsFinaly" ColumnName="IsFinaly" />
+                <ScalarProperty Name="Payable" ColumnName="Payable" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TraceCode" ColumnName="TraceCode" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Features">
+            <EntityTypeMapping TypeName="medab_DBModel.Product_Features">
+              <MappingFragment StoreEntitySet="Product_Features">
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PF_ID" ColumnName="PF_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Galleries">
+            <EntityTypeMapping TypeName="medab_DBModel.Product_Galleries">
+              <MappingFragment StoreEntitySet="Product_Galleries">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Groups">
+            <EntityTypeMapping TypeName="medab_DBModel.Product_Groups">
+              <MappingFragment StoreEntitySet="Product_Groups">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="GroupTitle" ColumnName="GroupTitle" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Selected_Groups">
+            <EntityTypeMapping TypeName="medab_DBModel.Product_Selected_Groups">
+              <MappingFragment StoreEntitySet="Product_Selected_Groups">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PG_ID" ColumnName="PG_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Tags">
+            <EntityTypeMapping TypeName="medab_DBModel.Product_Tags">
+              <MappingFragment StoreEntitySet="Product_Tags">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBrand">
+            <EntityTypeMapping TypeName="medab_DBModel.ProductBrand">
+              <MappingFragment StoreEntitySet="ProductBrand">
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PBID" ColumnName="PBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="medab_DBModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsInBestselling" ColumnName="IsInBestselling" />
+                <ScalarProperty Name="MinCount" ColumnName="MinCount" />
+                <ScalarProperty Name="Garanty" ColumnName="Garanty" />
+                <ScalarProperty Name="Visit" ColumnName="Visit" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="SefUrl" ColumnName="SefUrl" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsAcceptedByAdmin" ColumnName="IsAcceptedByAdmin" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="LikeCount" ColumnName="LikeCount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="PriceAfterDiscount" ColumnName="PriceAfterDiscount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="medab_DBModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleTitle" ColumnName="RoleTitle" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteVisit">
+            <EntityTypeMapping TypeName="medab_DBModel.SiteVisit">
+              <MappingFragment StoreEntitySet="SiteVisit">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="VisitID" ColumnName="VisitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slider">
+            <EntityTypeMapping TypeName="medab_DBModel.Slider">
+              <MappingFragment StoreEntitySet="Slider">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SlideID" ColumnName="SlideID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialProducts">
+            <EntityTypeMapping TypeName="medab_DBModel.SpecialProducts">
+              <MappingFragment StoreEntitySet="SpecialProducts">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="SPID" ColumnName="SPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoggedCart">
+            <EntityTypeMapping TypeName="medab_DBModel.LoggedCart">
+              <MappingFragment StoreEntitySet="LoggedCart">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Page">
+            <EntityTypeMapping TypeName="medab_DBModel.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="HeadTitle" ColumnName="HeadTitle" />
+                <ScalarProperty Name="PageContent" ColumnName="PageContent" />
+                <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="medab_DBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UIID" ColumnName="UIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="medab_DBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="LoginAtempts" ColumnName="LoginAtempts" />
+                <ScalarProperty Name="IsMobileConfirmed" ColumnName="IsMobileConfirmed" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="IsUserInfoCompleted" ColumnName="IsUserInfoCompleted" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="medab_DBModel.Sellers">
+              <MappingFragment StoreEntitySet="Sellers">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="IsAcceptedByAdmin" ColumnName="IsAcceptedByAdmin" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="StoreAddress" ColumnName="StoreAddress" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="SellerFullName" ColumnName="SellerFullName" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="medab_DBModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

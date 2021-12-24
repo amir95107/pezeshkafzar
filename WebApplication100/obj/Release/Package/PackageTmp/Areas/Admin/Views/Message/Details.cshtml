@@ -1,0 +1,94 @@
+﻿@model DataLayer.ContactForm
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultAdmin.cshtml";
+}
+
+<div style="height:75px"></div>
+<div class="container bg-white p-2" dir="rtl">
+
+    <h2 class="text-center p-2 border shadow ">@Model.Subject</h2>
+
+    <div class="p-3">
+        <dl class="dl-horizontal">
+            <dt>
+                تاریخ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt>
+                موضوع
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                متن یا سوال
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+
+            <dt>
+                پاسخ
+            </dt>
+
+
+            <dd>
+                <div>
+                    @if (Model.Answer != null)
+                    {
+                        <p>@Model.Answer</p>
+                    }
+                    else
+                    {
+                        <a href="/admin/message/edit/@Model.Id" class="btn btn-info">ثبت پاسخ</a>
+                    }
+                </div>
+            </dd>
+
+            <dt>
+                نام
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                موبایل
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mobile)
+            </dd>
+
+            <dt>
+                ایمیل
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                نام کاربری
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Users.UserName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("بازگشت", "Index")
+    </p>
+</div>
